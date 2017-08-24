@@ -1,0 +1,46 @@
+{
+  "name": "chainode",
+  "version": "0.0.1",
+  "description": "A private blockchain network based on node.js",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.15.4",
+    "figlet": "^1.2.0",
+    "minimist": "^1.2.0",
+    "moment": "^2.18.1",
+    "node-rsa": "^0.4.2",
+    "socket.io": "^2.0.3",
+    "socket.io-client": "^2.0.3"
+  },
+  "scripts": {
+    "create": "node scripts/create.js",
+    "newpeer": "node scripts/newpeer.js",
+    "start": "node scripts/start.js"
+  },
+  "engines": {
+    "node": ">=6.0"
+  },
+  "engineStrict": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidemiceli/chainode.git"
+  },
+  "keywords": [
+    "blockchain",
+    "blockchain-technology",
+    "private-blockchain",
+    "permissioned-blockchain",
+    "blockchain-network",
+    "fintech",
+    "p2p"
+  ],
+  "author": "davidemiceli",
+  "license": "AGPL-3.0",
+  "maintainers": [
+    "davidemiceli"
+  ],
+  "bugs": {
+    "url": "https://github.com/davidemiceli/chainode/issues"
+  },
+  "homepage": "https://github.com/davidemiceli/chainode#readme"
+}
