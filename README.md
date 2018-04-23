@@ -1,6 +1,6 @@
 # Chainode
 
-A private blockchain network based on node.js, redis, and MongoDB.
+A private blockchain network based on Node.js, Redis, and MongoDB.
 
 It allows to exchange data (as transactions) between participants using encrypted messages with the signature of each participant. These transactions are stored as blocks in a distributed ledger.
 
@@ -38,14 +38,14 @@ The access to the blockchain network is restricted. To join, every peer needs to
 
 ## Requirements
 Chainode is based on:
-- node.js v8.0+
+- Node.js v8.0+
 - Redis (https://redis.io)
 - MongoDB (https://www.mongodb.com)
 
 # Getting started
 
-Get Chainode from github and start the server
-```
+Download Chainode from github and start the server
+```bash
 git clone -b develop https://github.com/davidemiceli/chainode.git
 cd chainode
 bin/start --port 80
@@ -60,67 +60,67 @@ ____ _           _                 _
 
 Peer server listening on port 80
 ```
-Once the peer server started, the first time you must create a new peer to join to an existing blockchain or create a new block generator.
+At start, once the peer server started, you must create a new peer to join to an existing blockchain or create a new block generator that will handle a new blockchain.
 
 Create a new blockchain and a block generator peer (the `url` parameter should be the external url of the peer):
-```
+```bash
 curl -X POST http://172.18.0.2/peer/new -H "Content-Type: application/json" \
 --data '{"type":"blockgenerator","url":"http://172.18.0.2"}'
 ```
 
 From another server, create a new peer (the `url` parameter should be the external url of the peer):
-```
+```bash
 curl -X POST http://172.18.0.3/peer/new -H "Content-Type: application/json" \
 --data '{"type":"peer","url":"http://172.18.0.3"}'
 ```
 
 Subscribe the peer to the block generator (to join on the blockchain):
-```
+```bash
 curl -X POST http://172.18.0.3/permission/join/ask -H "Content-Type: application/json" \
 --data '{"blockgenerator_url":"http://172.18.0.2"}'
 ```
 
 The block generator can see all the pending peers that made request to join:
-```
+```bash
 curl -X GET http://172.18.0.2/peer/list/pending -H "Content-Type: application/json"
 ```
 
 The block generator can approve a peer to join:
-```
+```bash
 curl -X POST http://172.18.0.2/permission/join/approve -H "Content-Type: application/json" \
 --data '{"url":"http://172.18.0.3"}'
 ```
 where the parameter `url` is the url of the `peer` that needs to be approved.
 
 The block generator can see all the approved peers of the blockchain network:
-```
+```bash
 curl -X GET http://172.18.0.2/peer/list/joined -H "Content-Type: application/json"
 ```
 
 The peer can see the block generator it has joined:
-```
+```bash
 curl -X GET http://172.18.0.3/permission/joined -H "Content-Type: application/json"
 ```
 
 The block generator can see the latest blocks:
-```
+```bash
 curl -X GET http://172.18.0.2/blocks/latest -H "Content-Type: application/json"
 ```
 
 The peer can send a transaction (propose a new block) to the block generator:
-```
+```bash
 curl -X POST http://172.18.0.3/transaction/propose -H "Content-Type: application/json" \
 --data '{"data":{"something":"..."}}'
 ```
 The transaction informations are on `data` parameter.
 
 The block generator can check the latest blocks after the last one was added:
-```
+```bash
 curl -X GET http://172.18.0.2/blocks/latest -H "Content-Type: application/json"
 ```
 
 ## Install
-```
+```bash
 npm install chainode
 ```
 
