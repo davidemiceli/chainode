@@ -4,21 +4,22 @@
   "description": "A private blockchain network based on node.js",
   "main": "index.js",
   "dependencies": {
-    "express": "^4.15.4",
+    "axios": "^0.18.0",
+    "bluebird": "^3.5.1",
+    "express": "^4.16.3",
     "figlet": "^1.2.0",
-    "minimist": "^1.2.0",
     "moment": "^2.18.1",
+    "mongoose": "^5.0.15",
+    "morgan": "^1.9.0",
     "node-rsa": "^0.4.2",
-    "socket.io": "^2.0.3",
-    "socket.io-client": "^2.0.3"
+    "redis": "^2.8.0",
+    "uuid": "^3.2.1"
   },
   "scripts": {
-    "create": "node scripts/create.js",
-    "newpeer": "node scripts/newpeer.js",
-    "start": "node scripts/start.js"
+    "start": "bin/start"
   },
   "engines": {
-    "node": ">=6.0"
+    "node": ">=8.0"
   },
   "engineStrict": true,
   "repository": {

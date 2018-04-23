@@ -1,6 +1,7 @@
 'use strict';
 
 // Requirements
+const crypto = require('crypto');
 const RSA = require('./rsa');
 const AES = require('./aes');
 
@@ -34,5 +35,15 @@ module.exports = {
       iv: encryptedIV,
       msg: encryptedMSG
     };
+  },
+  sign(privateKey, message) {
+    const signer = crypto.createSign('sha256');
+    signer.update(message);
+    return signer.sign(privateKey, 'base64');
+  },
+  verify(publicKey, sign, message) {
+    const verifier = crypto.createVerify('sha256');
+    verifier.update(message);
+    return verifier.verify(publicKey, sign, 'base64');
   }
 }

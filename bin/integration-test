@@ -1,0 +1,58 @@
+#!/bin/bash
+# Bash script to execute integration test
+
+echo -e "Create a new blockchain and a blockgenerator peer:"
+curl -X POST http://172.18.0.2/peer/new -H "Content-Type: application/json" \
+--data '{"type":"blockgenerator","url":"http://172.18.0.2"}'
+
+echo -e "\n\nCreate a new peer:"
+curl -X POST http://172.18.0.3/peer/new -H "Content-Type: application/json" \
+--data '{"type":"peer","url":"http://172.18.0.3"}'
+
+echo -e "\n\nSubscribe the peer to the blockgenerator (to join on the blockchain):"
+curl -X POST http://172.18.0.3/permission/join/ask -H "Content-Type: application/json" \
+--data '{"blockgenerator_url":"http://172.18.0.2"}'
+
+echo -e "\n\nThe blockgenerator can see all the pending peers that made request to join:"
+curl -X GET http://172.18.0.2/peer/list/pending -H "Content-Type: application/json"
+
+echo -e "\n\nThe blockgenerator can approve a peer to join:"
+curl -X POST http://172.18.0.2/permission/join/approve -H "Content-Type: application/json" \
+--data '{"url":"http://172.18.0.3"}'
+
+echo -e "\n\nThe blockgenerator can see all the approved peers of the blockchain network:"
+curl -X GET http://172.18.0.2/peer/list/joined -H "Content-Type: application/json"
+
+echo -e "\n\nThe peer can see the blockgenerator it has joined:"
+curl -X GET http://172.18.0.3/permission/joined -H "Content-Type: application/json"
+
+echo -e "\nThe blockgenerator can see the latest blocks:"
+curl -X GET http://172.18.0.2/blocks/latest -H "Content-Type: application/json"
+
+echo -e "\n\nPropose a block to the blockgenerator:"
+curl -X POST http://172.18.0.3/transaction/propose -H "Content-Type: application/json" \
+--data '{"data":"This is a test block"}'
+
+echo -e "\n\nWaiting the block generation..."
+sleep 5s
+
+echo -e "\nThe Block Generator can check the latest blocks after the last one was added:"
+curl -X GET http://172.18.0.2/blocks/latest -H "Content-Type: application/json"
+
+echo -e "\n\nPropose other blocks to the blockgenerator:"
+for i in {1..4}; do
+  curl -X POST http://172.18.0.3/transaction/propose -H "Content-Type: application/json" \
+  --data '{"data":"test '$i'"}'
+  echo -e " $i"
+done
+
+echo -e "\n\nWaiting the block generation..."
+sleep 8s
+
+echo -e "\nThe Block Generator can check again the latest blocks after the last blocks was added:"
+curl -X GET http://172.18.0.2/blocks/latest -H "Content-Type: application/json"
+
+# echo -e "\n\nThe peer can ask to sync its blocks:"
+# curl -X GET http://172.18.0.3/blocks/sync -H "Content-Type: application/json"
+
+echo -e "\n\nCompleted all tests"

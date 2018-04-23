@@ -1,6 +1,6 @@
 # Chainode
 
-An experimental private blockchain network based on node.js.
+A private blockchain network based on node.js, redis, and MongoDB.
 
 It allows to exchange data (as transactions) between participants using encrypted messages with the signature of each participant. These transactions are stored as blocks in a distributed ledger.
 
@@ -9,11 +9,13 @@ This is a work in progress.
 ## How it works
 
 #### Participants
-Every participant is a network's node that is defined by an ID and a public key.  
+Every participant is a network's node that is defined by an ID, an ip address, and a public key.  
 
 There are two types of peer node:
 - A block generator.
 - Many block listeners.
+
+The blockchain is defined by its block generator, so every block generator represents a different blockchain.
 
 ##### Block generator (generator node)
 There is only one block generator in every single blockchain network.
@@ -30,55 +32,97 @@ The block listeners' tasks are:
 - Keep a local copy of the shared blocks' ledger.
 
 #### Network
-The access to the blockchain network is restricted. Every participant must keep inside the folder `/data/{blockchain_id}/peers` the json files (`{peer_id}.json`) with urls and public keys of all other participants.
+The access to the blockchain network is restricted. To join, every peer needs to be approved:
+- Every participant must send a join request to the block generator.
+- The block generator can approve or decline a peer to join.
+
+## Requirements
+Chainode is based on:
+- node.js v8.0+
+- Redis (https://redis.io)
+- MongoDB (https://www.mongodb.com)
+
+# Getting started
+
+Get Chainode from github and start the server
+```
+git clone -b develop https://github.com/davidemiceli/chainode.git
+cd chainode
+bin/start --port 80
+```
+then you will see
+```
+____ _           _                 _      
+/ ___| |__   __ _(_)_ __   ___   __| | ___
+| |   | '_ \ / _` | | '_ \ / _ \ / _` |/ _ \
+| |___| | | | (_| | | | | | (_) | (_| |  __/
+\____|_| |_|\__,_|_|_| |_|\___/ \__,_|\___|
+
+Peer server listening on port 80
+```
+Once the peer server started, the first time you must create a new peer to join to an existing blockchain or create a new block generator.
+
+Create a new blockchain and a block generator peer (the `url` parameter should be the external url of the peer):
+```
+curl -X POST http://172.18.0.2/peer/new -H "Content-Type: application/json" \
+--data '{"type":"blockgenerator","url":"http://172.18.0.2"}'
+```
+
+From another server, create a new peer (the `url` parameter should be the external url of the peer):
+```
+curl -X POST http://172.18.0.3/peer/new -H "Content-Type: application/json" \
+--data '{"type":"peer","url":"http://172.18.0.3"}'
+```
+
+Subscribe the peer to the block generator (to join on the blockchain):
+```
+curl -X POST http://172.18.0.3/permission/join/ask -H "Content-Type: application/json" \
+--data '{"blockgenerator_url":"http://172.18.0.2"}'
+```
+
+The block generator can see all the pending peers that made request to join:
+```
+curl -X GET http://172.18.0.2/peer/list/pending -H "Content-Type: application/json"
+```
+
+The block generator can approve a peer to join:
+```
+curl -X POST http://172.18.0.2/permission/join/approve -H "Content-Type: application/json" \
+--data '{"url":"http://172.18.0.3"}'
+```
+where the parameter `url` is the url of the `peer` that needs to be approved.
+
+The block generator can see all the approved peers of the blockchain network:
+```
+curl -X GET http://172.18.0.2/peer/list/joined -H "Content-Type: application/json"
+```
+
+The peer can see the block generator it has joined:
+```
+curl -X GET http://172.18.0.3/permission/joined -H "Content-Type: application/json"
+```
+
+The block generator can see the latest blocks:
+```
+curl -X GET http://172.18.0.2/blocks/latest -H "Content-Type: application/json"
+```
+
+The peer can send a transaction (propose a new block) to the block generator:
+```
+curl -X POST http://172.18.0.3/transaction/propose -H "Content-Type: application/json" \
+--data '{"data":{"something":"..."}}'
+```
+The transaction informations are on `data` parameter.
+
+The block generator can check the latest blocks after the last one was added:
+```
+curl -X GET http://172.18.0.2/blocks/latest -H "Content-Type: application/json"
+```
 
 ## Install
-
 ```
 npm install chainode
 ```
-
-## Getting started
-
-##### Create a new blockchain
-To create a new blockchain, on the project folder, type:
-```
-npm run create -- --url=http://localhost:60000
-```
-The `url` parameter should be the external url of the network.
-This will create a new blockchain and the new block generator peer data that you will see inside `/data` folder.
-Inside `/data/{blockchain_id}/peers` put all the files of the other participants.
-
-To start the blockchain network as the block generator type:
-```
-npm run start -- --port=60000 --chain=20881c896... --peer=c4bed8fa7...
-```
-where the parameter `chain` is the blockchain id and `peer` is the block generator id.
-Then you will see:
-```
-   ____ _           _                 _      
-  / ___| |__   __ _(_)_ __   ___   __| | ___
- | |   | '_ \ / _` | | '_ \ / _ \ / _` |/ _ \
- | |___| | | | (_| | | | | | (_) | (_| |  __/
-  \____|_| |_|\__,_|_|_| |_|\___/ \__,_|\___|
-
-Peer c4bed8fa781b0a2504ee994276d92afe is connecting to the blockchain 20881c89687aee3009d8176a27f7fbf7.
-Peer c4bed8fa781b0a2504ee994276d92afe listening on port 60000
-```
-
-##### Join to an existing blockchain
-If you want to join in an existing blockchain as a block listener, you must create a new peer typing:
-```
-npm run newpeer -- --chain=20881c896... --url=http://localhost:60001
-```
-This will create the blockchain and the peer data inside the `/data` folder.
-Inside `/data/{blockchain_id}/peers` put all the files of the other participants.
-
-To connect to the blockchain type:
-```
-npm run start -- --port=60001 --chain=20881c89687aee3009d8176a27f7fbf7 --peer=3acdfafb56fc26a119c45107fe06753a
-```
-where the parameter `chain` is the blockchain id and `peer` is the peer id.
 
 ## Getting started with node.js SDK
 To handle the blockchain, there is the javascript SDK.
