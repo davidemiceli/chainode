@@ -35,6 +35,7 @@ module.exports = class {
     this.io = require('socket.io')(http);
     http.listen(peer_port, function () {
       console.log(`Peer ${that.getId()} listening on port ${peer_port}`);
+      that.askForNextBlock();
     });
   }
 
