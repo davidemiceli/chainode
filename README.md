@@ -60,6 +60,7 @@ ____ _           _                 _
 
 Peer server listening on port 80
 ```
+##### Peer management
 At start, once the peer server started, you must create a new peer to join to an existing blockchain or create a new block generator that will handle a new blockchain.
 
 Create a new blockchain and a block generator peer (the `url` parameter should be the external url of the peer):
@@ -73,7 +74,7 @@ From another server, create a new peer (the `url` parameter should be the extern
 curl -X POST http://172.18.0.3/peer/new -H "Content-Type: application/json" \
 --data '{"type":"peer","url":"http://172.18.0.3"}'
 ```
-
+##### Permissions
 Subscribe the peer to the block generator (to join on the blockchain):
 ```bash
 curl -X POST http://172.18.0.3/permission/join/ask -H "Content-Type: application/json" \
@@ -102,6 +103,7 @@ The peer can see the block generator it has joined:
 curl -X GET http://172.18.0.3/permission/joined -H "Content-Type: application/json"
 ```
 
+##### Transactions
 The block generator can see the latest blocks:
 ```bash
 curl -X GET http://172.18.0.2/blocks/latest -H "Content-Type: application/json"
