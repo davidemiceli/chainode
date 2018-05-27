@@ -7,6 +7,11 @@
 module.exports = {
   // Monitoring peer server
   MAIN: '/',
+  // Client authorization
+  AUTH: {
+    SIGNIN: '/auth/signin',
+    LOGOUT: '/auth/logout'
+  },
   // Peer management
   PEER: {
     INDEX: '/peer',

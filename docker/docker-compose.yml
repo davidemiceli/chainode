@@ -1,0 +1,80 @@
+version: "3.5"
+
+services:
+
+  mongo001:
+    image: mongo
+    container_name: mongo001
+    restart: always
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.10
+
+  mongo002:
+    image: mongo
+    container_name: mongo002
+    restart: always
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.11
+
+  chainbox001:
+    image: chainode
+    build:
+      context: ./
+      dockerfile: ./chainode/Dockerfile
+      network: host
+    container_name: chainbox001
+    volumes:
+      - ../:/appdata
+    environment:
+      - DB_HOST=10.5.0.10
+    command: /bin/bash -c "redis-server & tail -f dev/null"
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.2
+    depends_on:
+      - mongo001
+
+  chainbox002:
+    image: chainode
+    build:
+      context: ./
+      dockerfile: ./chainode/Dockerfile
+      network: host
+    container_name: chainbox002
+    volumes:
+      - ../:/appdata
+    environment:
+      - DB_HOST=10.5.0.11
+    command: /bin/bash -c "redis-server & tail -f dev/null"
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.3
+    depends_on:
+      - mongo002
+
+  chaintest:
+    image: chainode
+    build:
+      context: ./
+      dockerfile: ./chainode/Dockerfile
+      network: host
+    container_name: chaintest
+    volumes:
+      - ../:/appdata
+    command: tail -f dev/null
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.20
+    depends_on:
+      - chainbox001
+      - chainbox002
+
+networks:
+  vpcbr:
+    name: chainet
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.5.0.0/24

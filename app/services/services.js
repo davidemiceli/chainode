@@ -11,7 +11,9 @@ class Services {
 
   // Send data to one peer
   CallToOne(method, peer_url, endpoint, data) {
+    // Clean endpoint
     if (endpoint) endpoint = endpoint.replace(/^\//, '');
+    // Return api request
     if (method === 'GET') {
       return axios.get(`${peer_url}/${endpoint}`);
     }

@@ -10,5 +10,5 @@ module.exports = new Schema({
   blockgenerator: {type: Boolean, required: false},
   url: {type: String, unique: true, required: true, dropDups: true},
   public: {type: String, required: true},
-  pending: {type: Boolean, required: true, default: true}
+  pending: {type: Boolean, required: false, default: true}
 });

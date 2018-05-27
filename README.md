@@ -40,18 +40,37 @@ The access to the blockchain network is restricted. To join, every peer needs to
 Chainode is based on:
 - Node.js v8.0+
 - Redis (https://redis.io)
-- MongoDB (https://www.mongodb.com)
+- One of the following databases:
+  - MongoDB (https://www.mongodb.com)
 
 # Getting started
 
+#### Docker
+Chainode can be runned using docker-compose
+```bash
+git clone -b develop https://github.com/davidemiceli/chainode.git
+cd chainode/docker
+docker-compose up -d --build
+docker exec -it chainbox001 bash -c "cd appdata && bin/start"
+```
+To shutdown the application:
+```bash
+cd chainode/docker
+sudo docker-compose down
+```
+
+#### Github
 Download Chainode from github and start the server
 ```bash
 git clone -b develop https://github.com/davidemiceli/chainode.git
 cd chainode
+```
+Edit the configuration on `/app/configs/configs.js` and then run the server:
+```bash
 bin/start --port 80
 ```
-then you will see
-```
+Then you will see:
+```bash
 ____ _           _                 _      
 / ___| |__   __ _(_)_ __   ___   __| | ___
 | |   | '_ \ / _` | | '_ \ / _ \ / _` |/ _ \
@@ -60,6 +79,7 @@ ____ _           _                 _
 
 Peer server listening on port 80
 ```
+
 ##### Peer management
 At start, once the peer server started, you must create a new peer to join to an existing blockchain or create a new block generator that will handle a new blockchain.
 
@@ -119,6 +139,17 @@ The transaction informations are on `data` parameter.
 The block generator can check the latest blocks after the last one was added:
 ```bash
 curl -X GET http://172.18.0.2/blocks/latest -H "Content-Type: application/json"
+```
+
+## Tests
+
+### Integration tests
+
+To run integration tests:
+```bash
+git clone -b develop https://github.com/davidemiceli/chainode.git
+cd chainode/
+bin/integration-test
 ```
 
 ## Install

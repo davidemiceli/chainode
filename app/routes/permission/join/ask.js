@@ -2,24 +2,21 @@
 
 // Requirements
 const Utils = require('../../../lib/utils');
-const CRYPT = require('../../../lib/crypt');
 const services = require('../../../services/services');
 const redis_client = require('../../../models/redis');
 const Routes = require('../../../routes');
-const PeersModel = require('../../../models/mongodb/methods/peers');
 
 module.exports = async function(req, res, next) {
-  // Get the info about the peer to create
-  const blockgenerator_url = (req.body && req.body.blockgenerator_url) || null;
-  if (!blockgenerator_url) {
-    return res.ErrorHandler.InternalServerError('Missing blockgenerator_url parameter.');
-  }
-  const peerdata = {
-    url: req.current_peer.url,
-    signature: req.peer_signature
-  };
-  console.log(`Asking to join to ${blockgenerator_url}.`);
   try {
+    // Get the info about the peer to create
+    const blockgenerator_url = (req.body && req.body.blockgenerator_url) || null;
+    if (!blockgenerator_url) {
+      return res.ErrorHandler.InternalServerError('Missing blockgenerator_url parameter.');
+    }
+    const peerdata = {
+      url: req.current_peer.url
+    };
+    console.log(`Asking to join to ${blockgenerator_url}.`);
     // Ask to the blockgenerator to join in the blockchain network
     const resp = await services.CallToOne('POST', blockgenerator_url, Routes.PERMISSION.JOIN.RECEIVE, peerdata);
     // Parse blockgenerator data to be stored

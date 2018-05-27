@@ -2,8 +2,8 @@
 
 // Requirements
 const uuidv4 = require('uuid/v4');
-const crypto = require('crypto');
 const bluebird = require('bluebird');
+const CRYPT = require('./lib/crypt');
 const services = require('./services/services');
 const redis_client = require('./models/redis');
 const InMemory = require('./models/inmemory/db');
@@ -17,7 +17,7 @@ class Blockchain {
 
   calculate_hash(prev_hash, next_index, timestamp, data) {
     const to_hash = `${prev_hash}-${next_index}-${timestamp}-${data}`;
-    return crypto.createHash('sha256').update(to_hash).digest('hex');
+    return CRYPT.md5(to_hash);
   }
 
   to_block(blockdata) {

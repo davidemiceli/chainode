@@ -21,6 +21,7 @@ class LedgerModel {
       if (condition.hash) find.hash = condition.hash;
       if (condition.index) find.index = {$gt: Number(condition.index)};
       if (condition.timestamp) find.timestamp = {$gt: Number(condition.timestamp)};
+      if (condition.data_md5) find.data_md5 = condition.data_md5;
     }
     return db.ledger.find(find).limit(howmuch).exec();
   }

@@ -14,10 +14,6 @@ const Routes = require('./routes');
 const ErrorHandler = require('./lib/error-handler');
 const Blockchain = require('./blockchain');
 
-// Configs
-const port = process.env.PORT || configs.port || 80;
-const log_type = process.env.LOGS || 'DEBUG_NO_SYNC';
-
 // Log types
 const logtypes = {
   'DEBUG': {skip: ((req, res) => false)},
@@ -32,7 +28,7 @@ const logtypes = {
 const app = express();
 
 // App settings and plugins
-app.use(logger('dev', logtypes[log_type]));
+app.use(logger('dev', logtypes[configs.logs.type]));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.disable('x-powered-by');
@@ -71,14 +67,14 @@ app.use(function(err, req, res, next) {
 });
 
 // Start server
-app.listen(port, function() {
+app.listen(configs.port, function() {
   return figlet('Chainode', function(err, data) {
     if (err) {
       console.log(err);
       return;
     }
     console.log(data);
-    console.log(`Peer server listening on port ${port}`);
+    console.log(`Peer server listening on port ${configs.port}`);
     return;
   });
 });

@@ -1,13 +1,17 @@
 {
   "name": "chainode",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A private blockchain network based on node.js",
   "main": "index.js",
   "dependencies": {
     "axios": "^0.18.0",
     "bluebird": "^3.5.1",
+    "chai": "^4.1.2",
     "express": "^4.16.3",
+    "express-ipfilter": "^0.3.1",
     "figlet": "^1.2.0",
+    "jsonwebtoken": "^8.2.1",
+    "mocha": "^5.1.1",
     "moment": "^2.18.1",
     "mongoose": "^5.0.15",
     "morgan": "^1.9.0",
@@ -16,7 +20,8 @@
     "uuid": "^3.2.1"
   },
   "scripts": {
-    "start": "bin/start"
+    "start": "bin/start",
+    "test": "mocha test/integration.js"
   },
   "engines": {
     "node": ">=8.0"

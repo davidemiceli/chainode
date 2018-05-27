@@ -2,21 +2,16 @@
 
 // Requirements
 const Utils = require('../../lib/utils');
+const sign = require('../../lib/sign');
 const services = require('../../services/services');
 const Routes = require('../../routes');
 
 module.exports = function(req, res, next) {
-  const blockgenerator = req.blockgenerator;
   // Item to propose
-  const itemdata = req.body.data;
-  if (!itemdata) {
-    return res.ErrorHandler.InternalServerError('Missing data.');
-  }
-  const data = (typeof(itemdata) === 'string') ? itemdata : JSON.stringify(itemdata);
-  const proposed = {
-    signature: req.peer_signature,
-    peer_id: req.current_peer.id,
-    data: data
+  const blockgenerator = req.blockgenerator;
+  const proposed = req.encrypted_data;
+  if (!proposed) {
+    return res.ErrorHandler.InternalServerError('Missing encrypted data.');
   }
   // Propose block to the blockgenerator
   console.log(`Proposing a new transaction...`);
@@ -27,7 +22,7 @@ module.exports = function(req, res, next) {
     return res.json(obj);
   })
   .catch(function(err) {
-    console.log(err)
+    console.log(err);
     return res.ErrorHandler.InternalServerError('Rejected transaction from Block Generator.');
   });
 }
