@@ -3,24 +3,10 @@
   "version": "1.0.0",
   "description": "A private blockchain network based on node.js",
   "main": "index.js",
-  "dependencies": {
-    "axios": "^0.18.0",
-    "bluebird": "^3.5.1",
-    "chai": "^4.1.2",
-    "express": "^4.16.3",
-    "express-ipfilter": "^0.3.1",
-    "figlet": "^1.2.0",
-    "jsonwebtoken": "^8.2.1",
-    "mocha": "^5.1.1",
-    "moment": "^2.18.1",
-    "mongoose": "^5.0.15",
-    "morgan": "^1.9.0",
-    "node-rsa": "^0.4.2",
-    "redis": "^2.8.0",
-    "uuid": "^3.2.1"
-  },
   "scripts": {
     "start": "bin/start",
+    "blockgenerator": "DB_HOST=172.25.255.20 node peers/blockgenerator.js",
+    "peer": "DB_HOST=172.25.255.21 GROUP=company node peers/peer.js",
     "test": "mocha test/integration.js"
   },
   "engines": {
@@ -48,5 +34,23 @@
   "bugs": {
     "url": "https://github.com/davidemiceli/chainode/issues"
   },
-  "homepage": "https://github.com/davidemiceli/chainode#readme"
+  "homepage": "https://github.com/davidemiceli/chainode#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "jsonwebtoken": "^8.4.0",
+    "moleculer": "^0.13.5",
+    "moleculer-jaeger": "^0.2.0",
+    "moment": "^2.22.2",
+    "mongoose": "^5.3.16",
+    "morgan": "^1.9.1",
+    "nats": "^1.2.1",
+    "node-rsa": "^1.0.2",
+    "redis": "^2.8.0",
+    "uuid": "^3.3.2"
+  }
 }
