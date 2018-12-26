@@ -1,53 +1,53 @@
 'use strict';
-
-// Requirements
-const db = require('../db');
+/*
+  Peers model
+*/
 
 // Model for peers managements
-class PeersModel {
+module.exports = class {
 
-  constructor() { }
+  constructor(db) {
+    this.db = db;
+  }
 
   GetPeer(condition) {
     if (condition.id) {
-      return db.peers.find({id: condition.id}).limit(1).exec();
+      return this.db.peers.find({id: condition.id}).limit(1).exec();
     }
     return new Promise();
   }
 
   GetPendingPeers() {
-    return db.peers.find({pending: true}).exec();
+    return this.db.peers.find({pending: true}).exec();
   }
 
   AddToPendingPeers(data) {
     data.pending = true;
-    return new db.peers(data).save();
+    return new this.db.peers(data).save();
   }
 
   GetFromPendingPeers(condition) {
     if (condition.id) {
-      return db.peers.find({id: condition.id, pending: true}).exec();
+      return this.db.peers.find({id: condition.id, pending: true}).exec();
     } else if (condition.url) {
-      return db.peers.find({url: condition.url, pending: true}).exec();
+      return this.db.peers.find({url: condition.url, pending: true}).exec();
     }
     return new Promise();
   }
 
   RemovePeer(condition) {
-    return db.peers.remove(condition).exec();
+    return this.db.peers.remove(condition).exec();
   }
 
   GetPeers() {
-    return db.peers.find({pending: false}).exec();
+    return this.db.peers.find({pending: false}).exec();
   }
 
   AddToPeers(condition) {
-    return db.peers.findOneAndUpdate(condition, {$set: {pending: false}}, {
+    return this.db.peers.findOneAndUpdate(condition, {$set: {pending: false}}, {
       upsert: false,
       new: true
     }).exec();
   }
 
 }
-
-module.exports = new PeersModel;

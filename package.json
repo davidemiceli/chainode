@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "bin/start",
-    "blockgenerator": "DB_HOST=172.25.255.20 node peers/blockgenerator.js",
-    "peer": "DB_HOST=172.25.255.21 GROUP=company node peers/peer.js",
-    "test": "mocha test/integration.js"
+    "blockgenerator": "node peers/blockgenerator.js",
+    "peer": "node peers/peer.js",
+    "peer001": "PEER_ID=peer001 DB_HOST=172.25.255.21 npm run peer",
+    "peer002": "PEER_ID=peer001 DB_HOST=172.25.255.22 npm run peer",
+    "test": "nyc mocha test --recursive --full-trace"
   },
   "engines": {
     "node": ">=8.0"

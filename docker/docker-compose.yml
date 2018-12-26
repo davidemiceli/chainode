@@ -50,6 +50,14 @@ services:
       chainet:
         ipv4_address: "172.25.255.21"
 
+  mongo003:
+    image: mongo
+    container_name: mongo003
+    restart: always
+    networks:
+      chainet:
+        ipv4_address: "172.25.255.22"
+
   nodejs:
     image: node:10.12
     container_name: nodejs
@@ -63,6 +71,8 @@ services:
       - nats-2
       - nats-3
       - mongo001
+      - mongo002
+      - mongo003
       - jaeger
     networks:
       chainet:

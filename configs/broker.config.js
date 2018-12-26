@@ -3,6 +3,7 @@
 // Requirements
 const logformatter = require('../lib/logformatter');
 const uuidv4 = require('uuid/v4');
+const BroadcastStrategy = require('../lib/services/broadcastStrategy');
 
 
 // Parameters
@@ -27,6 +28,7 @@ module.exports = (nodeID) => ({
   requestRetry: 0,
   registry: {
     strategy: "RoundRobin"
+    // strategy: BroadcastStrategy
   },
   retryPolicy: {
     enabled: true,
