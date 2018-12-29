@@ -9,7 +9,6 @@ const errors = require(`../lib/errors`);
 const { syncBlocks } = require('../lib/block');
 const backend = require('./web-console/backend/server');
 
-
 // Blockchain sdk
 module.exports = class {
 
@@ -39,6 +38,10 @@ module.exports = class {
       if (webui.enabled) {
         await this.startWebConsole();
       }
+      if (role != 'blockgenerator') {
+        await this.synchronizeBlocks();
+      }
+      this.__broker.setStatus.active();
       return this;
     } catch(err) {
       await errors(this.__broker, err);
@@ -48,7 +51,7 @@ module.exports = class {
   // Start the Web Console
   async startWebConsole() {
     const {webui} = this.configs;
-    this.webapp = await backend(webui, this.__broker, this.logger, this.__broker.DB);
+    this.webapp = await backend(webui, this, this.logger, this.__broker.DB);
   }
 
   // Stop Web Console
@@ -60,9 +63,12 @@ module.exports = class {
   async synchronizeBlocks(timing) {
     try {
       timing = timing || 1000;
-      this.__broker.logger.info(`Starting block synchronization...`);
+      if (this.__broker.onStatus('sync')) return;
+      this.__broker.setStatus.sync();
+      this.logger.info(`Starting block synchronization...`);
       await syncBlocks(this.__broker, timing);
-      this.__broker.logger.info(`Block synchronization completed.`);
+      this.logger.info(`Block synchronization completed.`);
+      this.__broker.setStatus.active();
       return this;
     } catch(err) {
       await errors(this.__broker, err);
@@ -72,6 +78,9 @@ module.exports = class {
   // Propose a block transaction
   async propose(data) {
     try {
+      if (this.__broker.onStatus('sync')) {
+        throw Error('Peer can not propose a block during synchronisation.');
+      }
       await this.__broker.call('blockgenerator.transaction.add', data);
       return this;
     } catch(err) {

@@ -10,8 +10,9 @@ const ErrorHandler = require('./lib/ErrorHandler');
 const logHandler = require('./lib/logHandler');
 
 
-module.exports = async (configs, broker, logger, db) => {
+module.exports = async (configs, sdk, logger, db) => {
   const componentName = 'WebConsole';
+  logger.info(`Starting ${componentName}.`);
   // Init express app
   const app = express();
   // App settings and plugins
@@ -22,7 +23,7 @@ module.exports = async (configs, broker, logger, db) => {
   app.disable('x-powered-by');
   app.use((req, res, next) => {
     req.db = db;
-    req.broker = broker;
+    req.sdk = sdk;
     res.ErrorHandler = new ErrorHandler(res);
     return next();
   });
@@ -58,7 +59,7 @@ module.exports = async (configs, broker, logger, db) => {
 
   // Start UI console server
   app.listen(configs.port, () => {
-    logger.info(`${componentName} listening on port ${configs.port}`);
+    logger.info(`${componentName} listening on port ${configs.port}.`);
     return app;
   });
 }

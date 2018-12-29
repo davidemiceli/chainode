@@ -40,14 +40,19 @@ const configs = {
 const delay = time => new Promise(res => setTimeout(() => res(), time));
 
 const act = async peer => {
-  const seconds = _.random(1, 60);
-  await delay(seconds * 1000);
-  const items = _.random(1, 5);
-  for (let i=0; i<items; i++) {
-    const n = Math.random().toString(36).substring(7);
-    await peer.propose(`Item ${n}`);
+  try {
+    const seconds = _.random(0, 5);
+    await delay(seconds * 1000);
+    const items = _.random(1, 100);
+    for (let i=0; i<items; i++) {
+      const n = Math.random().toString(36).substring(7);
+      await peer.propose(`Item ${n}`);
+    }
+  } catch(err) {
+    peer.logger.error(err.stack);
+  } finally {
+    return await act(peer);
   }
-  return await act(peer);
 }
 
 
@@ -58,15 +63,14 @@ const main = async () => {
     // Init the peer
     const peer = new Chainode(configs);
     await peer.start();
-    await peer.synchronizeBlocks(1000);
-    await act(peer);
+    // await act(peer);
     // for (let i=0; i<30; i++) {
     //   const n = Math.random();
     //   await peer.propose(`Hello ${n}!`);
     // }
     setInterval(async () => {
       await peer.synchronizeBlocks(1000);
-    }, 60*1000);
+    }, 5*60*1000);
     // await peer.shutdown();
     return true;
   } catch(err) {

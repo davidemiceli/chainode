@@ -8,6 +8,7 @@ const errors = require('../lib/services/errors');
 // Add a new block to the ledger
 const added = async ctx => {
   try {
+    if (ctx.broker.onStatus('sync')) return false;
     // Get db model instance
     const db = ctx.broker.DB;
     // New ledger block

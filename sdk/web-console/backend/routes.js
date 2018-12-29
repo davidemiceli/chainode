@@ -13,6 +13,11 @@ module.exports = {
     SIGNUP: '/auth/signup',
     LOGOUT: '/auth/logout'
   },
+  // Block management
+  BLOCK: {
+    PROPOSE: '/block/propose',
+    LIST: '/block/list'
+  },
   // Peer management
   PEER: {
     NEW: '/peer/new',

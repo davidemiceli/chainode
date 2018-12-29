@@ -81,7 +81,9 @@ Peer server listening on port 80
 ```
 
 ```bash
-curl -X POST http://172.25.255.50:8080 -H "Content-Type: application/json" -d '{"ping": "test"}'
+curl -X GET http://172.25.255.50:8080 -H "Content-Type: application/json"
+curl -X POST http://172.25.255.50:8080/block/list -H "Content-Type: application/json" -d '{"index": 0}'
+curl -X POST http://172.25.255.50:8080/block/propose -H "Content-Type: application/json" -d '{"data": {"ok": true}}'
 ```
 
 ##### Peer management
