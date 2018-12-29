@@ -1,7 +1,7 @@
 'use strict';
 
 // Requirements
-const logformatter = require('../lib/logformatter');
+const logFormatter = require('../lib/logFormatter');
 const uuidv4 = require('uuid/v4');
 const BroadcastStrategy = require('../lib/services/broadcastStrategy');
 
@@ -21,7 +21,7 @@ module.exports = (nodeID) => ({
   logger: "console",
   logLevel: "info",
   logFormatter(level, args, bindings) {
-    return logformatter(level, args, bindings)
+    return logFormatter(level, args, bindings)
   },
   metrics: true,
   requestTimeout: 5 * 1000, // in seconds

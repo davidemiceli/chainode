@@ -50,13 +50,13 @@ Chainode can be runned using docker-compose
 ```bash
 git clone -b develop https://github.com/davidemiceli/chainode.git
 cd chainode/docker
-docker-compose up -d --build
-docker exec -it chainbox001 bash -c "cd appdata && bin/start"
+docker-compose up -d
+docker exec -it chainbox001 npm run blockgenerator
 ```
 To shutdown the application:
 ```bash
 cd chainode/docker
-sudo docker-compose down
+docker-compose down
 ```
 
 #### Github
@@ -78,6 +78,10 @@ ____ _           _                 _
 \____|_| |_|\__,_|_|_| |_|\___/ \__,_|\___|
 
 Peer server listening on port 80
+```
+
+```bash
+curl -X POST http://172.25.255.50:8080 -H "Content-Type: application/json" -d '{"ping": "test"}'
 ```
 
 ##### Peer management

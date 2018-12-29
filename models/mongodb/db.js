@@ -4,11 +4,10 @@
 const mongoose = require('mongoose');
 const CounterModel = require('./methods/counter');
 const LedgerModel = require('./methods/ledger');
-const PeersModel = require('./methods/peers');
 
 
 // MongoDB database model
-module.exports = (configs, broker) => {
+module.exports = (configs, logger) => {
 
   // Get configs
   const { host, port, dbname } = configs;
@@ -25,20 +24,20 @@ module.exports = (configs, broker) => {
   });
   
   mongoose.connection.on('connected', function() {
-    broker.logger.info('MongoDB connected.');
+    logger.info('MongoDB connected.');
   });
   
   mongoose.connection.on('error', function(err) {
-    broker.logger.error('MongoDB connection error:', err);
+    logger.error('MongoDB connection error:', err);
   });
   
   mongoose.connection.on('disconnected', function() {
-    broker.logger.info('MongoDB disconnected.');
+    logger.info('MongoDB disconnected.');
   });
   
   process.on('SIGINT', function() {
     mongoose.connection.close(function() {
-      broker.logger.info('MongoDB disconnected through app termination.');
+      logger.info('MongoDB disconnected through app termination.');
       process.exit(0);
     });
   });
@@ -46,23 +45,19 @@ module.exports = (configs, broker) => {
   // Schemas
   const CounterSchema = mongoose.model('counter', require('./schemas/counter'));
   const LedgerSchema = mongoose.model('ledger', require('./schemas/ledger'));
-  const PeersSchema = mongoose.model('peers', require('./schemas/peers'));
 
   // Database
   const db = {
     counter: CounterSchema,
-    ledger: LedgerSchema,
-    peers: PeersSchema
+    ledger: LedgerSchema
   };
 
   // Models
   const Counter = new CounterModel(db);
   const Ledger = new LedgerModel(db);
-  const Peers = new PeersModel(db);
 
   return {
     Counter,
-    Ledger,
-    Peers
+    Ledger
   };
 }

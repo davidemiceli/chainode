@@ -78,11 +78,3 @@ app.listen(configs.port, function() {
     return;
   });
 });
-
-/*
-  Peer actions
-*/
-// Start block generation loop
-Blockchain.generate_blocks(1*0);
-// Start sync loop
-Blockchain.sync_blocks(1*0);

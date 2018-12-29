@@ -7,6 +7,7 @@
 const Broker = require('../lib/broker');
 const errors = require(`../lib/errors`);
 const { syncBlocks } = require('../lib/block');
+const backend = require('./web-console/backend/server');
 
 
 // Blockchain sdk
@@ -29,16 +30,30 @@ module.exports = class {
   async start() {
     try {
       // Check params
-      const {type, name} = this.configs;
+      const {type, name, webui} = this.configs;
       // Init the broker
       const broker = await Broker(name, type, this.configs);
       broker.logger.info(`Starting ${type} with name ${name}.`);
       this.__broker = broker;
       this.logger = broker.logger;
+      if (webui.enabled) {
+        await this.startWebConsole();
+      }
       return this;
     } catch(err) {
       await errors(this.__broker, err);
     }
+  }
+
+  // Start the Web Console
+  async startWebConsole() {
+    const {webui} = this.configs;
+    this.webapp = await backend(webui, this.__broker, this.logger, this.__broker.DB);
+  }
+
+  // Stop Web Console
+  stopWebConsole() {
+    this.webapp && this.webapp.close();
   }
 
   // Sync missing blocks

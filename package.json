@@ -7,8 +7,9 @@
     "start": "bin/start",
     "blockgenerator": "node peers/blockgenerator.js",
     "peer": "node peers/peer.js",
-    "peer001": "PEER_ID=peer001 DB_HOST=172.25.255.21 npm run peer",
-    "peer002": "PEER_ID=peer001 DB_HOST=172.25.255.22 npm run peer",
+    "blockgenerator001": "WEBUI_PORT=8080 PEER_ID=blockgenerator001 DB_HOST=172.25.255.20 npm run blockgenerator",
+    "peer001": "WEBUI_PORT=8081 PEER_ID=peer001 DB_HOST=172.25.255.21 npm run peer",
+    "peer002": "WEBUI_PORT=8082 PEER_ID=peer001 DB_HOST=172.25.255.22 npm run peer",
     "test": "nyc mocha test --recursive --full-trace"
   },
   "engines": {
@@ -44,6 +45,8 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
     "jsonwebtoken": "^8.4.0",
     "moleculer": "^0.13.5",
     "moleculer-jaeger": "^0.2.0",
