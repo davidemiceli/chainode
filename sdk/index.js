@@ -16,7 +16,7 @@ module.exports = class {
   // Init SDK
   constructor(configs) {
     // Check params
-    if (!/^(blockgenerator|peer)$/.test(configs.type)) throw Error(`Invalid peer type ${configs.type}.`);
+    if (!/^(blockgenerator|peer)$/.test(configs.role)) throw Error(`Invalid peer role ${configs.role}.`);
     this.configs = configs;
   }
 
@@ -30,10 +30,10 @@ module.exports = class {
   async start() {
     try {
       // Check params
-      const {type, name, webui} = this.configs;
+      const {role, name, webui} = this.configs;
       // Init the broker
-      const broker = await Broker(name, type, this.configs);
-      broker.logger.info(`Starting ${type} with name ${name}.`);
+      const broker = await Broker(name, role, this.configs);
+      broker.logger.info(`Starting ${role} with name ${name}.`);
       this.__broker = broker;
       this.logger = broker.logger;
       if (webui.enabled) {

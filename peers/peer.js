@@ -10,15 +10,46 @@ const errors = require(`../lib/errors`);
 
 // Configurations
 const configs = {
-  type: 'peer',
+  blockchain: 'blockchain',
+  role: 'peer',
   name: process.env.PEER_ID || 'peer001',
   db: {
     type: 'mongodb',
     port: process.env.DB_PORT || 27017,
     host: process.env.DB_HOST,
     dbname: 'blockchain'
+  },
+  webui: {
+    enabled: true,
+    port: process.env.WEBUI_PORT || 8080,
+    logs: {
+      type: process.env.LOGS || 'DEBUG'
+    },
+    jwt: {
+      secret: '93f7db1df1f22a27c8b7cc609b9d5c9b7c1dba05e13f029a9e4612066c42775c86305e9d57c8c92cd30a789bc31ec011d135dc33508707c4e41512dc7502aeb8',
+      expire: '5m'
+    },
+    admin: {
+      usedb: false,
+      user: 'admin',
+      password: 'admin'
+    }
   }
 };
+
+const delay = time => new Promise(res => setTimeout(() => res(), time));
+
+const act = async peer => {
+  const seconds = _.random(1, 60);
+  await delay(seconds * 1000);
+  const items = _.random(1, 5);
+  for (let i=0; i<items; i++) {
+    const n = Math.random().toString(36).substring(7);
+    await peer.propose(`Item ${n}`);
+  }
+  return await act(peer);
+}
+
 
 // Run peer
 const main = async () => {
@@ -27,18 +58,13 @@ const main = async () => {
     // Init the peer
     const peer = new Chainode(configs);
     await peer.start();
-    peer.logger.info('Hello peer!');
     await peer.synchronizeBlocks(1000);
-    for (let i=0; i<30; i++) {
-      const n = Math.random();
-      await peer.propose(`Hello ${n}!`);
-    }
+    await act(peer);
+    // for (let i=0; i<30; i++) {
+    //   const n = Math.random();
+    //   await peer.propose(`Hello ${n}!`);
+    // }
     setInterval(async () => {
-      // const c = _.random(1, 5);
-      // for (let i=0; i<c; i++) {
-      //   const n = Math.random().toString(36).substring(7);
-      //   await peer.propose(`Test ${n}`);
-      // }
       await peer.synchronizeBlocks(1000);
     }, 60*1000);
     // await peer.shutdown();

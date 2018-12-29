@@ -10,7 +10,7 @@ const errors = require(`../lib/errors`);
 // Configurations
 const configs = {
   blockchain: 'blockchain',
-  type: 'blockgenerator',
+  role: 'blockgenerator',
   name: 'blockgenerator001',
   db: {
     type: 'mongodb',
