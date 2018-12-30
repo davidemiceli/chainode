@@ -5,24 +5,27 @@
 
 // Routes
 module.exports = {
-  // Monitoring peer server
+  // Dashboard
   MAIN: '/',
+  DASHBOARD: '/dashboard',
+  // Monitoring peer server
+  STATUS: '/api',
   // Client authorization
   AUTH: {
-    SIGNIN: '/auth/signin',
-    SIGNUP: '/auth/signup',
-    LOGOUT: '/auth/logout'
+    SIGNIN: 'api/auth/signin',
+    SIGNUP: 'api/auth/signup',
+    LOGOUT: 'api/auth/logout'
   },
   // Block management
   BLOCK: {
-    PROPOSE: '/block/propose',
-    LIST: '/block/list'
+    PROPOSE: '/api/block/propose',
+    LIST: '/api/block/list'
   },
   // Peer management
   PEER: {
-    NEW: '/peer/new',
-    AUTH: '/peer/auth',
-    VERIFY: '/peer/verify',
-    LIST: '/peer/list'
+    NEW: 'api/peer/new',
+    AUTH: 'api/peer/auth',
+    VERIFY: 'api/peer/verify',
+    LIST: 'api/peer/list'
   }
 };

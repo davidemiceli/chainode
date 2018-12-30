@@ -38,10 +38,11 @@ module.exports = class {
       if (webui.enabled) {
         await this.startWebConsole();
       }
-      if (role != 'blockgenerator') {
+      if (role === 'blockgenerator') {
+        this.__broker.setStatus.active();
+      } else {
         await this.synchronizeBlocks();
       }
-      this.__broker.setStatus.active();
       return this;
     } catch(err) {
       await errors(this.__broker, err);

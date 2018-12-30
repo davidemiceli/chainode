@@ -4,6 +4,7 @@
 */
 
 // Requirements
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const ErrorHandler = require('./lib/ErrorHandler');
@@ -27,6 +28,10 @@ module.exports = async (configs, sdk, logger, db) => {
     res.ErrorHandler = new ErrorHandler(res);
     return next();
   });
+
+  // Static files
+  const staticFolder = path.resolve(__dirname, '../frontend/build');
+  app.use('/', express.static(staticFolder));
 
   // Add router
   app.use('/', require('./router'));

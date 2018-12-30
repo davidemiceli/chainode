@@ -4,12 +4,19 @@
 */
 
 // Requirements
+const path = require('path');
 const express = require('express');
 const router = express.Router();
 const Routes = require('./routes');
 
 // Middlewares
 // const isAuth = require('./middlewares/isAuth');
+
+// Pages and redirect
+router.get([Routes.MAIN, `${Routes.DASHBOARD}/`, `${Routes.DASHBOARD}/*`], (req, res) => {
+  // Render index dashboard page
+  return res.sendFile(path.resolve(__dirname, '../frontend/build/index.html'));
+});
 
 // Monitoring peer server
 router.get(Routes.MAIN, require('./routes/status/health'));
