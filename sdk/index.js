@@ -7,7 +7,8 @@
 const Broker = require('../lib/broker');
 const errors = require(`../lib/errors`);
 const { syncBlocks } = require('../lib/block');
-const backend = require('./web-console/backend/server');
+const backend = require('../web-console/backend/server');
+
 
 // Blockchain sdk
 module.exports = class {

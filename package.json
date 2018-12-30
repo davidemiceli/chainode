@@ -11,8 +11,8 @@
     "peer001": "WEBUI_PORT=8081 PEER_ID=peer001 DB_HOST=172.25.255.21 npm run peer",
     "peer002": "WEBUI_PORT=8082 PEER_ID=peer001 DB_HOST=172.25.255.22 npm run peer",
     "test": "nyc mocha test --recursive --full-trace",
-    "build-webconsole-dev": "cd sdk/web-console/frontend && npm run build-dev",
-    "build-webconsole-prod": "cd sdk/web-console/frontend && npm run build-prod"
+    "build-webconsole-dev": "cd web-console/frontend && npm run build-dev",
+    "build-webconsole-prod": "cd web-console/frontend && npm run build-prod"
   },
   "engines": {
     "node": ">=8.0"

@@ -97,7 +97,7 @@ CONFIGS=/app/test/configs/blockgenerator.js BLOCKCHAIN=blockchain ROLE=blockgene
 
 ##### APIs
 ```bash
-curl -X GET http://172.25.255.50:8080 -H "Content-Type: application/json"
+curl -X GET http://172.25.255.50:8080/api -H "Content-Type: application/json"
 curl -X POST http://172.25.255.50:8080/api/block/list -H "Content-Type: application/json" -d '{"index": 0}'
 curl -X POST http://172.25.255.50:8080/api/block/propose -H "Content-Type: application/json" -d '{"data": {"ok": true}}'
 ```

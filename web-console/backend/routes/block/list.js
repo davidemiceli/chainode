@@ -1,7 +1,7 @@
 'use strict';
 
 // Requirements
-const { toBlock } = require('../../../../../lib/block');
+const { toBlock } = require('../../../../lib/block');
 
 
 // List blocks
