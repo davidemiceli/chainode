@@ -1,4 +1,9 @@
-# Chainode
+<p align="center">
+  <a href="https://github.com/davidemiceli/chainode" target="_blank" rel="noopener noreferrer">
+    <img src="img/logo.png" alt="Chainode logo">
+  </a>
+</p>
+<h1 align="center">Chainode</h1>
 
 A private blockchain network based on Node.js, Redis, and MongoDB.
 
@@ -80,10 +85,21 @@ ____ _           _                 _
 Peer server listening on port 80
 ```
 
+##### Start a peer
+To start a peer use a configuration file:
+```bash
+CONFIGS=/app/test/configs/blockgenerator.js npm start
+```
+Or to overwrite configurations:
+```bash
+CONFIGS=/app/test/configs/blockgenerator.js BLOCKCHAIN=blockchain ROLE=blockgenerator PEER_ID=001 DB_HOST=172.25.255.21 WEBUI_PORT=8080 npm start
+```
+
+##### APIs
 ```bash
 curl -X GET http://172.25.255.50:8080 -H "Content-Type: application/json"
-curl -X POST http://172.25.255.50:8080/block/list -H "Content-Type: application/json" -d '{"index": 0}'
-curl -X POST http://172.25.255.50:8080/block/propose -H "Content-Type: application/json" -d '{"data": {"ok": true}}'
+curl -X POST http://172.25.255.50:8080/api/block/list -H "Content-Type: application/json" -d '{"index": 0}'
+curl -X POST http://172.25.255.50:8080/api/block/propose -H "Content-Type: application/json" -d '{"data": {"ok": true}}'
 ```
 
 ##### Peer management

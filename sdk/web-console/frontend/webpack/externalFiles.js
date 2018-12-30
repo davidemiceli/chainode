@@ -14,8 +14,11 @@ module.exports = (outputPath) => {
     'src/img/logo.png',
     'src/img/image.png'
   ]);
+  // Favicon
+  const icoExtFiles = move_to(`${outputPath}/`, ['src/img/favicon.ico']);
   // Return concatenated in an unique array
   return [
-    ...imgExtFiles
+    ...imgExtFiles,
+    ...icoExtFiles
   ];
 }

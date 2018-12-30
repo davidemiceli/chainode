@@ -21,7 +21,9 @@ module.exports = class {
 
   // Shutdown the peer broker
   async shutdown() {
-    if (this.__broker) await this.__broker.stop();
+    this
+      .stopWebConsole()
+      .stop();
     return this;
   }
 
@@ -31,7 +33,7 @@ module.exports = class {
       // Check params
       const {role, name, webui} = this.configs;
       // Init the broker
-      const broker = await Broker(name, role, this.configs);
+      const broker = await Broker(role, this.configs);
       broker.logger.info(`Starting ${role} with name ${name}.`);
       this.__broker = broker;
       this.logger = broker.logger;
@@ -45,19 +47,27 @@ module.exports = class {
       }
       return this;
     } catch(err) {
-      await errors(this.__broker, err);
+      await errors(this.logger, err);
     }
+  }
+
+  // Stop peer broker
+  async stop() {
+    this.__broker && await this.__broker.stop();
+    return this;
   }
 
   // Start the Web Console
   async startWebConsole() {
     const {webui} = this.configs;
     this.webapp = await backend(webui, this, this.logger, this.__broker.DB);
+    return this;
   }
 
   // Stop Web Console
   stopWebConsole() {
     this.webapp && this.webapp.close();
+    return this;
   }
 
   // Sync missing blocks
@@ -72,7 +82,7 @@ module.exports = class {
       this.__broker.setStatus.active();
       return this;
     } catch(err) {
-      await errors(this.__broker, err);
+      await errors(this.logger, err);
     }
   }
 
@@ -85,7 +95,7 @@ module.exports = class {
       await this.__broker.call('blockgenerator.transaction.add', data);
       return this;
     } catch(err) {
-      await errors(this.__broker, err);
+      await errors(this.logger, err);
     }
   }
 
