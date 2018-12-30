@@ -5,11 +5,11 @@
 </p>
 <h1 align="center">Chainode</h1>
 
-A private blockchain network based on Node.js, Redis, and MongoDB.
+<h4 align="center">A private blockchain network.</h4>
 
-It allows to exchange data (as transactions) between participants using encrypted messages with the signature of each participant. These transactions are stored as blocks in a distributed ledger.
+Chainode allows to exchange data (as transactions) between participants using encrypted messages with the signature of each participant. These transactions are stored as blocks in a distributed ledger.
 
-This is a work in progress.
+Chainode is written in Javascript for Node.js, and it is a work in progress.
 
 ## How it works
 
