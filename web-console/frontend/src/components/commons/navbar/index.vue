@@ -15,23 +15,23 @@
         <ul class="navbar-nav mr-auto">
           <!-- Left Menu -->
           <li class="nav-item active"><a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a></li>
-          <li class="nav-item"><a class="nav-link" href="#" v-on:click="Hello($event)">One</a></li>
-          <li class="nav-item"><a class="nav-link" v-bind:href="Routes.HOME.path">Two</a></li>
-          <li class="nav-item"><a class="nav-link" v-bind:href="Routes.HOME.path">Three</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" v-on:click="Hello($event)">Status</a></li>
+          <li class="nav-item"><a class="nav-link" v-bind:href="Routes.HOME.path">Documentation</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://github.com/davidemiceli/chainode" target="_blank">Github</a></li>
           <!-- Left Menu -->
         </ul>
         <ul class="navbar-nav mr-right">
           <!-- Right Menu -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
+              Menu
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <h6 class="dropdown-header">Dropdown header</h6>
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
+              <h6 class="dropdown-header">Transactions</h6>
+              <a class="dropdown-item" href="#">List</a>
+              <a class="dropdown-item" href="#">Propose</a>
               <div class="dropdown-divider"></div>
-              <h6 class="dropdown-header">Dropdown header</h6>
+              <h6 class="dropdown-header">Admin</h6>
               <a class="dropdown-item" href="#">Something else here</a>
             </div>
           </li>

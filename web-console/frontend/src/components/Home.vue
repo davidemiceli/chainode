@@ -1,11 +1,21 @@
 <template>
   <div class="p-t-80 container">
 
-    <h1 class="top-title text-center">Chainode</h1>
+    <div class="row">
 
-    <p class="m-t-50 text-center">
-      <img src="/img/image.png" />
-    </p>
+      <div class="col-md-6 text-right">
+        <img src="/img/image.png" style="width: 400px;"/>
+      </div>
+
+      <div class="col-md-6">
+        <h1 class="top-title">Chainode</h1>
+        <h1 class="title">
+          Private<br />Blockchain<br />Network
+        </h1>
+      </div>
+
+    </div>
+
 
     <h1 class="m-t-100 title text-center">Lorem ipsum</h1>
     <p class="sentences">

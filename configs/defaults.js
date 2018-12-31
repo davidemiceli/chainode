@@ -20,11 +20,7 @@ module.exports = {
       factor: 2
     },
     circuitBreaker: {
-      enabled: false,
-      threshold: 0.5,
-      minRequestCount: 5,
-      windowTime: 60, // in seconds
-      halfOpenTime: 5 * 1000 // in milliseconds
+      enabled: false
     },
     // Service allowed concurrency and queque size
     bulkhead: {

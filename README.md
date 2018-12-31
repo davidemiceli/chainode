@@ -5,11 +5,11 @@
 </p>
 <h1 align="center">Chainode</h1>
 
-<h4 align="center">A private blockchain network.</h4>
+<h4 align="center"><em>Private Blockchain Network</em></h4>
 
 Chainode allows to exchange data (as transactions) between participants using encrypted messages with the signature of each participant. These transactions are stored as blocks in a distributed ledger.
 
-Chainode is written in Javascript for Node.js, and it is a work in progress.
+Chainode is written in pure Javascript for Node.js. It is a work in progress.
 
 ## How it works
 
@@ -92,7 +92,7 @@ CONFIGS=/app/test/configs/blockgenerator.js npm start
 ```
 Or to overwrite configurations:
 ```bash
-CONFIGS=/app/test/configs/blockgenerator.js BLOCKCHAIN=blockchain ROLE=blockgenerator PEER_ID=001 DB_HOST=172.25.255.21 WEBUI_PORT=8080 npm start
+CONFIGS=/app/test/configs/generic.js BLOCKCHAIN=blockchain ROLE=blockgenerator PEER_ID=001 DB_TYPE=mongodb DB_HOST=172.25.255.20 WEBUI_PORT=8080 npm start
 ```
 
 ##### APIs

@@ -4,8 +4,8 @@
 // Configurations
 module.exports = {
   blockchain: 'blockchain',
-  role: 'blockgenerator',
-  id: '0001',
+  // role: 'blockgenerator',
+  // id: '0001',
   db: {
     type: 'mongodb',
     port: 27017,

@@ -746,7 +746,7 @@ var navbarvue_type_template_id_8be2602c_render = function() {
                       }
                     }
                   },
-                  [_vm._v("One")]
+                  [_vm._v("Status")]
                 )
               ]),
               _vm._v(" "),
@@ -757,23 +757,14 @@ var navbarvue_type_template_id_8be2602c_render = function() {
                     staticClass: "nav-link",
                     attrs: { href: _vm.Routes.HOME.path }
                   },
-                  [_vm._v("Two")]
+                  [_vm._v("Documentation")]
                 )
               ]),
               _vm._v(" "),
-              _c("li", { staticClass: "nav-item" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "nav-link",
-                    attrs: { href: _vm.Routes.HOME.path }
-                  },
-                  [_vm._v("Three")]
-                )
-              ])
+              _vm._m(3)
             ]),
             _vm._v(" "),
-            _vm._m(3)
+            _vm._m(4)
           ]
         )
       ])
@@ -840,6 +831,24 @@ var navbarvue_type_template_id_8be2602c_staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c(
+        "a",
+        {
+          staticClass: "nav-link",
+          attrs: {
+            href: "https://github.com/davidemiceli/chainode",
+            target: "_blank"
+          }
+        },
+        [_vm._v("Github")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("ul", { staticClass: "navbar-nav mr-right" }, [
       _c("li", { staticClass: "nav-item dropdown" }, [
         _c(
@@ -855,7 +864,7 @@ var navbarvue_type_template_id_8be2602c_staticRenderFns = [
               "aria-expanded": "false"
             }
           },
-          [_vm._v("\n            Dropdown\n          ")]
+          [_vm._v("\n            Menu\n          ")]
         ),
         _vm._v(" "),
         _c(
@@ -866,22 +875,20 @@ var navbarvue_type_template_id_8be2602c_staticRenderFns = [
           },
           [
             _c("h6", { staticClass: "dropdown-header" }, [
-              _vm._v("Dropdown header")
+              _vm._v("Transactions")
             ]),
             _vm._v(" "),
             _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-              _vm._v("Action")
+              _vm._v("List")
             ]),
             _vm._v(" "),
             _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-              _vm._v("Another action")
+              _vm._v("Propose")
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "dropdown-divider" }),
             _vm._v(" "),
-            _c("h6", { staticClass: "dropdown-header" }, [
-              _vm._v("Dropdown header")
-            ]),
+            _c("h6", { staticClass: "dropdown-header" }, [_vm._v("Admin")]),
             _vm._v(" "),
             _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
               _vm._v("Something else here")
@@ -1043,10 +1050,25 @@ var Homevue_type_template_id_8dc7cce2_staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "p-t-80 container" }, [
-      _c("h1", { staticClass: "top-title text-center" }, [_vm._v("Chainode")]),
-      _vm._v(" "),
-      _c("p", { staticClass: "m-t-50 text-center" }, [
-        _c("img", { attrs: { src: "/img/image.png" } })
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-6 text-right" }, [
+          _c("img", {
+            staticStyle: { width: "400px" },
+            attrs: { src: "/img/image.png" }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" }, [
+          _c("h1", { staticClass: "top-title" }, [_vm._v("Chainode")]),
+          _vm._v(" "),
+          _c("h1", { staticClass: "title" }, [
+            _vm._v("\n        Private"),
+            _c("br"),
+            _vm._v("Blockchain"),
+            _c("br"),
+            _vm._v("Network\n      ")
+          ])
+        ])
       ]),
       _vm._v(" "),
       _c("h1", { staticClass: "m-t-100 title text-center" }, [
@@ -1129,6 +1151,16 @@ Homevue_type_template_id_8dc7cce2_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/Home.vue?vue&type=template&id=8dc7cce2&
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--3!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Home.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
