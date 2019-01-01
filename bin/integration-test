@@ -1,16 +1,21 @@
 #!/bin/bash
 # Bash script to execute integration tests
 
+# Docker compose custom wrapper for test environment
+function docker-test-env {
+  docker-compose -f network.yml -f nats.yml -f mongodb.yml -f monitoring.yml -f integration-tests.yml $@
+}
+
 # Start test environment
 echo -e "Starting dockerized environment."
 cd docker-compose/
-docker-compose -f network.yml -f nats.yml -f mongodb.yml -f docker-compose.yml -f integration-tests.yml up -d
+docker-test-env up -d
 
 # Execute integration tests
 docker exec -it nodejs npm test
 echo -e "Completed all integration tests."
 
 # Stop the test environment
-docker-compose -f network.yml -f nats.yml -f mongodb.yml -f docker-compose.yml -f integration-tests.yml down
+docker-test-env down
 cd ../
 echo -e "Shutdown of dockerized environment."

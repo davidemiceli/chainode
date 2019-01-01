@@ -1,0 +1,14 @@
+version: "3.5"
+
+services:
+
+  jaeger:
+    # https://www.jaegertracing.io/docs/1.6/getting-started/#all-in-one-docker-image
+    # http://jaeger:16686
+    image: jaegertracing/all-in-one:1.7
+    container_name: jaeger
+    environment:
+      - COLLECTOR_ZIPKIN_HTTP_PORT=9411
+    networks: 
+      chainet: 
+        ipv4_address: "172.25.255.40"
