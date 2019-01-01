@@ -28,12 +28,13 @@ module.exports = baseurl => {
   });
 
   // Monitoring peer server
-  router.get(Routes.MAIN, require('./routes/status/health'));
+  router.get(Routes.STATUS, require('./routes/status/health'));
   // Client authentication
   // ...
   // Peer management
   router.post(Routes.BLOCK.PROPOSE, require('./routes/block/propose'));
   router.post(Routes.BLOCK.LIST, require('./routes/block/list'));
+  router.post(Routes.BLOCK.SYNC, require('./routes/block/sync'));
   // Peer management
   // router.post(Routes.PEER.NEW, require('./routes/peer/new'));
   // router.post(Routes.PEER.AUTH, require('./routes/peer/auth'));

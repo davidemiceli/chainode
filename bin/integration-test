@@ -1,109 +1,16 @@
 #!/bin/bash
-# Bash script to execute integration test
+# Bash script to execute integration tests
 
 # Start test environment
-# cd ../docker
-# docker-compose up -d --build
+echo -e "Starting dockerized environment."
+cd docker-compose/
+docker-compose -f network.yml -f nats.yml -f mongodb.yml -f docker-compose.yml -f integration-tests.yml up -d
 
-# Constants
-BLOCKGENERATOR_IP="10.5.0.2"
-BLOCKGENERATOR_CONTAINER="chainbox001"
-PEER_001_IP="10.5.0.3"
-PEER_001_CONTAINER="chainbox002"
-API_KEY="61f48dea3d1f9cbfaea9ca01ed8f8681-1525626679999"
-API_SECRET="b49c9b0d76308fcaf1c8d30e722474233855eb3a3ca468e414b9f0691225ab98"
-
-echo -e "\n\nAuthenticate blockgenerator client:"
-BLOCKGENERATOR_TOKEN=$(docker exec -it ${BLOCKGENERATOR_CONTAINER} \
-curl -X POST http://${BLOCKGENERATOR_IP}/auth/signin -H "Content-Type: application/json" \
---data '{"key":"'${API_KEY}'","secret":"'${API_SECRET}'"}')
-BLOCKGENERATOR_TOKEN=$(python -c "print(${BLOCKGENERATOR_TOKEN}[\"token\"])")
-echo -e "\n$BLOCKGENERATOR_TOKEN"
-
-echo -e "\n\nAuthenticate peer client:"
-PEER_TOKEN=$(docker exec -it ${PEER_001_CONTAINER} \
-curl -X POST http://${PEER_001_IP}/auth/signin -H "Content-Type: application/json" \
---data '{"key":"'${API_KEY}'","secret":"'${API_SECRET}'"}')
-PEER_TOKEN=$(python -c "print(${PEER_TOKEN}[\"token\"])")
-echo -e "\n$PEER_TOKEN"
-
-echo -e "Create a new blockchain and a blockgenerator peer:"
-docker exec -it ${BLOCKGENERATOR_CONTAINER} \
-curl -X POST http://${BLOCKGENERATOR_IP}/peer/new -H "Content-Type: application/json" \
--H "X-ACCESS-TOKEN: $BLOCKGENERATOR_TOKEN" \
---data '{"type":"blockgenerator","url":"http://'${BLOCKGENERATOR_IP}'"}'
-
-echo -e "\n\nCreate a new peer:"
-docker exec -it ${PEER_001_CONTAINER} \
-curl -X POST http://${PEER_001_IP}/peer/new -H "Content-Type: application/json" \
--H "X-ACCESS-TOKEN: $PEER_TOKEN" \
---data '{"type":"peer","url":"http://'${PEER_001_IP}'"}'
-
-echo -e "\n\nSubscribe the peer to the blockgenerator (to join on the blockchain):"
-docker exec -it ${PEER_001_CONTAINER} \
-curl -X POST http://${PEER_001_IP}/permission/join/ask -H "Content-Type: application/json" \
--H "X-ACCESS-TOKEN: $PEER_TOKEN" \
---data '{"blockgenerator_url":"http://'${BLOCKGENERATOR_IP}'"}'
-
-echo -e "\n\nThe blockgenerator can see all the pending peers that made request to join:"
-docker exec -it ${BLOCKGENERATOR_CONTAINER} \
-curl -X GET http://${BLOCKGENERATOR_IP}/peer/list/pending -H "Content-Type: application/json" \
--H "X-ACCESS-TOKEN: $BLOCKGENERATOR_TOKEN"
-
-echo -e "\n\nThe blockgenerator can approve a peer to join:"
-docker exec -it ${BLOCKGENERATOR_CONTAINER} \
-curl -X POST http://${BLOCKGENERATOR_IP}/permission/join/approve -H "Content-Type: application/json" \
--H "X-ACCESS-TOKEN: $BLOCKGENERATOR_TOKEN" \
---data '{"url":"http://'${PEER_001_IP}'"}'
-
-echo -e "\n\nThe blockgenerator can see all the approved peers of the blockchain network:"
-docker exec -it ${BLOCKGENERATOR_CONTAINER} \
-curl -X GET http://${BLOCKGENERATOR_IP}/peer/list/joined -H "Content-Type: application/json" \
--H "X-ACCESS-TOKEN: $BLOCKGENERATOR_TOKEN"
-
-echo -e "\n\nThe peer can see the blockgenerator it has joined:"
-docker exec -it ${PEER_001_CONTAINER} \
-curl -X GET http://${PEER_001_IP}/permission/joined -H "Content-Type: application/json" \
--H "X-ACCESS-TOKEN: $PEER_TOKEN"
-
-echo -e "\nThe blockgenerator can see the latest blocks:"
-docker exec -it ${BLOCKGENERATOR_CONTAINER} \
-curl -X GET http://${BLOCKGENERATOR_IP}/blocks/latest -H "Content-Type: application/json"
-
-echo -e "\n\nPropose a block to the blockgenerator:"
-docker exec -it ${PEER_001_CONTAINER} \
-curl -X POST http://${PEER_001_IP}/transaction/propose -H "Content-Type: application/json" \
--H "X-ACCESS-TOKEN: $PEER_TOKEN" \
---data '{"data":{"hello":"this is a test block"}}'
-
-echo -e "\n\nWaiting the block generation..."
-sleep 5s
-
-echo -e "\nThe Block Generator can check the latest blocks after the last one was added:"
-docker exec -it ${BLOCKGENERATOR_CONTAINER} \
-curl -X GET http://${BLOCKGENERATOR_IP}/blocks/latest -H "Content-Type: application/json"
-
-echo -e "\n\nPropose other blocks to the blockgenerator:"
-for i in {1..4}; do
-  now=$(date +%s)
-  docker exec -it ${PEER_001_CONTAINER} \
-  curl -X POST http://${PEER_001_IP}/transaction/propose -H "Content-Type: application/json" \
-  -H "X-ACCESS-TOKEN: $PEER_TOKEN" \
-  --data '{"data":{"test":'$i',"now":'$now'}}'
-  echo -e " $i"
-done
-
-echo -e "\n\nWaiting the block generation..."
-sleep 8s
-
-echo -e "\nThe Block Generator can check again the latest blocks after the last blocks was added:"
-docker exec -it ${BLOCKGENERATOR_CONTAINER} \
-curl -X GET http://${BLOCKGENERATOR_IP}/blocks/latest -H "Content-Type: application/json"
-
-# echo -e "\n\nThe peer can ask to sync its blocks:"
-# curl -X GET http://${PEER_001_IP}/blocks/sync -H "Content-Type: application/json"
-
-echo -e "\n\nCompleted all tests"
+# Execute integration tests
+docker exec -it nodejs npm test
+echo -e "Completed all integration tests."
 
 # Stop the test environment
-# docker-compose down
+docker-compose -f network.yml -f nats.yml -f mongodb.yml -f docker-compose.yml -f integration-tests.yml down
+cd ../
+echo -e "Shutdown of dockerized environment."

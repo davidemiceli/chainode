@@ -4,6 +4,7 @@
 */
 
 // Requirements
+const events = require('events');
 const Broker = require('../lib/broker');
 const errors = require(`../lib/errors`);
 const { syncBlocks } = require('../lib/block');
@@ -18,6 +19,8 @@ module.exports = class {
     // Check params
     if (!/^(blockgenerator|peer)$/.test(configs.role)) throw Error(`Invalid peer role ${configs.role}.`);
     this.configs = configs;
+    this.__events = new events.EventEmitter();
+    this.__events.on('sync', this.synchronizeBlocks.bind(this));
   }
 
   // Shutdown the peer broker
@@ -81,6 +84,16 @@ module.exports = class {
       await syncBlocks(this.__broker, timing);
       this.logger.info(`Block synchronization completed.`);
       this.__broker.setStatus.active();
+      return this;
+    } catch(err) {
+      await errors(this.logger, err);
+    }
+  }
+
+  // Start block synchronization in background
+  async synchronizeBlocksAsync(timing) {
+    try {
+      this.__events.emit('sync', timing);
       return this;
     } catch(err) {
       await errors(this.logger, err);

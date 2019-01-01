@@ -19,7 +19,8 @@ module.exports = {
   // Block management
   BLOCK: {
     PROPOSE: '/api/block/propose',
-    LIST: '/api/block/list'
+    LIST: '/api/block/list',
+    SYNC: '/api/block/sync'
   },
   // Peer management
   PEER: {
