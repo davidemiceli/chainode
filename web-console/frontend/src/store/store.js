@@ -1,12 +1,12 @@
 'use strict';
 
 // Shared stores
-const stores = {
+const Store = {
   uxui: {
     loading: false,
     navbar: true
   },
-  user: {}
+  blocks: []
 };
 
-export default stores;
+export default Store;

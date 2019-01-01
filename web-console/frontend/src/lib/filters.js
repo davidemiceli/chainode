@@ -14,9 +14,14 @@ Vue.use(VueCurrencyFilter, {
   symbolSpacing: false
 });
 
-Vue.filter('date_medium', function(datetime, format) {
+Vue.filter('dateMedium', function(datetime, format) {
   // return moment(datetime).format(format || 'YYYY-MM-DD hh:mm:ss');
   return moment(datetime).format(format || 'LLL');
+});
+
+// Shortify a string if is longer than a defined length
+Vue.filter('readMore', function(text, length, suffix) {
+  return text.substring(0, length) + (suffix || '…');
 });
 
 export {}

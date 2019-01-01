@@ -3,6 +3,7 @@
 */
 
 @import url('https://fonts.googleapis.com/css?family=Staatliches');
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:400,700&subset=latin-ext');
 
 .brand-title-name {
   font-family: 'Staatliches', sans-serif;
@@ -34,4 +35,8 @@
 .highlighted-link {
   color: #286090;
   font-weight: 500;
+}
+
+.coding {
+  font-family: 'Inconsolata', monospace;
 }

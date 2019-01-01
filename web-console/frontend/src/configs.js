@@ -1,9 +1,11 @@
 'use strict';
 
+
 // App configuration settings
 const Configs = {
+  baseurl: BASEURL_FROM_BE,
   alerts: {
-    success_added: 'Data added with success!',
+    successAdded: 'Data added with success!',
     deleted: 'Deleted data with success!',
     error: 'Sorry, there was an error: contact the administrator...',
   }

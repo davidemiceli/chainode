@@ -1,7 +1,7 @@
 'use strict';
 
 // Store
-import stores from '@/src/store/stores';
+import Store from '@/src/store/store';
 
 // Actions
 class Actions {
@@ -10,23 +10,23 @@ class Actions {
 
   // Loading actions
   LOADING_START() {
-    stores.uxui.loading = true;
+    Store.uxui.loading = true;
   }
   LOADING_STOP() {
-    stores.uxui.loading = false;
+    Store.uxui.loading = false;
   }
 
   // Navbar actions
   NAVBAR_SHOW() {
-    stores.uxui.navbar = true;
+    Store.uxui.navbar = true;
   }
   NAVBAR_HIDE() {
-    stores.uxui.navbar = false;
+    Store.uxui.navbar = false;
   }
 
-  // User actions
-  USER_SET(item) {
-    stores.user = item;
+  // Block actions
+  BLOCKS_SET(items) {
+    Store.blocks = items;
   }
 
 };

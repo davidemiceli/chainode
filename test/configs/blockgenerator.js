@@ -46,6 +46,7 @@ module.exports = {
   },
   webui: {
     enabled: true,
+    host: '172.25.255.50',
     port: 8080,
     logs: {
       type: 'DEBUG'

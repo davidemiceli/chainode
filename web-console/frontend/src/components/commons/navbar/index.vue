@@ -27,9 +27,9 @@
               Menu
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <h6 class="dropdown-header">Transactions</h6>
-              <a class="dropdown-item" href="#">List</a>
-              <a class="dropdown-item" href="#">Propose</a>
+              <h6 class="dropdown-header">Blocks</h6>
+              <a class="dropdown-item" v-bind:href="Routes.BLOCKS.LIST.path">List</a>
+              <a class="dropdown-item" v-bind:href="Routes.BLOCKS.PROPOSE.path">Propose</a>
               <div class="dropdown-divider"></div>
               <h6 class="dropdown-header">Admin</h6>
               <a class="dropdown-item" href="#">Something else here</a>
@@ -52,14 +52,14 @@ import Configs from '@/src/configs';
 import { Routes } from '@/src/router/routes';
 
 // Stores and actions
-import stores from  '@/src/store/stores';
+import Store from  '@/src/store/store';
 import actions from  '@/src/store/actions';
 
 export default {
   name: 'Navbar',
   data() {
     return {
-      shared: stores,
+      STORE: Store,
       Routes: Routes
     }
   },

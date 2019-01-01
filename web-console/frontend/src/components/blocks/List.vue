@@ -1,0 +1,76 @@
+<template>
+  <div class="p-t-40 container">
+
+    <h1 class="title text-center">Blocks</h1>
+    <p class="text-center">
+      <small>List of transactions of the ledger.</small>
+    </p>
+
+    <p class="text-center" v-if="!STORE.blocks.length">
+      There are no blocks yet...
+    </p>
+
+    <table class="table table-striped table-sm" v-if="STORE.blocks.length">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">timestamp</th>
+          <th scope="col">hash</th>
+          <th scope="col">data</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="block in STORE.blocks">
+          <td>{{block.index}}</td>
+          <td>{{block.timestamp | dateMedium}}</td>
+          <td>{{block.hash | readMore(24)}}</td>
+          <td>{{block.data | readMore(50)}}</td>
+          <td>
+            <a href="#" v-on:click="Details($event)"><i class="material-icons">visibility</i></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</template>
+
+<script>
+import Configs from '@/src/configs';
+import { Routes } from '@/src/router/routes';
+import { BlockServices } from '@/src/services/blocks';
+import Store from  '@/src/store/store';
+import actions from  '@/src/store/actions';
+
+
+export default {
+  name: Routes.BLOCKS.LIST.name,
+  data() {
+    return {
+      STORE: Store
+    }
+  },
+  methods: {
+    List: function(e) {
+      if (e) e.preventDefault();
+      return BlockServices
+        .list()
+        .then(r => {
+          actions.BLOCKS_SET(r);
+        })
+        .catch(err => {
+          toastr.error(Configs.alerts.error);
+        });
+    },
+    Details: function(e) {
+      return;
+    }
+  },
+  beforeRouteEnter(to, from, next) {
+    return next(vm => {
+      return vm.List();
+    });
+  }
+}
+</script>

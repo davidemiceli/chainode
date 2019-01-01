@@ -13,7 +13,7 @@ import 'bootstrap';
 import Vue from 'vue';
 import App from '@/src/components/App';
 import router from '@/src/router';
-import filters from '@/src/libs/filters';
+import filters from '@/src/lib/filters';
 
 // Turn off the production tip on the console
 Vue.config.productionTip = false;

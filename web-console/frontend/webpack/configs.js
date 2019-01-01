@@ -11,7 +11,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // Main webpack config
 module.exports = (entryPoint, rootPath, outputPath) => ({
   entry: {
-    "app": entryPoint
+    "app": ['babel-polyfill', entryPoint]
   },
   output: {
     path: outputPath,
@@ -46,7 +46,6 @@ module.exports = (entryPoint, rootPath, outputPath) => ({
       },
       {
         test: /\.js$/,
-        // exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader',
         query: {
           presets: ['@babel/preset-env'] // Transpile the ES6 to es2015 standard

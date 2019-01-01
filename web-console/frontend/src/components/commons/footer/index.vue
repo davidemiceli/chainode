@@ -14,14 +14,14 @@ import Configs from '@/src/configs';
 import { Routes } from '@/src/router/routes';
 
 // Stores and actions
-import stores from  '@/src/store/stores';
+import Store from  '@/src/store/store';
 import actions from  '@/src/store/actions';
 
 export default {
   name: 'Footer',
   data() {
     return {
-      shared: stores,
+      STORE: Store,
       Routes: Routes
     }
   },

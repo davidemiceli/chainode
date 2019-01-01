@@ -7,10 +7,15 @@ import Configs from '@/src/configs';
 export const Routes = {
   // Dashboard
   HOME: {path: '/', name: 'home'},
+  // Blocks
+  BLOCKS: {
+    LIST: {path: '/dashboard/blocks/list', name: 'BlocksList'},
+    PROPOSE: {path: '/dashboard/blocks/propose', name: 'BlocksPropose'}
+  },
   // Something
-  SOMETHING: {path: '/something', name: 'something'},
+  SOMETHING: {path: '/dashboard/something', name: 'something'},
   // Empty
-  EMPTY: {path: `/empty`, name: 'empty'},
+  EMPTY: {path: `/dashboard/empty`, name: 'empty'},
   // Not Found: 404 error
   NOTFOUND: {path: '/404', name: 'notfound'}
 };

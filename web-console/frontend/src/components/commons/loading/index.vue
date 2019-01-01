@@ -1,5 +1,5 @@
 <template>
-  <div v-if="shared.uxui.loading" class="dashboard-on-loading">
+  <div v-if="STORE.uxui.loading" class="dashboard-on-loading">
     <div style="padding-top: 10%;">
       <div class="spinner">
         <div class="rect1"></div>
@@ -14,13 +14,13 @@
 
 <script>
 // Store
-import stores from  '@/src/store/stores';
+import Store from  '@/src/store/store';
 
 export default {
   name: 'Loading',
   data() {
     return {
-      shared: stores
+      STORE: Store
     }
   }
 }

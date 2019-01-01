@@ -36,6 +36,13 @@ a:focus, a:hover {
 textarea {
   resize: none;
 }
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #cecece;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(204, 204, 204, 0.25);
+}
 
 .progress {
   height: 10px;

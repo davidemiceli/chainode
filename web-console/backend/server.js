@@ -34,7 +34,8 @@ module.exports = async (configs, sdk, logger, db) => {
   app.use('/', express.static(staticFolder));
 
   // Add router
-  app.use('/', require('./router'));
+  const router = require('./router')(`http://${configs.host}:${configs.port}`);
+  app.use('/', router);
 
   // Catch 404 and forward to error handler
   app.use((req, res, next) => {
