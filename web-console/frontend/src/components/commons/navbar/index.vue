@@ -17,7 +17,7 @@
           <li class="nav-item active"><a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a></li>
           <li class="nav-item"><a class="nav-link" href="#" v-on:click="Hello($event)">Status</a></li>
           <li class="nav-item"><a class="nav-link" v-bind:href="Routes.HOME.path">Documentation</a></li>
-          <li class="nav-item"><a class="nav-link" href="https://github.com/davidemiceli/chainode" target="_blank">Github</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://github.com/davidemiceli/chainode" target="_blank"><i class="fab fa-github"></i> Github</a></li>
           <!-- Left Menu -->
         </ul>
         <ul class="navbar-nav mr-right">

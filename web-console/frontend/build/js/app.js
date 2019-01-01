@@ -175,7 +175,7 @@ var Store = {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(282);
-module.exports = __webpack_require__(510);
+module.exports = __webpack_require__(512);
 
 
 /***/ }),
@@ -198,18 +198,18 @@ var Configs = {
 
 /***/ }),
 
-/***/ 485:
+/***/ 486:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 508:
+/***/ 510:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(moment) {/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
+/* WEBPACK VAR INJECTION */(function(moment) {/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(35);
 /* harmony import */ var vue_currency_filter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(280);
 /* harmony import */ var vue_currency_filter__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_currency_filter__WEBPACK_IMPORTED_MODULE_1__);
  // Requirements
@@ -227,11 +227,8 @@ vue__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].use(vue_currency_filter__WEB
 vue__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].filter('dateMedium', function (datetime, format) {
   // return moment(datetime).format(format || 'YYYY-MM-DD hh:mm:ss');
   return moment(datetime).format(format || 'LLL');
-}); // Shortify a string if is longer than "l" length
+}); // Shortify a string if is longer than a defined length
 
-vue__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].filter('shortString', function (s, l) {
-  return s.length > l ? s.substr(0, l - 1) + '…' : s;
-});
 vue__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].filter('readMore', function (text, length, suffix) {
   return text.substring(0, length) + (suffix || '…');
 });
@@ -240,7 +237,7 @@ vue__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].filter('readMore', function 
 
 /***/ }),
 
-/***/ 509:
+/***/ 511:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -513,11 +510,11 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 509;
+webpackContext.id = 511;
 
 /***/ }),
 
-/***/ 510:
+/***/ 512:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -526,11 +523,14 @@ __webpack_require__.r(__webpack_exports__);
 // EXTERNAL MODULE: ./node_modules/bootstrap/dist/css/bootstrap.css
 var bootstrap = __webpack_require__(483);
 
+// EXTERNAL MODULE: ./node_modules/@fortawesome/fontawesome-free/css/all.css
+var css_all = __webpack_require__(484);
+
 // EXTERNAL MODULE: ./node_modules/toastr/build/toastr.css
-var toastr = __webpack_require__(484);
+var toastr = __webpack_require__(485);
 
 // EXTERNAL MODULE: ./src/scss/app.scss
-var app = __webpack_require__(485);
+var app = __webpack_require__(486);
 
 // CONCATENATED MODULE: ./src/styles.js
 /*
@@ -538,14 +538,18 @@ var app = __webpack_require__(485);
 */
 // Default styles
 
+
  // Custom styles
 
 
 // EXTERNAL MODULE: ./node_modules/bootstrap/dist/js/bootstrap.js
-var js_bootstrap = __webpack_require__(486);
+var js_bootstrap = __webpack_require__(487);
+
+// EXTERNAL MODULE: ./node_modules/@fortawesome/fontawesome-free/js/fontawesome.js
+var fontawesome = __webpack_require__(488);
 
 // EXTERNAL MODULE: ./node_modules/vue/dist/vue.esm.js
-var vue_esm = __webpack_require__(33);
+var vue_esm = __webpack_require__(35);
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/App.vue?vue&type=template&id=617ab0be&
 var render = function() {
@@ -858,7 +862,7 @@ var navbarvue_type_template_id_8be2602c_staticRenderFns = [
             target: "_blank"
           }
         },
-        [_vm._v("Github")]
+        [_c("i", { staticClass: "fab fa-github" }), _vm._v(" Github")]
       )
     ])
   }
@@ -1060,7 +1064,12 @@ var Homevue_type_template_id_8dc7cce2_staticRenderFns = [
             _c("i", { staticClass: "material-icons" }, [
               _vm._v("insert_emoticon")
             ]),
-            _vm._v(" of two types.\n      ")
+            _vm._v(" of two types.\n        "),
+            _c("br"),
+            _vm._v("Here there are other icons from Font Awesome "),
+            _c("i", { staticClass: "fas fa-igloo" }),
+            _vm._v(" "),
+            _c("i", { staticClass: "fab fa-github" })
           ]),
           _vm._v(" "),
           _c("p", [
@@ -1079,10 +1088,17 @@ var Homevue_type_template_id_8dc7cce2_staticRenderFns = [
             ),
             _c("br"),
             _vm._v("Here there are some icon examples "),
-            _c("i", { staticClass: "material-icons" }, [_vm._v("folder")]),
+            _c("i", { staticClass: "material-icons" }, [_vm._v("cloud")]),
             _vm._v(" "),
-            _c("i", { staticClass: "material-icons" }, [_vm._v("show_chart")]),
-            _vm._v(" of two types.\n      ")
+            _c("i", { staticClass: "material-icons" }, [
+              _vm._v("insert_emoticon")
+            ]),
+            _vm._v(" of two types.\n        "),
+            _c("br"),
+            _vm._v("Here there are other icons from Font Awesome "),
+            _c("i", { staticClass: "fas fa-igloo" }),
+            _vm._v(" "),
+            _c("i", { staticClass: "fab fa-github" })
           ]),
           _vm._v(" "),
           _c("p", [
@@ -1115,6 +1131,8 @@ Homevue_type_template_id_8dc7cce2_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/Home.vue?vue&type=template&id=8dc7cce2&
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--3!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Home.vue?vue&type=script&lang=js&
+//
+//
 //
 //
 //
@@ -1633,7 +1651,7 @@ var router_routes = [{
   routes: router_routes
 }));
 // EXTERNAL MODULE: ./src/lib/filters.js
-var filters = __webpack_require__(508);
+var filters = __webpack_require__(510);
 
 // CONCATENATED MODULE: ./src/main.js
 
@@ -1643,6 +1661,7 @@ var filters = __webpack_require__(508);
 // CSS styles
 
  // Javascript libraries
+
 
  // Vue requirements
 

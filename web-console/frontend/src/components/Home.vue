@@ -35,6 +35,7 @@
           Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
           Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
           <br />Here there are some icon examples <i class="material-icons">cloud</i> <i class="material-icons">insert_emoticon</i> of two types.
+          <br />Here there are other icons from Font Awesome <i class="fas fa-igloo"></i> <i class="fab fa-github"></i>
         </p>
         <p><a class="highlighted-link" href="#">Learn more</a></p>
       </div>
@@ -46,7 +47,8 @@
           Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
           Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          <br />Here there are some icon examples <i class="material-icons">folder</i> <i class="material-icons">show_chart</i> of two types.
+          <br />Here there are some icon examples <i class="material-icons">cloud</i> <i class="material-icons">insert_emoticon</i> of two types.
+          <br />Here there are other icons from Font Awesome <i class="fas fa-igloo"></i> <i class="fab fa-github"></i>
         </p>
         <p><a class="highlighted-link" href="#">Learn more</a></p>
       </div>
