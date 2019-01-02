@@ -6,8 +6,6 @@
 // Requirements
 const axios = require('axios');
 const expect = require("chai").expect;
-const bluebird = require('bluebird');
-const Chainode = require('../sdk/index');
 
 
 // Constants
@@ -22,6 +20,7 @@ const Actors = {
   }
 };
 
+// APIs client
 const APIs = async (method, baseurl, endpoint, data) => {
   try {
     if (!/^(GET|POST)$/.test(method)) {
@@ -37,6 +36,7 @@ const APIs = async (method, baseurl, endpoint, data) => {
   }
 }
 
+// Integration tests
 describe('Should handle the blocks and the ledger', () => {
 
   it('check the status of the APIs', async () => {

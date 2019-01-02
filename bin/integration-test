@@ -10,6 +10,7 @@ function docker-test-env {
 echo -e "Starting dockerized environment."
 cd docker-compose/
 docker-test-env up -d
+sleep 2
 
 # Execute integration tests
 docker exec -it nodejs npm test

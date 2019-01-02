@@ -171,7 +171,7 @@ To run integration tests:
 ```bash
 git clone -b develop https://github.com/davidemiceli/chainode.git
 cd chainode/
-bin/integration-test
+npm run test-integration
 ```
 
 ## Install
