@@ -2,7 +2,6 @@
 
 // Requirements
 const mongoose = require('mongoose');
-const CounterModel = require('./methods/counter');
 const LedgerModel = require('./methods/ledger');
 
 
@@ -43,21 +42,17 @@ module.exports = (configs, logger) => {
   });
 
   // Schemas
-  const CounterSchema = mongoose.model('counter', require('./schemas/counter'));
   const LedgerSchema = mongoose.model('ledger', require('./schemas/ledger'));
 
   // Database
   const db = {
-    counter: CounterSchema,
     ledger: LedgerSchema
   };
 
   // Models
-  const Counter = new CounterModel(db);
   const Ledger = new LedgerModel(db);
 
   return {
-    Counter,
     Ledger
   };
 }

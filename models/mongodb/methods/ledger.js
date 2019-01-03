@@ -12,14 +12,8 @@ module.exports = class {
   }
 
   // Get the last block
-  async prevHash(index) {
-    const block = await this.db.ledger.find({index: index}).exec();
-    return (block && block[0] && block[0].hash) || undefined;
-  }
-
-  // Get the last block
   GetLatestBlock(sorting) {
-    sorting = sorting || {index: -1};
+    sorting = sorting || {timestamp: -1};
     return this.db.ledger.find().sort(sorting).limit(1).exec();
   }
 
@@ -29,7 +23,6 @@ module.exports = class {
     const find = {};
     if (condition) {
       if (condition.hash) find.hash = condition.hash;
-      if (condition.index) find.index = {$gt: condition.index};
       if (condition.timestamp) find.timestamp = {$gt: Number(condition.timestamp)};
       if (condition.data_md5) find.data_md5 = condition.data_md5;
     }

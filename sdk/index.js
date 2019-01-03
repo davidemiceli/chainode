@@ -4,12 +4,17 @@
 */
 
 // Requirements
+const uuid4 = require('uuid/v4');
 const initKafka = require('../lib/initKafka');
 const logger = require('../lib/logger');
 const errors = require(`../lib/errors`);
 const selectDb = require('../lib/database/select');
 const backend = require('../web-console/backend/server');
-const { generateNextBlock } = require('../lib/block');
+const {
+  isValidBlock,
+  generateNextBlock
+} = require('../lib/block');
+const { utcTimestamp } = require('../lib/helpers');
 
 
 // Blockchain sdk
@@ -20,8 +25,13 @@ module.exports = class {
     // Check params
     if (!/^(blockgenerator|peer)$/.test(configs.role)) throw Error(`Invalid peer role ${configs.role}.`);
     this.configs = configs;
-    const {role, id, logs} = this.configs;
+    const { role, id, logs } = this.configs;
     this.logger = logger(role, id, logs.level, logs.path, logs.console);
+  }
+
+  hasRole(r) {
+    const { role } = this.configs;
+    return role === r;
   }
 
   // Shutdown the peer broker and the web console
@@ -85,9 +95,9 @@ module.exports = class {
       const msg = {topic: topic, messages: data};
       // Produce message
       const self = this;
-      return this.producer.send([msg], function(err, data) {
+      return this.producer.send([msg], function(err, res) {
         if (err) throw Error(err);
-        self.logger.debug('Produced', data);
+        self.logger.debug('Produced to', res);
         return self;
       });
     } catch(err) {
@@ -107,12 +117,19 @@ module.exports = class {
 
   // Select action based on message and topic
   async onMessage(topic, data) {
-    // const deserialized = this.deserialize(data);
+    const { role } = this.configs;
+    const deserialized = this.deserialize(data);
     switch(topic) {
       case this.configs.kafka.topics.pending:
-        return await this.addBlock(data);
+        if (this.hasRole('blockgenerator')) {
+          return await this.addBlock(deserialized);
+        }
+        return false;
       case this.configs.kafka.topics.ledger:
-        return true;
+        if (this.hasRole('peer')) {
+          return await this.addedToLedgerBlock(deserialized.value);
+        }
+        return false;
       default:
         return false;
     }
@@ -123,7 +140,12 @@ module.exports = class {
     try {
       // Get topic
       const topic = this.configs.kafka.topics.pending;
-      const serialized = this.serialize(data);
+      const proposed = {
+        id: uuid4(),
+        proposedTime: utcTimestamp(),
+        value: this.serialize(data)
+      };
+      const serialized = this.serialize(proposed);
       await this.__produce(topic, serialized);
       return true;
     } catch(err) {
@@ -134,10 +156,12 @@ module.exports = class {
   // Add block to the ledger
   async addBlock(data) {
     try {
+      // Item data
+      const {id, proposedTime, value} = data;
       // Get db model instance
       const db = this.db;
       // Generate block using previous block
-      const newblock = await generateNextBlock(db, data);
+      const newblock = generateNextBlock(id, proposedTime, value);
       this.logger.info(`Building a block for the transaction ${newblock.hash} sended by ${this.configs.id}.`);
       this.logger.debug('Built new block', newblock);
       // Store block on db
@@ -149,6 +173,30 @@ module.exports = class {
       await this.__produce(topic, serialized);
       // Return the new block
       return newblock.hash;
+    } catch(err) {
+      errors(this.logger, err);
+    }
+  }
+
+  // Add block to the ledger
+  async addedToLedgerBlock(value) {
+    try {
+      // Get db model instance
+      const db = this.db;
+      const data = this.deserialize(value);
+      // Check if block is valid
+      const valid = isValidBlock(deserialized);
+      if (!valid) {
+        const invalidMsg = (data && data.hash && data.id) ? `Found an invalid block ${data.hash} with id ${data.id}.` : 'Received an invalid block.';
+        this.logger.error(invalidMsg);
+        return false;  
+      }
+      this.logger.info(`Received the block ${data.hash} with id ${data.id}.`);
+      // Store block on db
+      await db.Ledger.AddBlock(data);
+      this.logger.debug('Added new block:', data);
+      // Return the new block
+      return data.hash;
     } catch(err) {
       errors(this.logger, err);
     }
