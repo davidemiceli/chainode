@@ -1,0 +1,15 @@
+version: "3.5"
+
+services:
+  # Confluent Kafka => Port 9092
+  confluentkafka:
+    image: confluentkafka
+    container_name: confluentkafka
+    build:
+      context: ./confluentkafka
+      dockerfile: ./Dockerfile
+      network: host
+    command: /bin/bash -c "cd confluent/bin && ./confluent start kafka && ./confluent log kafka -f"
+    networks:
+      chainet:
+        ipv4_address: "172.25.255.61"

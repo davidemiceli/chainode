@@ -3,7 +3,7 @@
 
 # Docker compose custom wrapper for test environment
 function docker-test-env {
-  docker-compose -f network.yml -f nats.yml -f mongodb.yml -f monitoring.yml -f integration-tests.yml $@
+  docker-compose -f network.yml -f nats.yml -f mongodb.yml -f monitoring.yml -f dev-app.yml integration-tests.yml $@
 }
 
 # Start test environment

@@ -13,7 +13,9 @@
     "build-webconsole-dev": "cd web-console/frontend && npm run build-dev",
     "build-webconsole-prod": "cd web-console/frontend && npm run build-prod",
     "test": "nyc mocha test --recursive --full-trace",
-    "test-integration": "bin/integration-test"
+    "test-integration": "bin/integration-test",
+    "start-dev-env": "bin/run-dev-env up -d",
+    "stop-dev-env": "bin/run-dev-env down"
   },
   "engines": {
     "node": ">=8.0"
@@ -46,6 +48,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.4.0",
+    "kafka-node": "^3.0.1",
     "moleculer": "^0.13.5",
     "moleculer-jaeger": "^0.2.0",
     "moment": "^2.22.2",
@@ -54,7 +57,9 @@
     "nats": "^1.2.1",
     "node-rsa": "^1.0.2",
     "redis": "^2.8.0",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "winston": "^3.1.0",
+    "winston-daily-rotate-file": "^3.5.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",
