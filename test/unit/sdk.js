@@ -1,13 +1,10 @@
 'use strict';
-/*
-  Integration Tests
-*/
 
 // Requirements
-const path = require('path');
 const expect = require("chai").expect;
 const Chainode = require('../../sdk/index');
 const loadConfigs = require('../../lib/loadConfigs');
+const { generateNextBlock } = require('../../lib/block');
 
 // Set generic configs
 process.env.CONFIGS = '../test/configs/generic.js';
@@ -28,20 +25,29 @@ describe('SDK should handle the blocks and the ledger', () => {
   });
 
   it('starts the sdk peer agent', async () => {
-    // Init the peer
     const res = await agent.start();
     expect(res).instanceOf(Chainode);
+  }).timeout(5*1000);
+
+  it('propose a new block for the ledger', async () => {
+    const data = [
+      `Hello test ${Math.random()}`,
+      {ok: 'test', num: Math.random()}
+    ];
+    for (const item of data) {
+      const res = await agent.sendNewBlock(item);
+      expect(res).to.be.a('string');
+    }
   });
 
-  it('proposes a block', async () => {
-    // Init the peer
-    const data = 'Hello test!';
-    const res = await agent.propose(data);
-    expect(res).to.be.true;
+  it('adds a block to the ledger', async () => {
+    const data = Math.random();
+    const { organization } = agent.configs;
+    const serialized = agent.serialize(data);
+    const newblock = generateNextBlock(organization, serialized);
+    const res = await agent.addBlockToLedger(newblock);
+    expect(res).to.be.a('string');
   });
-
-  // Adds a block to the ledger
-  // Receives new block from the ledger
 
   after(async () => {
     await agent.shutdown();

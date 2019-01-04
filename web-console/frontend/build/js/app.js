@@ -1272,11 +1272,7 @@ var Listvue_type_template_id_7218f372_render = function() {
                 ]),
                 _vm._v(" "),
                 _c("td", [
-                  _vm._v(_vm._s(_vm._f("readMore")(block.company, 10)))
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(_vm._s(_vm._f("dateMedium")(block.proposedTime)))
+                  _vm._v(_vm._s(_vm._f("readMore")(block.organization, 10)))
                 ]),
                 _vm._v(" "),
                 _c("td", [
@@ -1311,9 +1307,7 @@ var Listvue_type_template_id_7218f372_staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("eventId")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("company")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("proposedTime")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("organization")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("generatedTime")]),
         _vm._v(" "),
@@ -1777,8 +1771,6 @@ function () {
 /* harmony import */ var _src_services_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(80);
 /* harmony import */ var _src_store_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(14);
 /* harmony import */ var _src_store_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(76);
-//
-//
 //
 //
 //

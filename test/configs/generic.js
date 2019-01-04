@@ -4,8 +4,8 @@
 // Configurations
 module.exports = {
   blockchain: 'blockchain',
-  company: 'brandName',
-  role: 'blockgenerator',
+  organization: 'brandName',
+  role: 'peer',
   id: '0000',
   db: {
     type: 'mongodb',
@@ -18,8 +18,7 @@ module.exports = {
       '172.25.255.61:9092'
     ],
     topics: {
-      pending: 'blockchain.blocks.pending',
-      ledger: 'blockchain.blocks.ledger'
+      pending: 'blockchain.blocks.pending'
     },
     consumer: {
       // groupId: 'blockchain.company.role',
