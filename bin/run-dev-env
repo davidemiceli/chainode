@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # Start environment for development
 echo -e "Starting dockerized environment for development."
 cd docker-compose/
