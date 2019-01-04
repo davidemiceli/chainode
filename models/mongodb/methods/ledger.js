@@ -23,8 +23,7 @@ module.exports = class {
     const find = {};
     if (condition) {
       if (condition.hash) find.hash = condition.hash;
-      if (condition.timestamp) find.timestamp = {$gt: Number(condition.timestamp)};
-      if (condition.data_md5) find.data_md5 = condition.data_md5;
+      if (condition.proposedTime) find.proposedTime = {$gt: Number(condition.proposedTime)};
     }
     return this.db.ledger.find(find).limit(howmuch).exec();
   }

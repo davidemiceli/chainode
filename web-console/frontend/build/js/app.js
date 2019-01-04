@@ -1265,7 +1265,15 @@ var Listvue_type_template_id_7218f372_render = function() {
             "tbody",
             _vm._l(_vm.STORE.blocks, function(block) {
               return _c("tr", [
-                _c("td", [_vm._v(_vm._s(_vm._f("readMore")(block.id, 10)))]),
+                _c("td", [_vm._v(_vm._s(_vm._f("readMore")(block.hash, 10)))]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(_vm._s(_vm._f("readMore")(block.eventId, 10)))
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(_vm._s(_vm._f("readMore")(block.company, 10)))
+                ]),
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(_vm._s(_vm._f("dateMedium")(block.proposedTime)))
@@ -1274,8 +1282,6 @@ var Listvue_type_template_id_7218f372_render = function() {
                 _c("td", [
                   _vm._v(_vm._s(_vm._f("dateMedium")(block.generatedTime)))
                 ]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(_vm._f("readMore")(block.hash, 10)))]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(_vm._f("readMore")(block.data, 20)))])
               ])
@@ -1301,13 +1307,15 @@ var Listvue_type_template_id_7218f372_staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("id")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("hash")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("eventId")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("company")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("proposedTime")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("generatedTime")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("hash")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("data")])
       ])
@@ -1769,6 +1777,8 @@ function () {
 /* harmony import */ var _src_services_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(80);
 /* harmony import */ var _src_store_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(14);
 /* harmony import */ var _src_store_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(76);
+//
+//
 //
 //
 //

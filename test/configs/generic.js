@@ -4,7 +4,7 @@
 // Configurations
 module.exports = {
   blockchain: 'blockchain',
-  company: 'company',
+  company: 'brandName',
   role: 'blockgenerator',
   id: '0000',
   db: {
@@ -17,7 +17,6 @@ module.exports = {
     hosts: [
       '172.25.255.61:9092'
     ],
-    partitionsPerTopic: 3,
     topics: {
       pending: 'blockchain.blocks.pending',
       ledger: 'blockchain.blocks.ledger'

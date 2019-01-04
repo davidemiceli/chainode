@@ -137,10 +137,13 @@ module.exports = class {
   // Propose a block transaction
   async propose(data) {
     try {
+      // Get company
+      const { company } = this.configs;
       // Get topic
       const topic = this.configs.kafka.topics.pending;
       const proposed = {
-        id: uuid4(),
+        eventId: uuid4(),
+        company: company,
         proposedTime: utcTimestamp(),
         value: this.serialize(data)
       };
@@ -156,16 +159,16 @@ module.exports = class {
   async addBlock(data) {
     try {
       // Item data
-      const {id, proposedTime, value} = data;
+      const {eventId, company, proposedTime, value} = data;
       // Get db model instance
       const db = this.db;
       // Generate block using previous block
-      const newblock = generateNextBlock(id, proposedTime, value);
-      this.logger.info(`Building a block for the transaction ${newblock.hash} sended by ${this.configs.id}.`);
+      const newblock = generateNextBlock(eventId, company, proposedTime, value);
+      this.logger.info(`Building a block for the transaction ${newblock.hash} sended by company ${company}.`);
       this.logger.debug('Built new block', newblock);
       // Store block on db
       await db.Ledger.AddBlock(newblock);
-      this.logger.info(`Block #${newblock.index} ${newblock.hash} was added to the ledger.`);
+      this.logger.info(`Block ${newblock.hash} was added to the ledger.`);
       // Publish block
       const topic = this.configs.kafka.topics.ledger;
       const serialized = this.serialize(newblock);

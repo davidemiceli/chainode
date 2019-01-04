@@ -21,6 +21,7 @@ module.exports = async (req, res) => {
     // Return results
     return res.json(results);
   } catch(err) {
+    req.sdk.logger.error(err.stack);
     return res.ErrorHandler.InternalServerError(err.message);
   }
 }
