@@ -70,7 +70,7 @@ module.exports = class {
 
   // Stop peer broker
   async stop() {
-    return consumer.close(function(err, res) {
+    return this.consumer.close(function(err, res) {
       return this;
     });
   }
@@ -117,7 +117,6 @@ module.exports = class {
 
   // Select action based on message and topic
   async onMessage(topic, data) {
-    const { role } = this.configs;
     const deserialized = this.deserialize(data);
     switch(topic) {
       case this.configs.kafka.topics.pending:
@@ -127,7 +126,7 @@ module.exports = class {
         return false;
       case this.configs.kafka.topics.ledger:
         if (this.hasRole('peer')) {
-          return await this.addedToLedgerBlock(deserialized.value);
+          return await this.receiveLedgerBlock(deserialized);
         }
         return false;
       default:
@@ -153,7 +152,7 @@ module.exports = class {
     }
   }
 
-  // Add block to the ledger
+  // Add a block to the ledger
   async addBlock(data) {
     try {
       // Item data
@@ -178,18 +177,17 @@ module.exports = class {
     }
   }
 
-  // Add block to the ledger
-  async addedToLedgerBlock(value) {
+  // Receive new block from the ledger
+  async receiveLedgerBlock(data) {
     try {
       // Get db model instance
       const db = this.db;
-      const data = this.deserialize(value);
       // Check if block is valid
-      const valid = isValidBlock(deserialized);
+      const valid = isValidBlock(this.logger, data);
       if (!valid) {
         const invalidMsg = (data && data.hash && data.id) ? `Found an invalid block ${data.hash} with id ${data.id}.` : 'Received an invalid block.';
         this.logger.error(invalidMsg);
-        return false;  
+        return false;
       }
       this.logger.info(`Received the block ${data.hash} with id ${data.id}.`);
       // Store block on db

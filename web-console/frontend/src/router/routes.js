@@ -14,8 +14,6 @@ export const Routes = {
   },
   // Something
   SOMETHING: {path: '/dashboard/something', name: 'something'},
-  // Empty
-  EMPTY: {path: `/dashboard/empty`, name: 'empty'},
   // Not Found: 404 error
   NOTFOUND: {path: '/404', name: 'notfound'}
 };

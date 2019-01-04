@@ -13,22 +13,23 @@
     <table class="table table-striped table-sm" v-if="STORE.blocks.length">
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">timestamp</th>
+          <th scope="col">id</th>
+          <th scope="col">proposedTime</th>
+          <th scope="col">generatedTime</th>
           <th scope="col">hash</th>
           <th scope="col">data</th>
-          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="block in STORE.blocks">
-          <td>{{block.index}}</td>
-          <td>{{block.timestamp | dateMedium}}</td>
-          <td>{{block.hash | readMore(24)}}</td>
-          <td>{{block.data | readMore(50)}}</td>
-          <td>
+          <td>{{block.id | readMore(10)}}</td>
+          <td>{{block.proposedTime | dateMedium}}</td>
+          <td>{{block.generatedTime | dateMedium}}</td>
+          <td>{{block.hash | readMore(10)}}</td>
+          <td>{{block.data | readMore(20)}}</td>
+          <!-- <td>
             <a href="#" v-on:click="Details($event)"><i class="material-icons">visibility</i></a>
-          </td>
+          </td> -->
         </tr>
       </tbody>
     </table>

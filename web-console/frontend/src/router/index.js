@@ -11,7 +11,6 @@ import { Routes } from '@/src/router/routes';
 import Home from '@/src/components/Home';
 import BlocksList from '@/src/components/blocks/List';
 import BlocksPropose from '@/src/components/blocks/Propose';
-import Empty from '@/src/components/Empty';
 import NotFound from '@/src/components/404';
 
 Vue.use(VueRouter);
@@ -21,7 +20,6 @@ const routes = [
   { path: Routes.BLOCKS.LIST.path, name: Routes.BLOCKS.LIST.name, component: BlocksList},
   { path: Routes.BLOCKS.PROPOSE.path, name: Routes.BLOCKS.PROPOSE.name, component: BlocksPropose},
   { path: Routes.SOMETHING.path, redirect: Routes.HOME.path },
-  { path: Routes.EMPTY.path, name: Routes.EMPTY.name, component: Empty},
   { path: Routes.NOTFOUND.path, component: NotFound },
   { path: '*', redirect: Routes.NOTFOUND.path }
 ];

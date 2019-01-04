@@ -4,6 +4,7 @@
 // Configurations
 module.exports = {
   blockchain: 'blockchain',
+  company: 'company',
   role: 'blockgenerator',
   id: '0000',
   db: {
@@ -22,7 +23,8 @@ module.exports = {
       ledger: 'blockchain.blocks.ledger'
     },
     consumer: {
-      groupId: 'company.role.uuid4',
+      // groupId: 'blockchain.company.role',
+      fromOffset: false,
       autoCommit: true,
       encoding: 'utf8',
       keyEncoding: 'utf8'

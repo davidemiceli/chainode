@@ -95,9 +95,10 @@ To start a peer use a configuration file:
 ```bash
 CONFIGS=/app/test/configs/blockgenerator.js npm start
 ```
-Or to overwrite configurations:
+The configurations can be overwritten like the following examples:
 ```bash
-CONFIGS=/app/test/configs/generic.js BLOCKCHAIN=blockchain ROLE=blockgenerator PEER_ID=000 DB_TYPE=mongodb DB_HOST=172.25.255.20 WEBUI_PORT=8080 npm start
+CONFIGS=/app/test/configs/generic.js BLOCKCHAIN=blockchain COMPANY=company ROLE=blockgenerator PEER_ID=000 DB_TYPE=mongodb DB_HOST=172.25.255.20 WEBUI_PORT=8080 npm start
+CONFIGS=/app/test/configs/generic.js BLOCKCHAIN=blockchain COMPANY=company ROLE=peer PEER_ID=001 DB_TYPE=mongodb DB_HOST=172.25.255.21 WEBUI_PORT=8081 npm start
 ```
 
 ##### APIs

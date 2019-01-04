@@ -14,6 +14,7 @@ services:
     environment:
       - CONFIGS=/app/test/configs/generic.js
       - BLOCKCHAIN=blockchain
+      - COMPANY=company
       - ROLE=blockgenerator
       - PEER_ID=000
       - DB_TYPE=mongodb
@@ -36,6 +37,7 @@ services:
     environment:
       - CONFIGS=/app/test/configs/generic.js
       - BLOCKCHAIN=blockchain
+      - COMPANY=company
       - ROLE=peer
       - PEER_ID=001
       - DB_TYPE=mongodb

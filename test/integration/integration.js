@@ -7,6 +7,8 @@
 const axios = require('axios');
 const expect = require("chai").expect;
 
+// Timeout
+const timeout = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 // Constants
 const Actors = {
@@ -44,12 +46,12 @@ describe('Should handle the blocks and the ledger', () => {
       const res = await APIs('GET', a.url, 'api');
       expect(res).to.deep.equal({status: 'active'});
     }
-  });
+  }).timeout(10*1000);
 
   it('make blockgenerator show the latest blocks', async () => {
     const res = await APIs('POST', Actors.blockgenerator.url, 'api/block/list', {});
     expect(res).to.be.an('array');
-  });
+  }).timeout(10*1000);
 
   it('make peer propose a block to the blockgenerator', async () => {
     for (let i=0; i<1*6; i++) {
@@ -59,16 +61,13 @@ describe('Should handle the blocks and the ledger', () => {
       const res = await APIs('POST', Actors.peer001.url, 'api/block/propose', data);
       expect(res).to.be.true;
     }
-  });
-
-  it('make peer synchronize blocks', async () => {
-    const res = await APIs('POST', Actors.peer001.url, 'api/block/sync', {});
-    expect(res).to.be.true;
-  }).timeout(100*1000);
+  }).timeout(30*1000);
 
   it('make blockgenerator check again the latest blocks after the last blocks were added', async () => {
+    // Wait Kafka propagates messages to consumer
+    await timeout(10);
     const res = await APIs('POST', Actors.blockgenerator.url, 'api/block/list', {});
     expect(res).to.be.an('array').to.be.not.empty;
-  }).timeout(10*1000);
+  }).timeout(20*1000);
 
 });

@@ -21,7 +21,8 @@ Vue.filter('dateMedium', function(datetime, format) {
 
 // Shortify a string if is longer than a defined length
 Vue.filter('readMore', function(text, length, suffix) {
-  return text.substring(0, length) + (suffix || '…');
+  suffix = (text.length <= length) ? '' : (suffix || '…');
+  return text.substring(0, length) + suffix;
 });
 
 export {}
