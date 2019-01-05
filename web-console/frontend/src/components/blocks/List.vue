@@ -14,18 +14,18 @@
       <thead>
         <tr>
           <th scope="col">hash</th>
-          <th scope="col">eventId</th>
+          <th scope="col">event_id</th>
           <th scope="col">organization</th>
-          <th scope="col">generatedTime</th>
+          <th scope="col">generated_time</th>
           <th scope="col">data</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="block in STORE.blocks">
           <td>{{block.hash | readMore(10)}}</td>
-          <td>{{block.eventId | readMore(10)}}</td>
+          <td>{{block.event_id | readMore(10)}}</td>
           <td>{{block.organization | readMore(10)}}</td>
-          <td>{{block.generatedTime | dateMedium}}</td>
+          <td>{{block.generated_time | dateMedium}}</td>
           <td>{{block.data | readMore(20)}}</td>
           <!-- <td>
             <a href="#" v-on:click="Details($event)"><i class="material-icons">visibility</i></a>

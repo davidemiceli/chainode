@@ -88,8 +88,10 @@ module.exports = class {
   // Produce message to a kafka topic
   async __produce(topic, data) {
     try {
+      // Serialize data
+      const serialized = this.serialize(data);
       // Compose message
-      const msg = {topic: topic, messages: data};
+      const msg = {topic: topic, messages: serialized};
       // Produce message
       const self = this;
       return this.producer.send([msg], function(err, res) {
@@ -112,6 +114,11 @@ module.exports = class {
     return JSON.parse(data);
   }
 
+  // Check if data is serialized
+  isSerialized(data) {
+    return typeof data === 'string';
+  }
+
   // Select actions based on message and topic
   async onMessage(topic, data) {
     const { topics } = this.configs.kafka;
@@ -130,17 +137,18 @@ module.exports = class {
   // Propose a new block
   async sendNewBlock(data) {
     try {
+      // Check if data is serialized
+      if (!this.isSerialized(data)) throw Error('Data is not serialized.');
       // Item data
       const { organization } = this.configs;
       // Generate block
-      const serializedData = this.serialize(data);
-      const newblock = generateNextBlock(organization, serializedData);
+      // const serializedData = this.serialize(data);
+      const newblock = generateNextBlock(organization, data);
       this.logger.info(`Building a block for the transaction ${newblock.hash} sended by organization ${organization}.`);
       this.logger.debug('Built new block', newblock);
       // Publish block
       const topic = this.configs.kafka.topics.pending;
-      const serialized = this.serialize(newblock);
-      await this.__produce(topic, serialized);
+      await this.__produce(topic, newblock);
       // Return the new block
       return newblock.hash;
     } catch(err) {

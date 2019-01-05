@@ -11,12 +11,6 @@ module.exports = class {
     this.db = db;
   }
 
-  // Get the last block
-  GetLatestBlock(sorting) {
-    sorting = sorting || {timestamp: -1};
-    return this.db.ledger.find().sort(sorting).limit(1).exec();
-  }
-
   // Get the last blocks
   GetBlocks(condition, howmuch) {
     howmuch = howmuch || 25;
@@ -25,6 +19,7 @@ module.exports = class {
       if (condition.hash) find.hash = condition.hash;
       if (condition.generatedTime) find.generatedTime = {$gt: Number(condition.generatedTime)};
     }
+    // .sort({generatedTime: -1})
     return this.db.ledger.find(find).limit(howmuch).exec();
   }
 

@@ -2,10 +2,11 @@
 
 // Requirements
 const expect = require('chai').expect;
-const axios = require('axios');
 const Chainode = require('../sdk/index');
 const loadConfigs = require('../lib/loadConfigs');
 const { generateNextBlock } = require('../lib/block');
+const APIs = require('./lib/apis');
+
 
 // Set generic configs
 process.env.CONFIGS = '../test/configs/generic.js';
@@ -13,23 +14,6 @@ process.env.CONFIGS = '../test/configs/generic.js';
 let agent = null;
 const peer = {url: ''};
 
-
-// APIs client
-const APIs = async (method, baseurl, endpoint, data) => {
-  try {
-    if (!/^(GET|POST)$/.test(method)) {
-      throw Error('Invalid REST APIs method.');
-    }
-    endpoint = endpoint && endpoint.replace(/^\//, '');
-    const apiMethod = method.toLowerCase();
-    const fullApiUrl = `${baseurl}/${endpoint}`;
-    const r = await axios[apiMethod](fullApiUrl, data);
-    return r.data;
-  } catch(e) {
-    console.log(e.stack);
-    throw e;
-  }
-}
 
 // Integration tests
 describe('should handle the blocks and the ledger', () => {
@@ -58,7 +42,7 @@ describe('should handle the blocks and the ledger', () => {
     it('propose a new block for the ledger', async () => {
       const data = [
         `Hello test ${Math.random()}`,
-        {ok: 'test', num: Math.random()}
+        JSON.stringify({ok: 'test', num: Math.random()})
       ];
       for (const item of data) {
         const res = await agent.sendNewBlock(item);

@@ -1,0 +1,14 @@
+#!/bin/bash
+# Create Cassandra keyspace and table
+
+KEYSPACE=blockchain
+TABLE=ledger
+
+for i in {1..3};
+do
+  DBCONTAINER=db00$i
+  docker exec -it $DBCONTAINER cqlsh -e "DROP KEYSPACE IF EXISTS $KEYSPACE;"
+  docker exec -it $DBCONTAINER cqlsh -e "CREATE KEYSPACE IF NOT EXISTS $KEYSPACE WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;"
+  docker exec -it $DBCONTAINER cqlsh -e "CREATE TABLE IF NOT EXISTS $KEYSPACE.$TABLE (hash text, organization text, event_id text, generated_time timestamp, data text, PRIMARY KEY ((hash), organization, event_id, generated_time));"
+  echo "Created keyspace and table for $DBCONTAINER."
+done

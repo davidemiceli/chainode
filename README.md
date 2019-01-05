@@ -7,6 +7,15 @@
 
 <h4 align="center"><em>Private Blockchain Network</em></h4>
 
+<p align="center">
+  <a href="https://github.com/davidemiceli/chainode/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.shields.io/badge/License-AGPL%20v3-blue.svg" alt="GitHub license">
+  </a>
+  <a href="https://github.com/davidemiceli/chainode/pulls" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome">
+  </a>
+</p>
+
 Chainode allows to exchange data (as transactions) between participants using encrypted messages with the signature of each participant. These transactions are stored as blocks in a distributed ledger.
 
 Chainode is written in pure Javascript for Node.js. It is a work in progress.

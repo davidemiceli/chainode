@@ -15,9 +15,9 @@ services:
     working_dir: /app
     depends_on:
       - confluentkafka
-      - mongo001
-      - mongo002
-      - mongo003
+      - db001
+      - db002
+      - db003
     networks:
       chainet:
         ipv4_address: "172.25.255.50"

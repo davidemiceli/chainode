@@ -8,10 +8,20 @@ module.exports = {
   role: 'peer',
   id: '0000',
   db: {
-    type: 'mongodb',
-    port: 27017,
-    host: '172.25.255.20',
-    dbname: 'blockchain'
+    type: 'cassandra',
+    mongodb: {
+      port: 27017,
+      host: '172.25.255.20',
+      dbname: 'blockchain'
+    },
+    cassandra: {
+      hosts: [
+        '172.25.255.20'
+      ],
+      localDataCenter: 'datacenter1',
+      keyspace: 'blockchain',
+      consistency: 'localQuorum'
+    }
   },
   kafka: {
     hosts: [

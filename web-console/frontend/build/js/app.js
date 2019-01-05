@@ -215,6 +215,7 @@ var Configs = {
  // Requirements
 
 
+ // Format currency
 
 vue__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].use(vue_currency_filter__WEBPACK_IMPORTED_MODULE_1___default.a, {
   symbol: '',
@@ -223,7 +224,8 @@ vue__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].use(vue_currency_filter__WEB
   fractionSeparator: ',',
   symbolPosition: 'front',
   symbolSpacing: false
-});
+}); // Format a datetime
+
 vue__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].filter('dateMedium', function (datetime, format) {
   // return moment(datetime).format(format || 'YYYY-MM-DD hh:mm:ss');
   return moment(datetime).format(format || 'LLL');
@@ -1268,7 +1270,7 @@ var Listvue_type_template_id_7218f372_render = function() {
                 _c("td", [_vm._v(_vm._s(_vm._f("readMore")(block.hash, 10)))]),
                 _vm._v(" "),
                 _c("td", [
-                  _vm._v(_vm._s(_vm._f("readMore")(block.eventId, 10)))
+                  _vm._v(_vm._s(_vm._f("readMore")(block.event_id, 10)))
                 ]),
                 _vm._v(" "),
                 _c("td", [
@@ -1276,7 +1278,7 @@ var Listvue_type_template_id_7218f372_render = function() {
                 ]),
                 _vm._v(" "),
                 _c("td", [
-                  _vm._v(_vm._s(_vm._f("dateMedium")(block.generatedTime)))
+                  _vm._v(_vm._s(_vm._f("dateMedium")(block.generated_time)))
                 ]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(_vm._f("readMore")(block.data, 20)))])
@@ -1305,11 +1307,11 @@ var Listvue_type_template_id_7218f372_staticRenderFns = [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("hash")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("eventId")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("event_id")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("organization")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("generatedTime")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("generated_time")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("data")])
       ])

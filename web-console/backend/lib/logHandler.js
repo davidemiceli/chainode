@@ -3,12 +3,13 @@
   Handle express errors using a generic inherited logger
 */
 
-// https://stackoverflow.com/questions/46367401/how-to-to-create-a-custom-logger-in-express
-// GENERAL winston example => https://gist.github.com/rtgibbons/7354879
-// USE THIS (winston) => https://gist.github.com/vikas5914/cf568748ac89446e19ecd5e2e6900443
 
 // Select logger by response status code
-const selectLogger = (res, logger) => (res.statusCode < 400 || res.statusCode >= 500) ? logger.error : logger.info;
+const selectLogger = (res, logger) => {
+  if (res.statusCode >= 200 && res.statusCode < 300) return logger.info;
+  if (res.statusCode >= 300 && res.statusCode < 400) return logger.warn;
+  return logger.error;
+}
 
 
 module.exports = (componentName, logger) => (req, res, next) => {

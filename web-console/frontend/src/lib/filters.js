@@ -5,6 +5,7 @@ import Vue from 'vue';
 import VueCurrencyFilter from 'vue-currency-filter';
 
 
+// Format currency
 Vue.use(VueCurrencyFilter, {
   symbol: '',
   thousandsSeparator: '.',
@@ -14,6 +15,7 @@ Vue.use(VueCurrencyFilter, {
   symbolSpacing: false
 });
 
+// Format a datetime
 Vue.filter('dateMedium', function(datetime, format) {
   // return moment(datetime).format(format || 'YYYY-MM-DD hh:mm:ss');
   return moment(datetime).format(format || 'LLL');

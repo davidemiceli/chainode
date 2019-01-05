@@ -2,26 +2,23 @@ version: "3.5"
 
 services:
 
-  mongo001:
+  db001:
     image: mongo
-    container_name: mongo001
-    restart: always
+    container_name: db001
     networks:
       chainet:
         ipv4_address: "172.25.255.20"
 
-  mongo002:
+  db002:
     image: mongo
-    container_name: mongo002
-    restart: always
+    container_name: db002
     networks:
       chainet:
         ipv4_address: "172.25.255.21"
 
-  mongo003:
+  db003:
     image: mongo
-    container_name: mongo003
-    restart: always
+    container_name: db003
     networks:
       chainet:
         ipv4_address: "172.25.255.22"

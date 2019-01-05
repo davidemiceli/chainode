@@ -8,9 +8,9 @@ const Schema = mongoose.Schema;
 // Blockchain ledger collection
 module.exports = new Schema({
   hash: {type: String, unique: true, required: true, dropDups: true},
-  eventId: {type: String, required: true},
+  event_id: {type: String, required: true},
   organization: {type: String, required: true},
-  generatedTime: {type: Number, required: true},
+  generated_time: {type: Number, required: true},
   data: {type: String, required: true}
 })
 .index({hash: 1}, {unique: true});

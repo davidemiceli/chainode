@@ -13,11 +13,7 @@ module.exports = async (req, res) => {
     const blocks = await req.db.Ledger.GetBlocks(condition, 25);
     // Parse blocks
     const results = blocks
-      .map(toBlock)
-      .map(b => {
-        b.data = JSON.parse(b.data);
-        return b;
-      });
+      .map(toBlock);
     // Return results
     return res.json(results);
   } catch(err) {

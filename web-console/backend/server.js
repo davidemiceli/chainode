@@ -53,10 +53,10 @@ module.exports = async (configs, sdk, logger, db) => {
       res.locals.error = current_env === 'development' ? err : {
         message: 'Internal Server Error'
       };
+      req.sdk.logger.error(err.stack);
     }
     // render the error
     res.status(err.status || 500);
-    if (err.status != 404) req.sdk.logger.error(err.stack);
     return res.json({
       code: err.status,
       message: err.message
