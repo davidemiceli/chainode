@@ -154,7 +154,7 @@
 /************************************************************************/
 /******/ ({
 
-/***/ 14:
+/***/ 13:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -163,7 +163,8 @@
 var Store = {
   uxui: {
     loading: false,
-    navbar: true
+    navbar: true,
+    footer: false
   },
   blocks: []
 };
@@ -615,7 +616,7 @@ loadingvue_type_template_id_07f7e478_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/commons/loading/index.vue?vue&type=template&id=07f7e478&
 
 // EXTERNAL MODULE: ./src/store/store.js
-var store = __webpack_require__(14);
+var store = __webpack_require__(13);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--3!./node_modules/vue-loader/lib??vue-loader-options!./src/components/commons/loading/index.vue?vue&type=script&lang=js&
 //
@@ -695,7 +696,16 @@ var navbarvue_type_template_id_8be2602c_render = function() {
           },
           [
             _c("ul", { staticClass: "navbar-nav mr-auto" }, [
-              _vm._m(2),
+              _c("li", { staticClass: "nav-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { href: _vm.Routes.HOME.path }
+                  },
+                  [_vm._v("Home")]
+                )
+              ]),
               _vm._v(" "),
               _c("li", { staticClass: "nav-item" }, [
                 _c(
@@ -713,16 +723,7 @@ var navbarvue_type_template_id_8be2602c_render = function() {
                 )
               ]),
               _vm._v(" "),
-              _c("li", { staticClass: "nav-item" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "nav-link",
-                    attrs: { href: _vm.Routes.HOME.path }
-                  },
-                  [_vm._v("Documentation")]
-                )
-              ]),
+              _vm._m(2),
               _vm._v(" "),
               _vm._m(3)
             ]),
@@ -772,18 +773,6 @@ var navbarvue_type_template_id_8be2602c_render = function() {
                         attrs: { href: _vm.Routes.BLOCKS.PROPOSE.path }
                       },
                       [_vm._v("Propose")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "dropdown-divider" }),
-                    _vm._v(" "),
-                    _c("h6", { staticClass: "dropdown-header" }, [
-                      _vm._v("Admin")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      { staticClass: "dropdown-item", attrs: { href: "#" } },
-                      [_vm._v("Something else here")]
                     )
                   ]
                 )
@@ -844,11 +833,19 @@ var navbarvue_type_template_id_8be2602c_staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item active" }, [
-      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-        _vm._v("Home "),
-        _c("span", { staticClass: "sr-only" }, [_vm._v("(current)")])
-      ])
+    return _c("li", { staticClass: "nav-item" }, [
+      _c(
+        "a",
+        {
+          staticClass: "nav-link",
+          attrs: {
+            href:
+              "https://github.com/davidemiceli/chainode/blob/develop/README.md",
+            target: "_blank"
+          }
+        },
+        [_vm._v("Documentation")]
+      )
     ])
   },
   function() {
@@ -908,17 +905,17 @@ var footervue_type_template_id_4e6c37b5_render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.STORE.uxui.footer
+    ? _c("footer", { staticClass: "footer bg-light" }, [_vm._m(0)])
+    : _vm._e()
 }
 var footervue_type_template_id_4e6c37b5_staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("footer", { staticClass: "footer bg-light" }, [
-      _c("div", { staticClass: "container" }, [
-        _c("span", { staticClass: "text-muted" }, [_vm._v("Just a footer.")])
-      ])
+    return _c("div", { staticClass: "container" }, [
+      _c("span", { staticClass: "text-muted" }, [_vm._v("Just a footer.")])
     ])
   }
 ]
@@ -1584,11 +1581,8 @@ new vue_esm["a" /* default */]({
 "use strict";
 /* WEBPACK VAR INJECTION */(function(toastr) {/* harmony import */ var _src_configs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(32);
 /* harmony import */ var _src_router_routes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
-/* harmony import */ var _src_store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(14);
+/* harmony import */ var _src_store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(13);
 /* harmony import */ var _src_store_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(76);
-//
-//
-//
 //
 //
 //
@@ -1664,7 +1658,7 @@ new vue_esm["a" /* default */]({
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _src_store_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
+/* harmony import */ var _src_store_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
  // Store
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1703,6 +1697,17 @@ function () {
     key: "NAVBAR_HIDE",
     value: function NAVBAR_HIDE() {
       _src_store_store__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].uxui.navbar = false;
+    } // Footer actions
+
+  }, {
+    key: "FOOTER_SHOW",
+    value: function FOOTER_SHOW() {
+      _src_store_store__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].uxui.footer = true;
+    }
+  }, {
+    key: "FOOTER_HIDE",
+    value: function FOOTER_HIDE() {
+      _src_store_store__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].uxui.footer = false;
     } // Block actions
 
   }, {
@@ -1726,7 +1731,7 @@ function () {
 "use strict";
 /* WEBPACK VAR INJECTION */(function(toastr) {/* harmony import */ var _src_configs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(32);
 /* harmony import */ var _src_router_routes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
-/* harmony import */ var _src_store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(14);
+/* harmony import */ var _src_store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(13);
 /* harmony import */ var _src_store_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(76);
 //
 //
@@ -1771,7 +1776,7 @@ function () {
 /* WEBPACK VAR INJECTION */(function(toastr) {/* harmony import */ var _src_configs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(32);
 /* harmony import */ var _src_router_routes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
 /* harmony import */ var _src_services_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(80);
-/* harmony import */ var _src_store_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(14);
+/* harmony import */ var _src_store_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(13);
 /* harmony import */ var _src_store_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(76);
 //
 //

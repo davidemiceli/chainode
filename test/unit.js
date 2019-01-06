@@ -39,7 +39,7 @@ describe('should handle the blocks and the ledger', () => {
       expect(res).instanceOf(Chainode);
     }).timeout(5*1000);
 
-    it('propose a new block for the ledger', async () => {
+    it('propose new blocks for the ledger', async () => {
       const data = [
         `Hello test ${Math.random()}`,
         JSON.stringify({ok: 'test', num: Math.random()})
@@ -47,6 +47,15 @@ describe('should handle the blocks and the ledger', () => {
       for (const item of data) {
         const res = await agent.sendNewBlock(item);
         expect(res).to.be.a('string');
+      }
+    });
+
+    it('propose a not serialized block for the ledger raising an error', async () => {
+      try {
+        const data = {test: 123};
+        await agent.sendNewBlock(data);
+      } catch(err) {
+        expect(err).to.be.an('error').with.property('message', 'Data is not serialized.');
       }
     });
 
@@ -73,7 +82,7 @@ describe('should handle the blocks and the ledger', () => {
       expect(res).to.be.an('array');
     });
   
-    it('make peer propose a block to the blockgenerator', async () => {
+    it('make peer propose blocks to the blockgenerator', async () => {
       for (let i=0; i<1*6; i++) {
         const data = {
           data: `Hello ${i}-${Math.random()}!`

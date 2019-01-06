@@ -98,7 +98,7 @@ Chainode is based on:
 
 ## Architecture
 
-The Kafka cluster is shared between organizations, while every organization holds its own cluster of Chainode peers, and Storage peers, as shown on the following diagram:
+The Kafka cluster is shared between organizations, while every organization holds its own cluster of Chainode peers and Storage peers, as shown on the following diagram:
 
 ![Microservice architecture](img/architecture/architecture.png?raw=true)
 

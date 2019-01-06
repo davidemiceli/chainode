@@ -24,6 +24,14 @@ class Actions {
     Store.uxui.navbar = false;
   }
 
+  // Footer actions
+  FOOTER_SHOW() {
+    Store.uxui.footer = true;
+  }
+  FOOTER_HIDE() {
+    Store.uxui.footer = false;
+  }
+
   // Block actions
   BLOCKS_SET(items) {
     Store.blocks = items;

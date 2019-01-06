@@ -4,7 +4,8 @@
 const Store = {
   uxui: {
     loading: false,
-    navbar: true
+    navbar: true,
+    footer: false
   },
   blocks: []
 };

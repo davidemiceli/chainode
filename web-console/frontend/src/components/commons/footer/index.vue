@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer bg-light">
+  <footer class="footer bg-light" v-if="STORE.uxui.footer">
     <div class="container">
       <span class="text-muted">Just a footer.</span>
     </div>
