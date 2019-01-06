@@ -5,7 +5,7 @@
 </p>
 <h1 align="center">Chainode</h1>
 
-<h4 align="center"><em>Fast and Lightweight Private Blockchain Network</em></h4>
+<h4 align="center"><em>Fast, Highly scalable, and Lightweight Private Blockchain Network</em></h4>
 
 <p align="center">
   <a href="https://github.com/davidemiceli/chainode/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">
@@ -16,33 +16,62 @@
   </a>
 </p>
 
-Chainode is a fast and lightweight private blockchain that allows to exchange data (i.e. transactions) between participants using encrypted messages with the signature of each participant. These transactions are stored as blocks in a distributed ledger.
+Chainode is a private blockchain that allows to exchange data (i.e. transactions) between trusted participants. These transactions are stored as blocks in a distributed ledger.
 
-Chainode is written in pure Javascript for Node.js. It is a work in progress.
+Chainode is written in pure Javascript for Node.js, and it is based on Kafka as communication system and block order. It is a work in progress.
+
+Main features:
+- _**Highly scalable**_
+  - *Each peer can an be deployed, executed, and scaled up and down asynchronously and independently from the others peers. Peers can be runned as containers on different clusters handled by different container orchestrators (like Kubernetes, Mesos, etc).*
+- _**Resilient**_
+  - *Each peer is resistant to failures. If a peer service (or the node where it is running) falls, it can be immediately restarted on another node without (thanks to Kafka features) losing data and starting from where he had stopped.*
+- _**Message driven**_
+  - *The network communication is Kafka based. The peers communicate with each other by exchanging messages asynchronously. Communication can be public or private.*
+- _**Fast**_
+  - *Every block is propagated to the network and added to the ledger as soon as it was generated (if it was considered valid by the peers), so without any delay or emission at every defined time interval.*
+- _**Lightweight**_
+  - *A chainode instance (a simple peer) is very lightweight: can be runned on cheap machines (like a Raspberry Pi, so as many docker containers on a single machine).*
+- _**REST APIs**_
+  - *Every peer exposes web APIs to be handled more easily by other applications.*
+- _**Web Console**_
+  - *Every peer exposes a Web Console UI for status monitoring, use, and general testing too.*
 
 ## How it works
 
 #### Participants
-Every participant is a network's node that is defined by an ID, an ip address, and a public key.  
+Every participant is a network's node that is defined by:
+- Blockchain id (the identifier of the blockchain).
+- Organization (a company, society, club, group, etc., or just an arbitrary identifier to cluster different peers).
+- Role.
 
-There are two types of peer node:
-- A block generator.
-- Many block listeners.
+Currently, there are three types of peer node:
+- Kafka peers.
+- Chainode peers:
+  - proposes new blocks.
+  - receives, validates, and adds new blocks to the ledger.
+- Storage peers.
 
-The blockchain is defined by its block generator, so every block generator represents a different blockchain.
+##### Kafka peers
+Kafka peers are mainly communication nodes. There can only be one Kafka cluster for every single blockchain network.
 
-##### Block generator (generator node)
-There is only one block generator in every single blockchain network.
+A Kafka peer tasks are:
+- Enable communications between chainode peers.
+- Keep order of emitted blocks.
 
-The block generator's tasks are:
-- Generate a block of transactions every defined interval.
-- Accept and validate the transactions from other nodes.
-- Distribute the blocks to other nodes.
+##### Chainode peers
+Chainode peers are simple chainode instances.
 
-##### Block listeners
-The block listeners' tasks are:
-- Validate each block it receives from the block generator.
-- Send new transactions to the block generator.
+A chainode peer tasks are:
+- propose new transactions (generate and send new blocks to the Kafka peers).
+- validate each block it receives from the Kafka peers.
+- communicate with storage peers:
+  - to add new validated blocks to the ledger.
+  - to retrieve ledger's blocks.
+
+##### Storage peers
+The storage peers are distributed database clusters (like Cassandra, MongoDB, etc) that holds the ledger.
+
+A storage peer tasks are:
 - Keep a local copy of the shared blocks' ledger.
 
 #### Network
@@ -52,10 +81,15 @@ The access to the blockchain network is restricted. To join, every peer needs to
 
 ## Requirements
 Chainode is based on:
-- Node.js v8.0+
-- Redis (https://redis.io)
+- Apache Kafka v2.1+ (or Confluent Kafka v4.1.2+)
+- Node.js v10.1+
 - One of the following databases:
-  - MongoDB (https://www.mongodb.com)
+  - Cassandra v3+
+  - MongoDB v3.6+
+
+## Architecture
+
+To write...
 
 # Getting started
 
@@ -180,16 +214,17 @@ curl -X GET http://172.18.0.2/blocks/latest -H "Content-Type: application/json"
 
 ## Tests
 
-### Start dockerized environment for testing
+#### Start dockerized environment for testing
 
-At first, run:
+At first, is required to start a dockerized environment for testing.
+To do this, run:
 ```bash
 cd chainode/
 DB=cassandra npm run start-dev-env
 npm run create-dev-topics
 npm run test-integration
 ```
-If required by selected database, run:
+if needed (based on used database), run:
 ```bash
 bin/create-db/<database-name>
 ```
@@ -197,7 +232,9 @@ for example:
 ```bash
 bin/create-db/cassandra
 ```
-Then run unit tests:
+
+#### Run unit tests
+After dockerized environment is started, run unit tests:
 ```bash
 docker exec -it nodejs npm test
 ```
