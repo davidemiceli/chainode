@@ -5,7 +5,7 @@
 </p>
 <h1 align="center">Chainode</h1>
 
-<h4 align="center"><em>Fast, Highly scalable, and Lightweight Private Blockchain Network</em></h4>
+<h4 align="center"><em>Fast, Highly Scalable, and Lightweight Private Blockchain Network</em></h4>
 
 <p align="center">
   <a href="https://github.com/davidemiceli/chainode/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">
@@ -20,7 +20,10 @@ Chainode is a private blockchain that allows to exchange data (i.e. transactions
 
 Chainode is written in pure Javascript for Node.js, and it is based on Kafka as communication system and block order. It is a work in progress.
 
-Main features:
+## Features
+
+The main features are:
+
 - _**Highly scalable**_
   - *Each peer can an be deployed, executed, and scaled up and down asynchronously and independently from the others peers. Peers can be runned as containers on different clusters handled by different container orchestrators (like Kubernetes, Mesos, etc).*
 - _**Resilient**_
@@ -39,12 +42,18 @@ Main features:
 ## How it works
 
 #### Participants
+
 Every participant is a network's node that is defined by:
-- Blockchain id (the identifier of the blockchain).
-- Organization (a company, society, club, group, etc., or just an arbitrary identifier to cluster different peers).
-- Role.
+
+- Blockchain:
+    - the identifier of the blockchain.
+- Organization:
+    - a company, society, club, group, etc., or just an arbitrary identifier to cluster different peers.
+- Role:
+    - the role a node occupies in the network.
 
 Currently, there are three types of peer node:
+
 - Kafka peers.
 - Chainode peers:
   - proposes new blocks.
@@ -89,7 +98,9 @@ Chainode is based on:
 
 ## Architecture
 
-To write...
+The Kafka cluster is shared between organizations, while every organization holds its own cluster of Chainode peers, and Storage peers, as shown on the following diagram:
+
+![Microservice architecture](img/architecture/architecture.png?raw=true)
 
 # Getting started
 
