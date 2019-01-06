@@ -14,10 +14,10 @@ services:
     environment:
       - CONFIGS=/app/test/configs/generic.js
       - BLOCKCHAIN=blockchain
-      - COMPANY=company
-      - ROLE=blockgenerator
+      - ORGANIZATION=brand001
+      - ROLE=peer
       - PEER_ID=000
-      - DB_TYPE=mongodb
+      - DB_TYPE=cassandra
       - DB_HOST=172.25.255.20
       - WEBUI_HOST=172.25.255.51
     command: npm start
@@ -37,10 +37,10 @@ services:
     environment:
       - CONFIGS=/app/test/configs/generic.js
       - BLOCKCHAIN=blockchain
-      - COMPANY=company
+      - ORGANIZATION=brand002
       - ROLE=peer
       - PEER_ID=001
-      - DB_TYPE=mongodb
+      - DB_TYPE=cassandra
       - DB_HOST=172.25.255.21
       - WEBUI_HOST=172.25.255.52
     command: npm start

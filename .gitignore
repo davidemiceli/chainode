@@ -59,7 +59,4 @@ package-lock.json
 .env
 
 # Custom
-examples/
-raws/
-data/*
 docker/data/*

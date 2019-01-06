@@ -4,9 +4,9 @@
 */
 
 // Requirements
-const Chainode = require('./sdk/index');
+const Chainode = require('./lib/sdk');
 const errors = require('./lib/errors');
-const loadConfigs = require('./lib/loadConfigs');
+const loadConfigs = require('./lib/configs/loadConfigs');
 
 
 // Run peer

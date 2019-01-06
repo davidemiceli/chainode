@@ -2,14 +2,14 @@
 
 // Requirements
 const expect = require('chai').expect;
-const Chainode = require('../sdk/index');
-const loadConfigs = require('../lib/loadConfigs');
+const Chainode = require('../lib/sdk');
+const loadConfigs = require('../lib/configs/loadConfigs');
 const { generateNextBlock } = require('../lib/block');
 const APIs = require('./lib/apis');
 
 
 // Set generic configs
-process.env.CONFIGS = '../test/configs/generic.js';
+process.env.CONFIGS = '../../test/configs/generic.js';
 
 let agent = null;
 const peer = {url: ''};

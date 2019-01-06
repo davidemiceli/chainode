@@ -5,7 +5,7 @@
 </p>
 <h1 align="center">Chainode</h1>
 
-<h4 align="center"><em>Private Blockchain Network</em></h4>
+<h4 align="center"><em>Fast and Lightweight Private Blockchain Network</em></h4>
 
 <p align="center">
   <a href="https://github.com/davidemiceli/chainode/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">
@@ -16,7 +16,7 @@
   </a>
 </p>
 
-Chainode allows to exchange data (as transactions) between participants using encrypted messages with the signature of each participant. These transactions are stored as blocks in a distributed ledger.
+Chainode is a fast and lightweight private blockchain that allows to exchange data (i.e. transactions) between participants using encrypted messages with the signature of each participant. These transactions are stored as blocks in a distributed ledger.
 
 Chainode is written in pure Javascript for Node.js. It is a work in progress.
 
@@ -180,13 +180,26 @@ curl -X GET http://172.18.0.2/blocks/latest -H "Content-Type: application/json"
 
 ## Tests
 
-### Integration tests
+### Start dockerized environment for testing
 
-To run integration tests:
+At first, run:
 ```bash
-git clone -b develop https://github.com/davidemiceli/chainode.git
 cd chainode/
+DB=cassandra npm run start-dev-env
+npm run create-dev-topics
 npm run test-integration
+```
+If required by selected database, run:
+```bash
+bin/create-db/<database-name>
+```
+for example:
+```bash
+bin/create-db/cassandra
+```
+Then run unit tests:
+```bash
+docker exec -it nodejs npm test
 ```
 
 ## Install
