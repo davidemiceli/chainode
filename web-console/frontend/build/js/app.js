@@ -1039,72 +1039,96 @@ var Homevue_type_template_id_8dc7cce2_staticRenderFns = [
         ])
       ]),
       _vm._v(" "),
-      _c("h1", { staticClass: "m-t-100 title text-center" }, [
-        _vm._v("Lorem ipsum")
-      ]),
-      _vm._v(" "),
-      _c("p", { staticClass: "sentences" }, [
+      _c("p", { staticClass: "sentences m-t-40" }, [
         _vm._v(
-          "\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\n    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n  "
+          "\n    Chainode is a fast, lightweight, and scalable private blockchain that allows to exchange data (i.e. transactions) between trusted participants.\n    These transactions are stored as blocks in a distributed ledger.\n  "
         )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "m-t-50 row" }, [
         _c("div", { staticClass: "col-md-6" }, [
-          _c("p", { staticClass: "small-title" }, [_vm._v("About something")]),
+          _c("p", { staticClass: "small-title" }, [_vm._v("Highly scalable")]),
           _vm._v(" "),
           _c("p", [
             _vm._v(
-              "\n        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\n        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n        "
-            ),
-            _c("br"),
-            _vm._v("Here there are some icon examples "),
-            _c("i", { staticClass: "material-icons" }, [_vm._v("cloud")]),
-            _vm._v(" "),
-            _c("i", { staticClass: "material-icons" }, [
-              _vm._v("insert_emoticon")
-            ]),
-            _vm._v(" of two types.\n        "),
-            _c("br"),
-            _vm._v("Here there are other icons from Font Awesome "),
-            _c("i", { staticClass: "fas fa-igloo" }),
-            _vm._v(" "),
-            _c("i", { staticClass: "fab fa-github" })
-          ]),
-          _vm._v(" "),
-          _c("p", [
-            _c("a", { staticClass: "highlighted-link", attrs: { href: "#" } }, [
-              _vm._v("Learn more")
-            ])
+              "\n        Each peer can an be deployed, executed, and scaled up and down asynchronously and independently from the others peers.\n        Peers can be runned as containers on different clusters handled by different container orchestrators (like Kubernetes, Mesos, etc).\n      "
+            )
           ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-6" }, [
-          _c("p", { staticClass: "small-title" }, [_vm._v("Another section")]),
+          _c("p", { staticClass: "small-title" }, [_vm._v("Resilient")]),
           _vm._v(" "),
           _c("p", [
             _vm._v(
-              "\n        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\n        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n        "
-            ),
-            _c("br"),
-            _vm._v("Here there are some icon examples "),
-            _c("i", { staticClass: "material-icons" }, [_vm._v("cloud")]),
-            _vm._v(" "),
-            _c("i", { staticClass: "material-icons" }, [
-              _vm._v("insert_emoticon")
-            ]),
-            _vm._v(" of two types.\n        "),
-            _c("br"),
-            _vm._v("Here there are other icons from Font Awesome "),
-            _c("i", { staticClass: "fas fa-igloo" }),
-            _vm._v(" "),
-            _c("i", { staticClass: "fab fa-github" })
-          ]),
+              "\n        Each peer is resistant to failures. If a peer service (or the node where it is running) falls,\n        it can be immediately restarted on another node without (thanks to Kafka features) losing data and starting from where he had stopped.\n      "
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "m-t-50 row" }, [
+        _c("div", { staticClass: "col-md-6" }, [
+          _c("p", { staticClass: "small-title" }, [_vm._v("Message driven")]),
           _vm._v(" "),
           _c("p", [
-            _c("a", { staticClass: "highlighted-link", attrs: { href: "#" } }, [
-              _vm._v("Learn more")
-            ])
+            _vm._v(
+              "\n        The network communication is Kafka based. The peers communicate with each other by exchanging messages asynchronously. Communication can be public or private.\n      "
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" }, [
+          _c("p", { staticClass: "small-title" }, [_vm._v("Fast")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "\n        Every block is propagated to the network and added to the ledger as soon as it was generated (if it was considered valid by the peers),\n        so without any delay or emission at every defined time interval.\n      "
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "m-t-50 row" }, [
+        _c("div", { staticClass: "col-md-6" }, [
+          _c("p", { staticClass: "small-title" }, [_vm._v("Lightweight")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "\n        A chainode instance (a simple peer) is very lightweight: can be runned on cheap machines (like a Raspberry Pi, so as many docker containers on a single machine).\n      "
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" }, [
+          _c("p", { staticClass: "small-title" }, [_vm._v("REST APIs")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "\n        Every peer exposes web APIs to be handled more easily by other applications.\n      "
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "m-t-50 row" }, [
+        _c("div", { staticClass: "col-md-6" }, [
+          _c("p", { staticClass: "small-title" }, [_vm._v("Web Console")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "\n        Every peer exposes a Web Console UI for status monitoring, use, and general testing too.\n      "
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" }, [
+          _c("p", { staticClass: "small-title" }, [_vm._v("Open Source")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "\n        Chainode is an Open Source project, written in pure Javascript for Node.js, and it is based on Kafka as communication system and block order.\n      "
+            )
           ])
         ])
       ]),
@@ -1131,6 +1155,47 @@ Homevue_type_template_id_8dc7cce2_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/Home.vue?vue&type=template&id=8dc7cce2&
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--3!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Home.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //

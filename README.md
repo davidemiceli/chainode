@@ -45,19 +45,14 @@ The main features are:
 
 Every participant is a network's node that is defined by:
 
-- Blockchain:
-    - the identifier of the blockchain.
-- Organization:
-    - a company, society, club, group, etc., or just an arbitrary identifier to cluster different peers.
-- Role:
-    - the role a node occupies in the network.
+- Blockchain (*the identifier of the blockchain*).
+- Organization (*a company, society, club, group, etc., or just an arbitrary identifier to cluster different peers*).
+- Role (*the role a node occupies in the network*).
 
 Currently, there are three types of peer node:
 
 - Kafka peers.
-- Chainode peers:
-  - proposes new blocks.
-  - receives, validates, and adds new blocks to the ledger.
+- Chainode peers.
 - Storage peers.
 
 ##### Kafka peers
@@ -68,7 +63,7 @@ A Kafka peer tasks are:
 - Keep order of emitted blocks.
 
 ##### Chainode peers
-Chainode peers are simple chainode instances.
+Chainode peers are simple chainode instances that propose, receive, and validate new blocks.
 
 A chainode peer tasks are:
 - propose new transactions (generate and send new blocks to the Kafka peers).
@@ -98,10 +93,11 @@ Chainode is based on:
 
 ## Architecture
 
-The Kafka cluster is shared between organizations, while every organization holds its own cluster of Chainode peers and Storage peers, as shown on the following diagram:
+The Kafka cluster is shared between organizations, while every organization holds its own cluster of Chainode peers and Storage peers.  
+Below there is a possible architecture of a generic blockchain.
 
 <p align="center">
-  <img src="img/architecture/architecture.png" alt="Chainode logo">
+  <img src="img/architecture/architecture.png" alt="Chainode example architecture">
 </p>
 
 # Getting started
@@ -149,12 +145,12 @@ Create the Kafka topics (if not exist):
 ```
 To start a peer use a configuration file:
 ```bash
-CONFIGS=/app/test/configs/blockgenerator.js npm start
+CONFIGS=/app/test/configs/generic.json npm start
 ```
 The configurations can be overwritten like the following examples:
 ```bash
-CONFIGS=/app/test/configs/generic.js BLOCKCHAIN=blockchain ROLE=peer PEER_ID=000 DB_TYPE=mongodb DB_HOST=172.25.255.20 WEBUI_PORT=8080 npm start
-CONFIGS=/app/test/configs/generic.js BLOCKCHAIN=blockchain ROLE=peer PEER_ID=001 DB_TYPE=mongodb DB_HOST=172.25.255.21 WEBUI_PORT=8081 npm start
+CONFIGS=/app/test/configs/generic.json BLOCKCHAIN=blockchain ROLE=peer PEER_ID=000 DB_TYPE=mongodb DB_HOST=172.25.255.20 WEBUI_PORT=8080 npm start
+CONFIGS=/app/test/configs/generic.json BLOCKCHAIN=blockchain ROLE=peer PEER_ID=001 DB_TYPE=mongodb DB_HOST=172.25.255.21 WEBUI_PORT=8081 npm start
 ```
 
 ##### APIs
@@ -235,7 +231,6 @@ To do this, run:
 cd chainode/
 DB=cassandra npm run start-dev-env
 npm run create-dev-topics
-npm run test-integration
 ```
 if needed (based on used database), run:
 ```bash

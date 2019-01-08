@@ -3315,6 +3315,9 @@ textarea {
   color: #286090;
   font-weight: 500; }
 
+.table {
+  font-size: 14px; }
+
 .coding {
   font-family: 'Inconsolata', monospace; }
 

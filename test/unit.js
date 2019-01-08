@@ -9,10 +9,12 @@ const APIs = require('./lib/apis');
 
 
 // Set generic configs
-process.env.CONFIGS = '../../test/configs/generic.js';
+process.env.CONFIGS = process.env.CONFIGS || './test/configs/generic.json';
 
 let agent = null;
-const peer = {url: ''};
+const peer = {
+  url: ''
+};
 
 
 // Integration tests
@@ -59,13 +61,16 @@ describe('should handle the blocks and the ledger', () => {
       }
     });
 
-    it('adds a block to the ledger', async () => {
+    it('adds a valid block and an invalid one to the ledger', async () => {
       const data = Math.random();
       const { organization } = agent.configs;
       const serialized = agent.serialize(data);
       const newblock = generateNextBlock(organization, serialized);
       const res = await agent.addBlockToLedger(newblock);
-      expect(res).to.be.a('string');
+      expect(res).to.be.a('string').to.be.equal(newblock.hash);
+      newblock.data = 'I am not valid!';
+      const res2 = await agent.addBlockToLedger(newblock);
+      expect(res2).to.be.false;
     });
 
   });
