@@ -41,7 +41,7 @@ describe('should handle the blocks and the ledger', () => {
       expect(res).instanceOf(Chainode);
     }).timeout(5*1000);
 
-    it('propose new blocks for the ledger', async () => {
+    it('proposes new blocks for the ledger', async () => {
       const data = [
         `Hello test ${Math.random()}`,
         JSON.stringify({ok: 'test', num: Math.random()})
@@ -52,7 +52,7 @@ describe('should handle the blocks and the ledger', () => {
       }
     });
 
-    it('propose a not serialized block for the ledger raising an error', async () => {
+    it('proposes a not serialized block for the ledger raising an error', async () => {
       try {
         const data = {test: 123};
         await agent.sendNewBlock(data);
@@ -61,33 +61,40 @@ describe('should handle the blocks and the ledger', () => {
       }
     });
 
-    it('adds a valid block and an invalid one to the ledger', async () => {
+    it('adds a valid block to the ledger', async () => {
       const data = Math.random();
       const { organization } = agent.configs;
       const serialized = agent.serialize(data);
       const newblock = generateNextBlock(organization, serialized);
       const res = await agent.addBlockToLedger(newblock);
       expect(res).to.be.a('string').to.be.equal(newblock.hash);
-      newblock.data = 'I am not valid!';
-      const res2 = await agent.addBlockToLedger(newblock);
-      expect(res2).to.be.false;
+    });
+
+    it('tries to adds an invalid block to the ledger', async () => {
+      const serialized = agent.serialize('Test block');
+      const data = generateNextBlock('someCompany', serialized);
+      const resValid = await agent.addBlockToLedger(data);
+      expect(resValid).to.be.a('string').to.be.equal(data.hash);
+      data.data = 'I am not valid!';
+      const resNotValid = await agent.addBlockToLedger(data);
+      expect(resNotValid).to.be.false;
     });
 
   });
 
   describe('should handle the blockchain via web-console APIs.', () => {
   
-    it('check the status of the APIs', async () => {
+    it('checks the status of the APIs', async () => {
       const res = await APIs('GET', peer.url, 'api');
       expect(res).to.deep.equal({status: 'active'});
     });
   
-    it('make blockgenerator show the latest blocks', async () => {
+    it('makes blockgenerator show the latest blocks', async () => {
       const res = await APIs('POST', peer.url, 'api/block/list', {});
       expect(res).to.be.an('array');
     });
   
-    it('make peer propose blocks to the blockgenerator', async () => {
+    it('makes peer propose blocks to the blockgenerator', async () => {
       for (let i=0; i<1*6; i++) {
         const data = {
           data: `Hello ${i}-${Math.random()}!`
@@ -101,6 +108,6 @@ describe('should handle the blocks and the ledger', () => {
 
   after(async () => {
     await agent.shutdown();
-    process.exit();
+    return true;
   });
 });

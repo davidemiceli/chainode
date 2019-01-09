@@ -7,7 +7,7 @@
     "start": "node main.js",
     "build-webconsole-dev": "cd web-console/frontend && npm run build-dev",
     "build-webconsole-prod": "cd web-console/frontend && npm run build-prod",
-    "test": "nyc mocha test --recursive --full-trace",
+    "test": "nyc mocha test --recursive --full-trace --exit",
     "start-dev-env": "bin/run-dev-env up -d",
     "stop-dev-env": "bin/run-dev-env down",
     "create-dev-topics": "bin/create-topics"

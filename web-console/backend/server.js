@@ -64,7 +64,7 @@ module.exports = async (configs, sdk, logger, db) => {
   });
 
   // Start UI console server
-  app.listen(configs.port, () => {
+  return app.listen(configs.port, async () => {
     logger.info(`${componentName} listening on port ${configs.port}.`);
     return app;
   });
