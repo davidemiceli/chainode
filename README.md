@@ -16,7 +16,7 @@
   </a>
 </p>
 
-Chainode is a private blockchain that allows to exchange data (i.e. transactions) between trusted participants. These transactions are stored as blocks in a distributed ledger.
+Chainode is a private blockchain designed to be fast, lightweight, and highly scalable. The network allows to exchange data (i.e. transactions) between trusted participants. These transactions are stored as blocks in a distributed ledger.
 
 Chainode is written in pure Javascript for Node.js, and it is based on Kafka as communication system and block order. It is a work in progress.
 
@@ -25,9 +25,11 @@ Chainode is written in pure Javascript for Node.js, and it is based on Kafka as 
 The main features are:
 
 - _**Highly scalable**_
-  - *Each peer can an be deployed, executed, and scaled up and down asynchronously and independently from the others peers. Peers can be runned as containers on different clusters handled by different container orchestrators (like Kubernetes, Mesos, etc).*
+  - *Each peer can be deployed, executed, and scaled up and down asynchronously and independently from the others peers. Peers can be runned as containers on different clusters handled by different container orchestrators (like Kubernetes, Mesos, etc).*
+- _**Load balancing**_
+  - *Designed to support high data volumes, the blocks and the ledger are load balanced: the blocks are distributed between different peers that acts as a single one, sharing the same Kafka group id.*
 - _**Resilient**_
-  - *Each peer is resistant to failures. If a peer service (or the node where it is running) falls, it can be immediately restarted on another node without (thanks to Kafka features) losing data and starting from where he had stopped.*
+  - *Each peer is resistant to failures. If a peer service (or the node where it is running) falls, it can be immediately restarted on another node without (thanks to Kafka retention features) losing data and starting from where he had stopped.*
 - _**Message driven**_
   - *The network communication is Kafka based. The peers communicate with each other by exchanging messages asynchronously. Communication can be public or private.*
 - _**Fast**_
@@ -73,71 +75,44 @@ A chainode peer tasks are:
   - to retrieve ledger's blocks.
 
 ##### Storage peers
-The storage peers are distributed database clusters (like Cassandra, MongoDB, etc) that holds the ledger.
+The storage peers are distributed database clusters (Couchbase cluster) that holds the ledger.
 
 A storage peer tasks are:
-- Keep a local copy of the shared blocks' ledger.
+- Keep a local immutable copy of the shared blocks' ledger.
 
-#### Network
-The access to the blockchain network is restricted. To join, every peer needs to be approved:
-- Every participant must send a join request to the block generator.
-- The block generator can approve or decline a peer to join.
+#### The network ledger flow
+The network steps are the followings:
+- A transaction is sent as a new block by a Chainode peer via SDK, REST API, or web console.
+- The proposed new block is received by the Kafka peer and placed on the pending topics.
+- The other Chainode peers receive the new block, validate it checking if hash is correct, and send the validated block to the Storage peers.
+- The Storage peers receive the new block and store it.
 
 ## Requirements
 Chainode is based on:
-- Apache Kafka v2.1+ (or Confluent Kafka v4.1.2+)
+- Apache Kafka v2.1+ (or equivalent Confluent Kafka v4.1.2+)
 - Node.js v10.1+
-- One of the following databases:
-  - Cassandra v3+
-  - MongoDB v3.6+
+- Couchbase v6+
 
 ## Architecture
 
 The Kafka cluster is shared between organizations, while every organization holds its own cluster of Chainode peers and Storage peers.  
-Below there is a possible architecture of a generic blockchain.
+Below there is the architecture of a generic chainode blockchain.
 
 <p align="center">
   <img src="img/architecture/architecture.png" alt="Chainode example architecture">
 </p>
 
-# Getting started
+## Getting started
 
-#### Docker
-Chainode can be runned using docker-compose
+#### Installation
+To install chainode with npm package manager:
 ```bash
-git clone -b develop https://github.com/davidemiceli/chainode.git
-cd chainode/docker
-docker-compose up -d
-docker exec -it chainbox001 npm run blockgenerator
-```
-To shutdown the application:
-```bash
-cd chainode/docker
-docker-compose down
-```
-
-#### Github
-Download Chainode from github and start the server
-```bash
-git clone -b develop https://github.com/davidemiceli/chainode.git
-cd chainode
-```
-Edit the configuration on `/app/configs/configs.js` and then run the server:
-```bash
-bin/start --port 80
-```
-Then you will see:
-```bash
-____ _           _                 _      
-/ ___| |__   __ _(_)_ __   ___   __| | ___
-| |   | '_ \ / _` | | '_ \ / _ \ / _` |/ _ \
-| |___| | | | (_| | | | | | (_) | (_| |  __/
-\____|_| |_|\__,_|_|_| |_|\___/ \__,_|\___|
-
-Peer server listening on port 80
+npm install chainode
 ```
 
 ##### Start a peer
+To run the chainode peer, the Kafka peers and the Storage peers must be running and available.
+
 Create the Kafka topics (if not exist):
 ```bash
 /confluent/bin/kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic blockchain.blocks.pending --if-not-exists
@@ -149,76 +124,70 @@ CONFIGS=/app/test/configs/generic.json npm start
 ```
 The configurations can be overwritten like the following examples:
 ```bash
-CONFIGS=/app/test/configs/generic.json BLOCKCHAIN=blockchain ROLE=peer PEER_ID=000 DB_TYPE=mongodb DB_HOST=172.25.255.20 WEBUI_PORT=8080 npm start
-CONFIGS=/app/test/configs/generic.json BLOCKCHAIN=blockchain ROLE=peer PEER_ID=001 DB_TYPE=mongodb DB_HOST=172.25.255.21 WEBUI_PORT=8081 npm start
+CONFIGS=/app/test/configs/generic.json BLOCKCHAIN=blockchain PEER_ID=000 DB_HOST=172.25.255.20 WEBUI_PORT=8080 npm start
+CONFIGS=/app/test/configs/generic.json BLOCKCHAIN=blockchain PEER_ID=001 DB_HOST=172.25.255.21 WEBUI_PORT=8081 npm start
 ```
 
-##### APIs
+## Configurations
+The configurations are loaded by a json file. An example of configuration can be found here: [`test/configs/generic.json`](!test/configs/generic.json)
+
+The fields are the followings:
+
+| Field | Optional | type | Description |
+| --- | --- | --- | --- |
+| `blockchain` | no | *string* | The name of the blockchain |
+| `organization` | no | *string* | The organization to which the peer belongs |
+| `role` | no | *enum(peer)* | The role of the peer (currently allowed only "peer") |
+| `id` | no | *string* | The id of the peer |
+| `db.hosts` | no | *[string]* | The list of database hosts |
+| `db.bucket` | no | *string* | Database bucket |
+| `db.username` | no | *string* | Database username |
+| `db.password` | no | *string* | Database password |
+| `kafka.hosts` | no | *[string]* | The list of Kafka broker hosts |
+| `kafka.topics.pending` | no | *string* | The name of the topic for the new proposed blocks |
+| `kafka.consumer.groupId` | no | *string* | The Kafka consumer group id to use |
+| `kafka.consumer.fromOffset` | yes | *boolean* |  |
+| `kafka.consumer.autoCommit` | yes | *boolean* |  |
+| `kafka.consumer.encoding` | yes | *string* |  |
+| `kafka.consumer.keyEncoding` | yes | *string* |  |
+| `kafka.producer.partitionerType` | yes | *integer* |  |
+| `webconsole.enabled` | yes | *boolean* | Enable/disable the web console |
+| `webconsole.host` | no | *string* | The ip address or the hostname of the web console server |
+| `webconsole.port` | yes | *integer* | The web console server port |
+| `logs.level` | yes | *enum(debug, info, warn, error)* | The log level to use |
+| `logs.console` | yes | *boolean* | To show logs on the console too |
+| `logs.path` | no | *string* | The path for .log files |
+
+# Development
+
+#### Docker compose
+Chainode can be runned using docker-compose
+```bash
+git clone https://github.com/davidemiceli/chainode.git
+cd chainode/docker
+docker-compose up -d
+docker exec -it nodejs /bin/bash -c "CONFIGS=/app/test/configs/generic.json npm start"
+```
+To shutdown the application:
+```bash
+cd chainode/docker
+docker-compose down
+```
+
+##### REST APIs
+Every peer exposes a REST API service.
+
+Get the status of the peer:
 ```bash
 curl -X GET http://172.25.255.50:8080/api -H "Content-Type: application/json"
+```
+Get the list of the blocks:
+```bash
 curl -X POST http://172.25.255.50:8080/api/block/list -H "Content-Type: application/json" -d '{"index": 0}'
+```
+Propose a new transaction:
+```bash
 curl -X POST http://172.25.255.50:8080/api/block/propose -H "Content-Type: application/json" -d '{"data": {"ok": true}}'
-```
-
-##### Peer management
-At start, once the peer server started, you must create a new peer to join to an existing blockchain or create a new block generator that will handle a new blockchain.
-
-Create a new blockchain and a block generator peer (the `url` parameter should be the external url of the peer):
-```bash
-curl -X POST http://172.18.0.2/peer/new -H "Content-Type: application/json" \
---data '{"type":"blockgenerator","url":"http://172.18.0.2"}'
-```
-
-From another server, create a new peer (the `url` parameter should be the external url of the peer):
-```bash
-curl -X POST http://172.18.0.3/peer/new -H "Content-Type: application/json" \
---data '{"type":"peer","url":"http://172.18.0.3"}'
-```
-##### Permissions
-Subscribe the peer to the block generator (to join on the blockchain):
-```bash
-curl -X POST http://172.18.0.3/permission/join/ask -H "Content-Type: application/json" \
---data '{"blockgenerator_url":"http://172.18.0.2"}'
-```
-
-The block generator can see all the pending peers that made request to join:
-```bash
-curl -X GET http://172.18.0.2/peer/list/pending -H "Content-Type: application/json"
-```
-
-The block generator can approve a peer to join:
-```bash
-curl -X POST http://172.18.0.2/permission/join/approve -H "Content-Type: application/json" \
---data '{"url":"http://172.18.0.3"}'
-```
-where the parameter `url` is the url of the `peer` that needs to be approved.
-
-The block generator can see all the approved peers of the blockchain network:
-```bash
-curl -X GET http://172.18.0.2/peer/list/joined -H "Content-Type: application/json"
-```
-
-The peer can see the block generator it has joined:
-```bash
-curl -X GET http://172.18.0.3/permission/joined -H "Content-Type: application/json"
-```
-
-##### Transactions
-The block generator can see the latest blocks:
-```bash
-curl -X GET http://172.18.0.2/blocks/latest -H "Content-Type: application/json"
-```
-
-The peer can send a transaction (propose a new block) to the block generator:
-```bash
-curl -X POST http://172.18.0.3/transaction/propose -H "Content-Type: application/json" \
---data '{"data":{"something":"..."}}'
-```
-The transaction informations are on `data` parameter.
-
-The block generator can check the latest blocks after the last one was added:
-```bash
-curl -X GET http://172.18.0.2/blocks/latest -H "Content-Type: application/json"
 ```
 
 ## Tests
@@ -231,14 +200,7 @@ To do this, run:
 cd chainode/
 DB=cassandra npm run start-dev-env
 npm run create-dev-topics
-```
-if needed (based on used database), run:
-```bash
-bin/create-db/<database-name>
-```
-for example:
-```bash
-bin/create-db/cassandra
+npm run bin/create-db/couchbase
 ```
 
 #### Run unit tests
@@ -247,47 +209,17 @@ After dockerized environment is started, run unit tests:
 docker exec -it nodejs npm test
 ```
 
-## Install
+#### Manual testing
 ```bash
-npm install chainode
+docker exec -it nodejs /bin/bash -c "CONFIGS=/app/test/configs/generic.json npm start"
 ```
 
-## Getting started with node.js SDK
-To handle the blockchain, there is the javascript SDK.
-
-Follow the examples:
-```javascript
-'use strict';
-
-// Requirements
-const Blockchain = require('../sdk/blockchain');
-
-// Instantiate the blockchain
-const blockchain = new Blockchain();
-
-// Create a new Blockchain
-const blockchain_info = blockchain.create('http://localhost:8333');
-
-// Get IDs
-const blockchain_id = blockchain_info.blockchain_id;
-const blockgenerator_id = blockchain_info.blockgenerator_id;
-
-// Start the blockchain as the block generator
-const blockgenerator = blockchain.start(blockchain_id, blockgenerator_id, 8333);
-
-// Add a new peer to an existing blockchain
-const peer_id = blockchain.addpeer(blockchain_id, 'http://localhost:8334');
-
-// Start the blockchain as a peer
-const peer = blockchain.start(blockchain_id, peer_id, 8334);
-
-// Add a new block
-peer.propose("Hello! This is my first block");
-
-// List the ledger
-console.log(peer.blockchain.ledger);
+To close the dockerized environment:
+```bash
+npm run stop-dev-env
 ```
 
 ## License
 
-Chainode is licensed under the terms of the [GNU Affero General Public License Version 3 (AGPL)](LICENSE).
+Chainode is licensed under the terms of the [GNU Affero General Public License Version 3 (AGPL)](LICENSE).  
+Documentation is licensed under [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/).

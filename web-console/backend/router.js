@@ -24,11 +24,13 @@ module.exports = baseurl => {
   // Pages and redirect
   router.get([Routes.MAIN, `${Routes.DASHBOARD}/`, `${Routes.DASHBOARD}/*`], (req, res) => {
     // Render index dashboard page
-    return res.send(indexHtml);
+    return res.end(indexHtml);
   });
 
   // Monitoring peer server
-  router.get(Routes.STATUS, require('./routes/status/health'));
+  router.get(Routes.APIS, require('./routes/status/health'));
+  router.get(Routes.STATUS.HEALTH, require('./routes/status/health'));
+  router.get(Routes.STATUS.STATS, require('./routes/status/stats'));
   // Client authentication
   // ...
   // Block management

@@ -1,0 +1,31 @@
+version: "3.5"
+
+
+services:
+  # -----------------------------------
+  # Couchdb server (Ports: 8091-8094:8091-8094)
+  # https://hub.docker.com/r/couchbase/server/
+  # -----------------------------------
+  db001:
+    image: couchbase
+    container_name: db001
+    user: couchbase
+    networks:
+      chainet:
+        ipv4_address: "172.25.255.20"
+
+  db002:
+    image: couchbase
+    container_name: db002
+    user: couchbase
+    networks:
+      chainet:
+        ipv4_address: "172.25.255.21"
+
+  db003:
+    image: couchbase
+    container_name: db003
+    user: couchbase
+    networks:
+      chainet:
+        ipv4_address: "172.25.255.22"

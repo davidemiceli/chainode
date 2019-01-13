@@ -8,6 +8,7 @@ import '@/src/styles.js';
 
 // Javascript libraries
 import 'bootstrap';
+import 'lodash';
 import '@fortawesome/fontawesome-free';
 
 // Vue requirements

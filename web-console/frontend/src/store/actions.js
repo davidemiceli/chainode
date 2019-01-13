@@ -32,6 +32,11 @@ class Actions {
     Store.uxui.footer = false;
   }
 
+  // System actions
+  SYSTEM_SET(items) {
+    Store.system = items;
+  }
+
   // Block actions
   BLOCKS_SET(items) {
     Store.blocks = items;

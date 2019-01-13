@@ -8,8 +8,13 @@ module.exports = {
   // Dashboard
   MAIN: '/',
   DASHBOARD: '/dashboard',
+  // APIs home
+  APIS: '/api',
   // Monitoring peer server
-  STATUS: '/api',
+  STATUS: {
+    HEALTH: '/api/health',
+    STATS: '/api/stats'
+  },
   // Client authorization
   AUTH: {
     SIGNIN: 'api/auth/signin',

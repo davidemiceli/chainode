@@ -4,20 +4,12 @@
   "role": "peer",
   "id": "0000",
   "db": {
-    "type": "cassandra",
-    "mongodb": {
-      "port": 27017,
-      "host": "172.25.255.20",
-      "dbname": "blockchain"
-    },
-    "cassandra": {
-      "hosts": [
-        "172.25.255.20"
-      ],
-      "localDataCenter": "datacenter1",
-      "keyspace": "blockchain",
-      "consistency": "localQuorum"
-    }
+    "hosts": [
+      "172.25.255.20"
+    ],
+    "bucket": "blockchain",
+    "username": "admin",
+    "password": "secret"
   },
   "kafka": {
     "hosts": [
@@ -27,6 +19,7 @@
       "pending": "blockchain.blocks.pending"
     },
     "consumer": {
+      "groupId": "brandName.0000",
       "fromOffset": false,
       "autoCommit": true,
       "encoding": "utf8",
@@ -36,7 +29,7 @@
       "partitionerType": 2
     }
   },
-  "webui": {
+  "webconsole": {
     "enabled": true,
     "host": "172.25.255.50",
     "port": 8080,

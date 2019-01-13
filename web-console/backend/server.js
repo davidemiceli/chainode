@@ -14,6 +14,8 @@ const logHandler = require('./lib/logHandler');
 module.exports = async (configs, sdk, logger, db) => {
   const componentName = 'WebConsole';
   logger.info(`Starting ${componentName}.`);
+  const webConsolePort = (configs.port == 80) ? '' : `:${configs.port}`;
+  const webConsoleUrl = `http://${configs.host}${webConsolePort}`;
   // Init express app
   const app = express();
   // App settings and plugins
@@ -29,13 +31,13 @@ module.exports = async (configs, sdk, logger, db) => {
     return next();
   });
 
+  // Add router
+  const router = require('./router')(webConsoleUrl);
+  app.use('/', router);
+
   // Static files
   const staticFolder = path.resolve(__dirname, '../frontend/build');
   app.use('/', express.static(staticFolder));
-
-  // Add router
-  const router = require('./router')(`http://${configs.host}:${configs.port}`);
-  app.use('/', router);
 
   // Catch 404 and forward to error handler
   app.use((req, res, next) => {
@@ -65,7 +67,7 @@ module.exports = async (configs, sdk, logger, db) => {
 
   // Start UI console server
   return app.listen(configs.port, async () => {
-    logger.info(`${componentName} listening on port ${configs.port}.`);
+    logger.info(`${componentName} listening on port ${webConsoleUrl}.`);
     return app;
   });
 }

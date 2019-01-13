@@ -14,8 +14,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <!-- Left Menu -->
-          <li class="nav-item"><a class="nav-link" v-bind:href="Routes.HOME.path">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#" v-on:click="Hello($event)">Status</a></li>
+          <li class="nav-item"><a class="nav-link" v-bind:href="Routes.HOME.path">Status</a></li>
           <li class="nav-item"><a class="nav-link" href="https://github.com/davidemiceli/chainode/blob/develop/README.md" target="_blank">Documentation</a></li>
           <li class="nav-item"><a class="nav-link" href="https://github.com/davidemiceli/chainode" target="_blank"><i class="fab fa-github"></i> Github</a></li>
           <!-- Left Menu -->

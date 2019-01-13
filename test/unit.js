@@ -29,7 +29,7 @@ describe('should handle the blocks and the ledger', () => {
     agent = new Chainode(configs);
     expect(agent).instanceOf(Chainode);
     // Set peer url
-    const { host, port } = agent.configs.webui;
+    const { host, port } = agent.configs.webconsole;
     peer.url = `http://${host}:${port}`;
     expect(peer.url).to.be.a('string').to.be.not.empty;
   });
@@ -67,14 +67,14 @@ describe('should handle the blocks and the ledger', () => {
       const serialized = agent.serialize(data);
       const newblock = generateNextBlock(organization, serialized);
       const res = await agent.addBlockToLedger(newblock);
-      expect(res).to.be.a('string').to.be.equal(newblock.hash);
+      expect(res).to.be.a('string').to.be.equal(newblock.id);
     });
 
     it('tries to adds an invalid block to the ledger', async () => {
       const serialized = agent.serialize('Test block');
       const data = generateNextBlock('someCompany', serialized);
       const resValid = await agent.addBlockToLedger(data);
-      expect(resValid).to.be.a('string').to.be.equal(data.hash);
+      expect(resValid).to.be.a('string').to.be.equal(data.id);
       data.data = 'I am not valid!';
       const resNotValid = await agent.addBlockToLedger(data);
       expect(resNotValid).to.be.false;

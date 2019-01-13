@@ -1,9 +1,5 @@
 <template>
-  <footer class="footer bg-light" v-if="STORE.uxui.footer">
-    <div class="container">
-      <span class="text-muted">Just a footer.</span>
-    </div>
-  </footer>
+  <footer class="m-t-40" v-if="STORE.uxui.footer"></footer>
 </template>
 
 <script>
@@ -23,14 +19,6 @@ export default {
     return {
       STORE: Store,
       Routes: Routes
-    }
-  },
-  methods: {
-    Hello: function(e) {
-      e.preventDefault();
-      // this.$router.push({name: Routes.HOME});
-      // toastr.error(Configs.alerts.error);
-      toastr.success('Hello!');
     }
   }
 }
