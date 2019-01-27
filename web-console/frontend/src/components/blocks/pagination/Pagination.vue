@@ -2,11 +2,11 @@
   <div class="row" v-if="STORE.blocks.length">
 
     <div class="col-md-6 text-left">
-      <button type="button" class="btn btn-light" v-on:click="goTo($event, -1)">Previous</button>
+      <button type="button" class="btn btn-light" @click="goTo(-1)" :disabled="pag <= 0">Previous</button>
     </div>
 
     <div class="col-md-6 text-right">
-      <button type="button" class="btn btn-light" v-on:click="goTo($event, 1)">Next</button>
+      <button type="button" class="btn btn-light" @click="goTo(1)">Next</button>
     </div>
 
   </div>
@@ -29,16 +29,23 @@ export default {
     }
   },
   methods: {
-    goTo: async function(e, pag) {
-      e && e.preventDefault();
-      this.pag += pag;
-      this.pag = (this.pag < 0) ? 0 : this.pag;
-      const blocksBkc = _.clone(this.STORE.blocks, true);
-      await this.$parent.List({pag: this.pag});
-      if (this.STORE.blocks.length === 0 && pag > 0 ) {
-        this.pag -= pag;
-        actions.BLOCKS_SET([]);
-        actions.BLOCKS_SET(blocksBkc);
+    async goTo(pag) {
+      const loader = this.$loading.show();
+      try {
+        this.pag += pag;
+        this.pag = (this.pag < 0) ? 0 : this.pag;
+        const blocksBkc = _.clone(this.STORE.blocks, true);
+        await this.$parent.List({pag: this.pag});
+        if (this.STORE.blocks.length === 0 && pag > 0 ) {
+          this.pag -= pag;
+          actions.BLOCKS_SET([]);
+          actions.BLOCKS_SET(blocksBkc);
+        }
+      } catch(err) {
+        console.error(err.stack);
+        toastr.error(Configs.alerts.error);
+      } finally {
+        loader.hide();
       }
     }
   }

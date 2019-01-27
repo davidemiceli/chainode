@@ -16,9 +16,17 @@ import Vue from 'vue';
 import App from '@/src/components/App';
 import router from '@/src/router';
 import filters from '@/src/lib/filters';
+// Import component plugins
+import Loading from 'vue-loading-overlay';
 
 // Turn off the production tip on the console
 Vue.config.productionTip = false;
+
+// Init loading plugins
+Vue.use(Loading,{
+  loader: 'bars',
+  color: '#ffc107'
+});
 
 // App
 new Vue({

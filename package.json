@@ -10,7 +10,8 @@
     "test": "nyc mocha test --recursive --full-trace --exit",
     "start-dev-env": "bin/run-dev-env up -d",
     "stop-dev-env": "bin/run-dev-env down",
-    "create-dev-topics": "bin/create-topics"
+    "create-dev-topics": "bin/create-topics",
+    "init-db": "bin/create-db/couchbase"
   },
   "engines": {
     "node": ">=8.0"
@@ -51,6 +52,7 @@
     "node-rsa": "^1.0.2",
     "redis": "^2.8.0",
     "uuid": "^3.3.2",
+    "vue-loading-overlay": "^3.1.1",
     "winston": "^3.1.0",
     "winston-daily-rotate-file": "^3.5.1"
   },

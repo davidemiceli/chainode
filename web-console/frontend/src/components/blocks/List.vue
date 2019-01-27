@@ -57,17 +57,19 @@ export default {
     }
   },
   methods: {
-    List: function(condition) {
-      return BlockServices
-        .list(condition)
-        .then(r => {
-          actions.BLOCKS_SET(r);
-        })
-        .catch(err => {
-          toastr.error(Configs.alerts.error);
-        });
+    async List(condition) {
+      const loader = this.$loading.show();
+      try {
+        const r = await BlockServices.list(condition);
+        actions.BLOCKS_SET(r);
+      } catch(err) {
+        console.error(err.stack);
+        toastr.error(Configs.alerts.error);
+      } finally {
+        loader.hide();
+      }
     },
-    Details: function(e) {
+    Details(e) {
       return;
     }
   },

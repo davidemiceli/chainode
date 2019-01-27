@@ -43,7 +43,7 @@ The main features are:
 
 ## How it works
 
-#### Participants
+### Participants
 
 Every participant is a network's node that is defined by:
 
@@ -80,7 +80,7 @@ The storage peers are distributed database clusters (Couchbase cluster) that hol
 A storage peer tasks are:
 - Keep a local immutable copy of the shared blocks' ledger.
 
-#### The network ledger flow
+### The network ledger flow
 The network steps are the followings:
 - A transaction is sent as a new block by a Chainode peer via SDK, REST API, or web console.
 - The proposed new block is received by the Kafka peer and placed on the pending topics.
@@ -88,10 +88,16 @@ The network steps are the followings:
 - The Storage peers receive the new block and store it.
 
 ## Requirements
-Chainode is based on:
+Chainode application is based on:
 - Apache Kafka v2.1+ (or equivalent Confluent Kafka v4.1.2+)
-- Node.js v10.1+
 - Couchbase v6+
+- Node.js v10.1+
+
+Chainode Web Console is based on:
+- Node.js v10.1+
+- Vue.js v2.5.17+
+- Bootstrap v4.1.3+
+- Webpack v4.27+
 
 ## Architecture
 
@@ -129,7 +135,7 @@ CONFIGS=/app/test/configs/generic.json BLOCKCHAIN=blockchain PEER_ID=001 DB_HOST
 ```
 
 ## Configurations
-The configurations are loaded by a json file. An example of configuration can be found here: [`test/configs/generic.json`](!test/configs/generic.json)
+The configurations are loaded by a json file. An example of configuration can be found here: [`test/configs/generic.json`](test/configs/generic.json)
 
 The fields are the followings:
 
@@ -158,24 +164,12 @@ The fields are the followings:
 | `logs.console` | yes | *boolean* | To show logs on the console too |
 | `logs.path` | no | *string* | The path for .log files |
 
-# Development
-
-#### Docker compose
-Chainode can be runned using docker-compose
-```bash
-git clone https://github.com/davidemiceli/chainode.git
-cd chainode/docker
-docker-compose up -d
-docker exec -it nodejs /bin/bash -c "CONFIGS=/app/test/configs/generic.json npm start"
-```
-To shutdown the application:
-```bash
-cd chainode/docker
-docker-compose down
-```
-
-##### REST APIs
+## REST APIs
 Every peer exposes a REST API service.
+
+- [**Status**](https://github.com/davidemiceli/chainode/wiki)
+- [**List of blocks**](https://github.com/davidemiceli/chainode/wiki)
+- [**New transaction**](https://github.com/davidemiceli/chainode/wiki)
 
 Get the status of the peer:
 ```bash
@@ -190,17 +184,22 @@ Propose a new transaction:
 curl -X POST http://172.25.255.50:8080/api/block/propose -H "Content-Type: application/json" -d '{"data": {"ok": true}}'
 ```
 
-## Tests
+## Development and testing
 
 #### Start dockerized environment for testing
 
-At first, is required to start a dockerized environment for testing.
-To do this, run:
+At first, is required to start a dockerized environment for testing. To do this, run:
 ```bash
+git clone https://github.com/davidemiceli/chainode.git
 cd chainode/
-DB=cassandra npm run start-dev-env
+DB=couchbase npm run start-dev-env
+docker exec -it nodejs npm install
 npm run create-dev-topics
-npm run bin/create-db/couchbase
+npm run init-db
+```
+To close the dockerized environment:
+```bash
+npm run stop-dev-env
 ```
 
 #### Run unit tests
@@ -214,9 +213,19 @@ docker exec -it nodejs npm test
 docker exec -it nodejs /bin/bash -c "CONFIGS=/app/test/configs/generic.json npm start"
 ```
 
-To close the dockerized environment:
+#### Web Console
+The first time, install all required packages:
 ```bash
-npm run stop-dev-env
+docker exec -it nodejs /bin/bash -c "cd web-console/frontend && npm install"
+```
+Then build the frontend typing:
+(for development mode):
+```bash
+docker exec -it nodejs build-webconsole-dev
+```
+(for production):
+```bash
+docker exec -it nodejs build-webconsole-prod
 ```
 
 ## License

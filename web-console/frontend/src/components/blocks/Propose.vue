@@ -11,7 +11,7 @@
         <textarea class="form-control coding" id="block-proposed" rows="8" v-model="block"></textarea>
       </div>
       <div class="text-right">
-        <button type="button" class="btn btn-light" v-on:click="Propose($event)">Propose</button>
+        <button type="button" class="btn btn-light" @click="Propose">Propose</button>
       </div>
     </form>
 
@@ -45,23 +45,24 @@ export default {
     }
   },
   methods: {
-    Propose: function(e) {
-      e.preventDefault();
-      const block = this.block;
-      if (!canBeSerialized(block)) {
-        toastr.error('Data is a not valid json.');
-        return;
+    async Propose() {
+      const loader = this.$loading.show();
+      try {
+        const block = this.block;
+        if (!canBeSerialized(block)) {
+          toastr.error('Data is a not valid json.');
+          return;
+        }
+        const r = await BlockServices.propose(block);
+        toastr.success(Configs.alerts.successAdded);
+        this.block = '';
+        return this.$router.push({name: Routes.BLOCKS.LIST.name});
+      } catch(err) {
+        console.error(err.stack);
+        toastr.error(Configs.alerts.error);
+      } finally {
+        loader.hide();
       }
-      return BlockServices
-        .propose(block)
-        .then(r => {
-          toastr.success(Configs.alerts.successAdded);
-          this.block = '';
-          return this.$router.push({name: Routes.BLOCKS.LIST.name});
-        })
-        .catch(err => {
-          toastr.error(Configs.alerts.error);
-        });
     }
   }
 }
