@@ -218,12 +218,13 @@ The first time, install all required packages:
 ```bash
 docker exec -it nodejs /bin/bash -c "cd web-console/frontend && npm install"
 ```
-Then build the frontend typing:
-(for development mode):
+Then, to build the frontend type:
+
+*for development mode*
 ```bash
 docker exec -it nodejs build-webconsole-dev
 ```
-(for production):
+*for production*
 ```bash
 docker exec -it nodejs build-webconsole-prod
 ```
