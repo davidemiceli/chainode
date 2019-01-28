@@ -119,10 +119,9 @@ npm install chainode
 ##### Start a peer
 To run the chainode peer, the Kafka peers and the Storage peers must be running and available.
 
-Create the Kafka topics (if not exist):
+Create the Kafka topic (if not exist):
 ```bash
 /confluent/bin/kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic blockchain.blocks.pending --if-not-exists
-/confluent/bin/kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic blockchain.blocks.ledger --if-not-exists
 ```
 To start a peer use a configuration file:
 ```bash
@@ -139,7 +138,7 @@ The configurations are loaded by a json file. An example of configuration can be
 
 The fields are the followings:
 
-| Field | Optional | type | Description |
+| Field | Optional | Type | Description |
 | --- | --- | --- | --- |
 | `blockchain` | no | *string* | The name of the blockchain |
 | `organization` | no | *string* | The organization to which the peer belongs |
@@ -152,11 +151,11 @@ The fields are the followings:
 | `kafka.hosts` | no | *[string]* | The list of Kafka broker hosts |
 | `kafka.topics.pending` | no | *string* | The name of the topic for the new proposed blocks |
 | `kafka.consumer.groupId` | no | *string* | The Kafka consumer group id to use |
-| `kafka.consumer.fromOffset` | yes | *boolean* |  |
-| `kafka.consumer.autoCommit` | yes | *boolean* |  |
-| `kafka.consumer.encoding` | yes | *string* |  |
-| `kafka.consumer.keyEncoding` | yes | *string* |  |
-| `kafka.producer.partitionerType` | yes | *integer* |  |
+| `kafka.consumer.fromOffset` | yes | *boolean* | If set true, Kafka consumer will fetch message from the given offset in the payloads |
+| `kafka.consumer.autoCommit` | yes | *boolean* | The consumed messages are acked automatically by the Kafka consumer |
+| `kafka.consumer.encoding` | yes | *string* | Kafka message encoding (`utf8`) |
+| `kafka.consumer.keyEncoding` | yes | *string* | Kafka key message encoding (`utf8`) |
+| `kafka.producer.partitionerType` | yes | *integer* | Partitioner type (default = 0, random = 1, cyclic = 2, keyed = 3, custom = 4), default 0 |
 | `webconsole.enabled` | yes | *boolean* | Enable/disable the web console |
 | `webconsole.host` | no | *string* | The ip address or the hostname of the web console server |
 | `webconsole.port` | yes | *integer* | The web console server port |
@@ -165,24 +164,7 @@ The fields are the followings:
 | `logs.path` | no | *string* | The path for .log files |
 
 ## REST APIs
-Every peer exposes a REST API service.
-
-- [**Status**](https://github.com/davidemiceli/chainode/wiki)
-- [**List of blocks**](https://github.com/davidemiceli/chainode/wiki)
-- [**New transaction**](https://github.com/davidemiceli/chainode/wiki)
-
-Get the status of the peer:
-```bash
-curl -X GET http://172.25.255.50:8080/api -H "Content-Type: application/json"
-```
-Get the list of the blocks:
-```bash
-curl -X POST http://172.25.255.50:8080/api/block/list -H "Content-Type: application/json" -d '{"index": 0}'
-```
-Propose a new transaction:
-```bash
-curl -X POST http://172.25.255.50:8080/api/block/propose -H "Content-Type: application/json" -d '{"data": {"ok": true}}'
-```
+Every peer exposes a REST API service. For a detailed documentation, read the [wiki page](https://github.com/davidemiceli/chainode/wiki/RestApis).
 
 ## Development and testing
 
