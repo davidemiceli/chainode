@@ -1,0 +1,23 @@
+version: "3.5"
+
+services:
+
+  # -------------------------------------------------------
+  # Application peers for integration tests
+  # -------------------------------------------------------
+  nodejs:
+    image: node:10.12
+    container_name: nodejs
+    user: "1000:1000"
+    volumes:
+      - ../:/app
+    command: tail -f /dev/null
+    working_dir: /app
+    depends_on:
+      - confluentkafka
+      - db001
+      - db002
+      - db003
+    networks:
+      chainet:
+        ipv4_address: "172.25.255.50"

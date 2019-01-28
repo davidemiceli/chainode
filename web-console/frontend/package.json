@@ -1,0 +1,60 @@
+{
+  "name": "chainode-webconsole",
+  "version": "0.0.1",
+  "description": "",
+  "author": "davidemiceli",
+  "license": "AGPL-3.0",
+  "maintainers": [
+    "davidemiceli"
+  ],
+  "scripts": {
+    "build-dev": "webpack --mode=development --debug --progress --colors",
+    "build-prod": "webpack --mode=production --debug --progress --colors"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidemiceli/chainode"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/davidemiceli/chainode/issues"
+  },
+  "homepage": "https://github.com/davidemiceli/chainode#readme",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.6.3",
+    "axios": "^0.18.0",
+    "bootstrap": "^4.1.3",
+    "jquery": "^3.3.1",
+    "moment": "^2.22.2",
+    "popper.js": "^1.14.6",
+    "toastr": "^2.1.4",
+    "vue": "^2.5.17",
+    "vue-currency-filter": "^3.2.0",
+    "vue-loading-overlay": "^3.1.1",
+    "vue-router": "^3.0.2",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "babel-loader": "^8.0.4",
+    "babel-polyfill": "^6.26.0",
+    "body-parser": "^1.18.3",
+    "clean-webpack-plugin": "^1.0.0",
+    "copy-webpack-plugin": "^4.6.0",
+    "css-loader": "^1.0.1",
+    "express": "^4.16.4",
+    "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.5.0",
+    "morgan": "^1.9.1",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.0.1",
+    "vue-loader": "^15.4.2",
+    "vue-template-compiler": "^2.5.17",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2"
+  }
+}

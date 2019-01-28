@@ -1,0 +1,14 @@
+#!/bin/bash
+
+
+# Start environment for development
+if [ -z "$DB" ]
+then
+  echo -e "Missing environmental variable DB (ie: mongodb, cassandra, etc).";
+  exit 1;
+fi
+
+echo -e "Starting dockerized environment for development.";
+cd docker-compose/
+docker-compose -f network.yml -f kafka.yml -f databases/$DB.yml -f dev-app.yml $@
+cd ../

@@ -1,24 +1,20 @@
 {
   "name": "chainode",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A private blockchain network based on node.js",
   "main": "index.js",
-  "dependencies": {
-    "express": "^4.15.4",
-    "figlet": "^1.2.0",
-    "minimist": "^1.2.0",
-    "moment": "^2.18.1",
-    "node-rsa": "^0.4.2",
-    "socket.io": "^2.0.3",
-    "socket.io-client": "^2.0.3"
-  },
   "scripts": {
-    "create": "node scripts/create.js",
-    "newpeer": "node scripts/newpeer.js",
-    "start": "node scripts/start.js"
+    "start": "node main.js",
+    "build-webconsole-dev": "cd web-console/frontend && npm run build-dev",
+    "build-webconsole-prod": "cd web-console/frontend && npm run build-prod",
+    "test": "nyc mocha test --recursive --full-trace --exit",
+    "start-dev-env": "bin/run-dev-env up -d",
+    "stop-dev-env": "bin/run-dev-env down",
+    "create-dev-topics": "bin/create-topics",
+    "init-db": "bin/create-db/couchbase"
   },
   "engines": {
-    "node": ">=6.0"
+    "node": ">=8.0"
   },
   "engineStrict": true,
   "repository": {
@@ -42,5 +38,26 @@
   "bugs": {
     "url": "https://github.com/davidemiceli/chainode/issues"
   },
-  "homepage": "https://github.com/davidemiceli/chainode#readme"
+  "homepage": "https://github.com/davidemiceli/chainode#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "couchbase": "^2.6.2",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
+    "kafka-node": "^3.0.1",
+    "lodash": "^4.17.11",
+    "moment": "^2.22.2",
+    "morgan": "^1.9.1",
+    "node-rsa": "^1.0.2",
+    "redis": "^2.8.0",
+    "uuid": "^3.3.2",
+    "winston": "^3.1.0",
+    "winston-daily-rotate-file": "^3.5.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0"
+  }
 }

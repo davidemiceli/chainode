@@ -1,0 +1,57 @@
+/*
+  Custom generic styles
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+/* For Vue.js to hide brackets on startup of page */
+[v-cloak], .v-cloak {
+    display: none !important;
+}
+
+/* To fix the text align with material google icons */
+.material-icons {
+  vertical-align: middle;
+}
+
+html, body {
+  background-color: #FFF;
+}
+
+a {
+  color: #bfbfbf;
+}
+a:focus, a:hover {
+  color: rgb(115, 115, 115);
+  text-decoration: none;
+}
+
+.form-control {
+  border-radius: 0px;
+}
+.btn {
+  border-radius: 0px;
+}
+textarea {
+  resize: none;
+}
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #cecece;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(204, 204, 204, 0.25);
+}
+
+.progress {
+  height: 10px;
+}
+
+.box-section {
+  padding: 35px;
+  background-color: #fff;
+  border-radius: 2px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 10px 50px 0px rgba(84,110,122,0.15);
+}

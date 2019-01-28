@@ -1,0 +1,32 @@
+#!/bin/bash
+# Create Couchbase cluster and bucket
+
+USER=admin
+PWD=secret
+BUCKET=blockchain
+CREATE_PRIMARY_INDEX="\"CREATE PRIMARY INDEX ON $BUCKET\""
+CREATE_INDEX="\"CREATE INDEX ind_generated_time ON $BUCKET(generated_time)\""
+
+NUM_OF_DB=$(seq 3);
+
+for i in $NUM_OF_DB;
+do
+  DBCONTAINER=db00$i
+  docker exec -it $DBCONTAINER /bin/bash -c "couchbase-cli cluster-init -c 0.0.0.0 --cluster-username $USER --cluster-password $PWD --services data,index,query,fts,analytics --cluster-ramsize 512 --cluster-index-ramsize 512 --cluster-eventing-ramsize 512 --cluster-fts-ramsize 512 --cluster-analytics-ramsize 1024 --cluster-fts-ramsize 512 --index-storage-setting default"
+  echo "Initialized database cluster for $DBCONTAINER."
+  sleep 1
+  docker exec -it $DBCONTAINER /bin/bash -c "couchbase-cli bucket-create -c 0.0.0.0 --username $USER --password $PWD --bucket $BUCKET --bucket-type couchbase --bucket-ramsize 512"
+  echo "Created bucket $BUCKET for $DBCONTAINER."
+  sleep 3
+done
+
+for i in $NUM_OF_DB;
+do
+  DBCONTAINER=db00$i
+  docker exec -it $DBCONTAINER sh -c "/opt/couchbase/bin/cbq -e couchbase://0.0.0.0 -user $USER -password $PWD -script $CREATE_PRIMARY_INDEX"
+  echo "Created primary index for $DBCONTAINER."
+  sleep 1
+  docker exec -it $DBCONTAINER sh -c "/opt/couchbase/bin/cbq -e couchbase://0.0.0.0 -user $USER -password $PWD -script $CREATE_INDEX"
+  echo "Created index on bucket $BUCKET for $DBCONTAINER."
+  sleep 3
+done

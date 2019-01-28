@@ -1,0 +1,9 @@
+version: "3.5"
+
+networks:
+  chainet:
+    name: chainet
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 172.25.255.0/24

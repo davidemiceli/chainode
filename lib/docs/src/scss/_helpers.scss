@@ -1,0 +1,40 @@
+/*
+  Helpers classes for styles
+
+  Dynamic function to create helper classes of margin:
+    Example: .m-t-5 => margin-top: 5px;
+*/
+
+@mixin mp-i-x {
+  @for $i from 0 through 100 {
+    /* margin */
+    .m-t-#{$i} { margin-top: #{$i}px; }
+    .m-b-#{$i} { margin-bottom: #{$i}px; }
+    .m-l-#{$i} { margin-left: #{$i}px; }
+    .m-r-#{$i} { margin-right: #{$i}px; }
+    /* padding */
+    .p-t-#{$i} { padding-top: #{$i}px; }
+    .p-b-#{$i} { padding-bottom: #{$i}px; }
+    .p-l-#{$i} { padding-left: #{$i}px; }
+    .p-r-#{$i} { padding-right: #{$i}px; }
+  }
+}
+
+@mixin m-lr-x {
+  @for $i from 0 through 100 {
+    .m-lr-#{$i} {
+      margin-left: #{$i}px;
+      margin-right: #{$i}px;
+    }
+  }
+}
+
+@mixin f-x {
+  @for $i from 7 through 70 {
+    .f-#{$i} { font-size: #{$i}px; }
+  }
+}
+
+@include f-x;
+@include mp-i-x;
+@include m-lr-x;

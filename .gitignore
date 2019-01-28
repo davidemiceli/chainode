@@ -50,6 +50,7 @@ typings/
 
 # Output of 'npm pack'
 *.tgz
+package-lock.json
 
 # Yarn Integrity file
 .yarn-integrity
@@ -58,6 +59,4 @@ typings/
 .env
 
 # Custom
-examples/
-raws/
-data/*
+docker/data/*

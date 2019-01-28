@@ -1,0 +1,15 @@
+/*
+  For less impegnative websites
+*/
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:300,500');
+
+html, body, textarea, input, select {
+  font-family: "Work Sans";
+}
+
+/* For a dashboard */
+.navbar-nav {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+}

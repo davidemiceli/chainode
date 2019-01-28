@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for t in pending ledger
+do
+  topic="blockchain.blocks.$t"
+  echo "Trying to create the kafka topic $topic"
+  docker exec -it confluentkafka /bin/bash -c "/confluent/bin/kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic $topic --if-not-exists"
+done

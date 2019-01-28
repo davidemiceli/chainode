@@ -1,0 +1,49 @@
+/* 
+  Dashboard
+*/
+
+/* Menù */
+
+.menu-on-sidebar {
+  margin: 0 !important;
+  padding: 10px;
+  position: fixed;
+  background: #fff;
+  height: calc(100% - 50px);
+  width: 500px;
+  top: 50px;
+  left: 0px;
+  overflow-y: auto;
+  transition: all;
+  transition-duration: .0s;
+  z-index: 10;
+  box-shadow: 0 0 3px rgba(14,18,21,.38);
+}
+.section-menu {
+  position: fixed;
+  background-color: #fff;
+  width: calc(100% - 70px);
+  transition: all;
+  transition-duration: .0s;
+  transition-duration: .0s;
+  z-index: 2000;
+}
+.dashboard-on-loading {
+  position: fixed;
+  background: rgba(255,255,255,0.5);
+  height: 100%;
+  min-width: 100%;
+  /* top: 70px; */
+  transition: all;
+  transition-duration: .0s;
+  z-index: 5000;
+  overflow-y: hidden;
+  box-shadow: 0 0 3px rgba(14,18,21,.38);
+}
+.numbers-chart {
+  font-family: "Roboto";
+  font-size: 13px;
+  line-height: 1.42857143;
+  color: #5E5E5E;
+  background-color: #f3f3f3;
+}

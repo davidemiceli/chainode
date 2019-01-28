@@ -1,0 +1,46 @@
+/*
+  Typography
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Staatliches');
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:400,700&subset=latin-ext');
+
+.brand-title-name {
+  font-family: 'Staatliches', sans-serif;
+  font-weight: 400;
+  color: #EFBB00;
+}
+
+.title {
+  line-height: 1.33;
+  font-weight: 300;
+  letter-spacing: -.5px;
+}
+
+.sentences {
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+.small-title {
+  font-weight: 500;
+}
+
+.top-title {
+  font-size: 50px;
+  color: #111;
+}
+
+.highlighted-link {
+  color: #286090;
+  font-weight: 500;
+}
+
+.table-small-text {
+  font-size: 14px;
+}
+
+.coding {
+  font-family: 'Inconsolata', monospace;
+}
