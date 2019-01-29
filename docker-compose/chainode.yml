@@ -1,0 +1,13 @@
+version: "3.5"
+
+services:
+
+  # -------------------------------------------------------
+  # Application peers for integration tests
+  # -------------------------------------------------------
+  chainode:
+    image: chainode
+    container_name: chainode
+    environment:
+      - CONFIGS=/node_modules/chainode/test/configs/generic.json
+    network_mode: host

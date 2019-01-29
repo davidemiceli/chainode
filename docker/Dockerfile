@@ -1,25 +1,19 @@
 # Base image
-FROM node:10.12
+FROM node:10.15
 
 # Configure environment
 ENV LANG=C.UTF-8 \
-    LC_ALL=C.UTF-8 \
-    DEBIAN_FRONTEND=noninteractive
-
-# Update packages
-RUN apt-get update && \
-    apt-get install -y apt-utils git && \
-    apt-get upgrade -y
-
-RUN git clone -b develop --single-branch https://github.com/davidemiceli/chainode.git
-
-# Create app directory
-WORKDIR /chainode
+  LC_ALL=C.UTF-8 \
+  DEBIAN_FRONTEND=noninteractive
 
 # Update npm
 RUN npm i -g npm
-
-# Install useful packages
 RUN npm cache clean -f
 
+# Install Chainode
+RUN npm init --force
+RUN npm install chainode
+WORKDIR /node_modules/chainode
+
+# Run Chainode peer
 CMD npm start
