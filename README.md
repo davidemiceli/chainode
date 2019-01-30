@@ -16,30 +16,9 @@
   </a>
 </p>
 
-Chainode is a private blockchain designed to be fast, lightweight, and highly scalable. The network allows to exchange data (i.e. transactions) between trusted participants. These transactions are stored as blocks in a distributed ledger.
+Chainode is a private blockchain designed to be fast, lightweight, and highly scalable. The network allows to exchange data (transactions) between trusted participants. These transactions are stored as blocks in a distributed ledger.
 
-Chainode is written in pure Javascript for Node.js, and it is based on Kafka as communication system and block order. It is a work in progress.
-
-## Features
-
-The main features are:
-
-- _**Highly scalable**_
-  - *Each peer can be deployed, executed, and scaled up and down asynchronously and independently from the others peers. Peers can be runned as containers on different clusters handled by different container orchestrators (like Kubernetes, Mesos, etc).*
-- _**Load balancing**_
-  - *Designed to support high data volumes, the blocks and the ledger are load balanced: the blocks are distributed between different peers that acts as a single one, sharing the same Kafka group id.*
-- _**Resilient**_
-  - *Each peer is resistant to failures. If a peer service (or the node where it is running) falls, it can be immediately restarted on another node without (thanks to Kafka retention features) losing data and starting from where he had stopped.*
-- _**Message driven**_
-  - *The network communication is Kafka based. The peers communicate with each other by exchanging messages asynchronously. Communication can be public or private.*
-- _**Fast**_
-  - *Every block is propagated to the network and added to the ledger as soon as it was generated (if it was considered valid by the peers), so without any delay or emission at every defined time interval.*
-- _**Lightweight**_
-  - *A chainode instance (a simple peer) is very lightweight: can be runned on cheap machines (like a Raspberry Pi, so as many docker containers on a single machine).*
-- _**REST APIs**_
-  - *Every peer exposes web APIs to be handled more easily by other applications.*
-- _**Web Console**_
-  - *Every peer exposes a Web Console UI for status monitoring, use, and general testing too.*
+Chainode is written in pure Javascript for Node.js, and it is based on Kafka as communication system and block order. Designed for BigData use cases, it is message driven, each peer supports load balancing and is resistant to failures. The Chainode Blockchain is fast, every block is propagated to the network and added to the ledger as soon as it was generated. It is very lightweight being able to run on cheap machines. Every peer provides REST APIs and a Web Console.
 
 ## Index of contents
 
