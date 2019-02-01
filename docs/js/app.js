@@ -560,7 +560,7 @@ var navbarvue_type_template_id_8be2602c_render = function() {
               height: "25px",
               display: "inline-block"
             },
-            attrs: { src: Object({"NODE_ENV":"production"}).BASEURL + "img/logo.png" }
+            attrs: { src: _vm.Configs.baseurl + "img/logo.png" }
           }),
           _vm._v(" "),
           _c(
@@ -687,6 +687,7 @@ navbarvue_type_template_id_8be2602c_render._withStripped = true
  // App configuration settings
 
 var Configs = {
+  baseurl: BASE_URL,
   alerts: {
     successAdded: 'Data added with success!',
     deleted: 'Deleted data with success!',
@@ -829,6 +830,7 @@ function () {
   name: 'Navbar',
   data: function data() {
     return {
+      Configs: configs,
       STORE: store,
       Routes: Routes
     };

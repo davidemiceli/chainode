@@ -3,7 +3,7 @@
     <div class="container">
 
       <a class="navbar-brand" href="#">
-        <img :src="`${process.env.BASEURL}img/logo.png`" style="margin-top: -5px; height: 25px; display: inline-block;" />
+        <img :src="`${Configs.baseurl}img/logo.png`" style="margin-top: -5px; height: 25px; display: inline-block;" />
         <span class="brand-title-name" style="display: inline-block;">CHAINODE</span>
       </a>
 
@@ -46,6 +46,7 @@ export default {
   name: 'Navbar',
   data() {
     return {
+      Configs: Configs,
       STORE: Store,
       Routes: Routes
     }
