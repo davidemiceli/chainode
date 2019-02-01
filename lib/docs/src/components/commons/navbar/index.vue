@@ -18,8 +18,10 @@
         </ul>
         <ul class="navbar-nav mr-right">
           <!-- Right Menu -->
-          <li class="nav-item"><a class="nav-link" href="https://github.com/davidemiceli/chainode/blob/develop/README.md" target="_blank">Documentation</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://github.com/davidemiceli/chainode/wiki" target="_blank"><i class="fas fa-book"></i> Documentation</a></li>
           <li class="nav-item"><a class="nav-link" href="https://github.com/davidemiceli/chainode" target="_blank"><i class="fab fa-github"></i> Github</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://hub.docker.com/r/davidemiceli/chainode" target="_blank"><i class="fab fa-docker"></i> Docker</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://www.npmjs.com/package/chainode" target="_blank"><i class="fab fa-npm"></i> Npm</a></li>
           <!-- Right Menu -->
         </ul>
 

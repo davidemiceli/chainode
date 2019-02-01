@@ -16,9 +16,10 @@
 
     </div>
 
+    <!-- USE THIS: https://www.npmjs.com/package/vue-highlightjs -->
+
     <p class="sentences m-t-40">
-      Chainode is a private blockchain designed to be fast, lightweight, and highly scalable. The network allows to exchange data (i.e. transactions) between trusted participants.
-      These transactions are stored as blocks in a distributed ledger.
+      Chainode is a private blockchain designed to be fast, lightweight, and highly scalable. The network allows to exchange data (transactions) between trusted participants. These transactions are stored as blocks in a distributed ledger.
     </p>
 
     <div class="m-t-50 row">
@@ -34,8 +35,7 @@
       <div class="col-md-6">
         <p class="small-title">Load balancing</p>
         <p>
-          Designed to support high data volumes, the blocks and the ledger are load balanced: 
-          the blocks are distributed between different peers that acts as a single one, sharing the same Kafka group id.
+          Designed to support high data volumes, the blocks and the ledger are load balanced: the blocks are distributed between different peers that acts as a single one, sharing the same Kafka group id.
         </p>
       </div>
 
@@ -46,16 +46,14 @@
       <div class="col-md-6">
         <p class="small-title">Resilient</p>
         <p>
-          Each peer is resistant to failures. If a peer service (or the node where it is running) falls,
-          it can be immediately restarted on another node without (thanks to Kafka retention features) losing data and starting from where he had stopped.
+          Each peer is resistant to failures. If a peer service (or the node where it is running) falls, it can be immediately restarted on another node without (thanks to Kafka retention features) losing data and starting from where he had stopped.
         </p>
       </div>
 
       <div class="col-md-6">
         <p class="small-title">Fast</p>
         <p>
-          Every block is propagated to the network and added to the ledger as soon as it was generated (if it was considered valid by the peers),
-          so without any delay or emission at every defined time interval.
+          Every block is propagated to the network and added to the ledger as soon as it was generated (if it was considered valid by the peers), so without any delay or emission at every defined time interval.
         </p>
       </div>
 

@@ -528,8 +528,6 @@ var render = function() {
     "div",
     { attrs: { id: "app" } },
     [
-      _c("loading"),
-      _vm._v(" "),
       _c("navbar"),
       _vm._v(" "),
       _c("router-view"),
@@ -545,104 +543,6 @@ render._withStripped = true
 
 // CONCATENATED MODULE: ./src/components/App.vue?vue&type=template&id=617ab0be&
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/commons/loading/index.vue?vue&type=template&id=07f7e478&
-var loadingvue_type_template_id_07f7e478_render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm.STORE.uxui.loading
-    ? _c("div", { staticClass: "dashboard-on-loading" }, [_vm._m(0)])
-    : _vm._e()
-}
-var loadingvue_type_template_id_07f7e478_staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticStyle: { "padding-top": "10%" } }, [
-      _c("div", { staticClass: "spinner" }, [
-        _c("div", { staticClass: "rect1" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "rect2" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "rect3" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "rect4" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "rect5" })
-      ])
-    ])
-  }
-]
-loadingvue_type_template_id_07f7e478_render._withStripped = true
-
-
-// CONCATENATED MODULE: ./src/components/commons/loading/index.vue?vue&type=template&id=07f7e478&
-
-// CONCATENATED MODULE: ./src/store/store.js
- // Shared stores
-
-var Store = {
-  uxui: {
-    loading: false,
-    navbar: true,
-    footer: true
-  }
-};
-/* harmony default export */ var store = (Store);
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--3!./node_modules/vue-loader/lib??vue-loader-options!./src/components/commons/loading/index.vue?vue&type=script&lang=js&
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// Store
-
-/* harmony default export */ var loadingvue_type_script_lang_js_ = ({
-  name: 'Loading',
-  data: function data() {
-    return {
-      STORE: store
-    };
-  }
-});
-// CONCATENATED MODULE: ./src/components/commons/loading/index.vue?vue&type=script&lang=js&
- /* harmony default export */ var commons_loadingvue_type_script_lang_js_ = (loadingvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(19);
-
-// CONCATENATED MODULE: ./src/components/commons/loading/index.vue
-
-
-
-
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  commons_loadingvue_type_script_lang_js_,
-  loadingvue_type_template_id_07f7e478_render,
-  loadingvue_type_template_id_07f7e478_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "src/components/commons/loading/index.vue"
-/* harmony default export */ var loading = (component.exports);
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/commons/navbar/index.vue?vue&type=template&id=8be2602c&
 var navbarvue_type_template_id_8be2602c_render = function() {
   var _vm = this
@@ -715,12 +615,14 @@ var navbarvue_type_template_id_8be2602c_staticRenderFns = [
                     {
                       staticClass: "nav-link",
                       attrs: {
-                        href:
-                          "https://github.com/davidemiceli/chainode/blob/develop/README.md",
+                        href: "https://github.com/davidemiceli/chainode/wiki",
                         target: "_blank"
                       }
                     },
-                    [_vm._v("Documentation")]
+                    [
+                      _c("i", { staticClass: "fas fa-book" }),
+                      _vm._v(" Documentation")
+                    ]
                   )
                 ]),
                 _vm._v(" "),
@@ -738,6 +640,37 @@ var navbarvue_type_template_id_8be2602c_staticRenderFns = [
                       _c("i", { staticClass: "fab fa-github" }),
                       _vm._v(" Github")
                     ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      attrs: {
+                        href: "https://hub.docker.com/r/davidemiceli/chainode",
+                        target: "_blank"
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "fab fa-docker" }),
+                      _vm._v(" Docker")
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      attrs: {
+                        href: "https://www.npmjs.com/package/chainode",
+                        target: "_blank"
+                      }
+                    },
+                    [_c("i", { staticClass: "fab fa-npm" }), _vm._v(" Npm")]
                   )
                 ])
               ])
@@ -779,6 +712,17 @@ var Routes = {
     name: 'notfound'
   }
 };
+// CONCATENATED MODULE: ./src/store/store.js
+ // Shared stores
+
+var Store = {
+  uxui: {
+    loading: false,
+    navbar: true,
+    footer: true
+  }
+};
+/* harmony default export */ var store = (Store);
 // CONCATENATED MODULE: ./src/store/actions.js
  // Store
 
@@ -875,6 +819,8 @@ function () {
 //
 //
 //
+//
+//
 // Configurations
  // Routes
 
@@ -893,6 +839,9 @@ function () {
 });
 // CONCATENATED MODULE: ./src/components/commons/navbar/index.vue?vue&type=script&lang=js&
  /* harmony default export */ var commons_navbarvue_type_script_lang_js_ = (navbarvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__(28);
+
 // CONCATENATED MODULE: ./src/components/commons/navbar/index.vue
 
 
@@ -901,7 +850,7 @@ function () {
 
 /* normalize component */
 
-var navbar_component = Object(componentNormalizer["a" /* default */])(
+var component = Object(componentNormalizer["a" /* default */])(
   commons_navbarvue_type_script_lang_js_,
   navbarvue_type_template_id_8be2602c_render,
   navbarvue_type_template_id_8be2602c_staticRenderFns,
@@ -913,9 +862,9 @@ var navbar_component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* hot reload */
-if (false) { var navbar_api; }
-navbar_component.options.__file = "src/components/commons/navbar/index.vue"
-/* harmony default export */ var navbar = (navbar_component.exports);
+if (false) { var api; }
+component.options.__file = "src/components/commons/navbar/index.vue"
+/* harmony default export */ var navbar = (component.exports);
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/commons/footer/index.vue?vue&type=template&id=4e6c37b5&
 var footervue_type_template_id_4e6c37b5_render = function() {
   var _vm = this
@@ -1023,15 +972,12 @@ footer_component.options.__file = "src/components/commons/footer/index.vue"
 //
 //
 //
-//
 // Components
-
 
 
 /* harmony default export */ var Appvue_type_script_lang_js_ = ({
   name: 'App',
   components: {
-    'loading': loading,
     'navbar': navbar,
     'footerBottom': footer
   }
@@ -1100,7 +1046,7 @@ var Homevue_type_template_id_8dc7cce2_staticRenderFns = [
       _vm._v(" "),
       _c("p", { staticClass: "sentences m-t-40" }, [
         _vm._v(
-          "\n    Chainode is a private blockchain designed to be fast, lightweight, and highly scalable. The network allows to exchange data (i.e. transactions) between trusted participants.\n    These transactions are stored as blocks in a distributed ledger.\n  "
+          "\n    Chainode is a private blockchain designed to be fast, lightweight, and highly scalable. The network allows to exchange data (transactions) between trusted participants. These transactions are stored as blocks in a distributed ledger.\n  "
         )
       ]),
       _vm._v(" "),
@@ -1120,7 +1066,7 @@ var Homevue_type_template_id_8dc7cce2_staticRenderFns = [
           _vm._v(" "),
           _c("p", [
             _vm._v(
-              "\n        Designed to support high data volumes, the blocks and the ledger are load balanced: \n        the blocks are distributed between different peers that acts as a single one, sharing the same Kafka group id.\n      "
+              "\n        Designed to support high data volumes, the blocks and the ledger are load balanced: the blocks are distributed between different peers that acts as a single one, sharing the same Kafka group id.\n      "
             )
           ])
         ])
@@ -1132,7 +1078,7 @@ var Homevue_type_template_id_8dc7cce2_staticRenderFns = [
           _vm._v(" "),
           _c("p", [
             _vm._v(
-              "\n        Each peer is resistant to failures. If a peer service (or the node where it is running) falls,\n        it can be immediately restarted on another node without (thanks to Kafka retention features) losing data and starting from where he had stopped.\n      "
+              "\n        Each peer is resistant to failures. If a peer service (or the node where it is running) falls, it can be immediately restarted on another node without (thanks to Kafka retention features) losing data and starting from where he had stopped.\n      "
             )
           ])
         ]),
@@ -1142,7 +1088,7 @@ var Homevue_type_template_id_8dc7cce2_staticRenderFns = [
           _vm._v(" "),
           _c("p", [
             _vm._v(
-              "\n        Every block is propagated to the network and added to the ledger as soon as it was generated (if it was considered valid by the peers),\n        so without any delay or emission at every defined time interval.\n      "
+              "\n        Every block is propagated to the network and added to the ledger as soon as it was generated (if it was considered valid by the peers), so without any delay or emission at every defined time interval.\n      "
             )
           ])
         ])
@@ -1212,8 +1158,6 @@ Homevue_type_template_id_8dc7cce2_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/Home.vue?vue&type=template&id=8dc7cce2&
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--3!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Home.vue?vue&type=script&lang=js&
-//
-//
 //
 //
 //
