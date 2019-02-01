@@ -570,7 +570,7 @@ var navbarvue_type_template_id_8be2602c_staticRenderFns = [
                 height: "25px",
                 display: "inline-block"
               },
-              attrs: { src: "/img/logo.png" }
+              attrs: { src: "img/logo.png" }
             }),
             _vm._v(" "),
             _c(
@@ -1027,7 +1027,7 @@ var Homevue_type_template_id_8dc7cce2_staticRenderFns = [
         _c("div", { staticClass: "col-md-6 text-right" }, [
           _c("img", {
             staticStyle: { width: "400px" },
-            attrs: { src: "/img/image.png" }
+            attrs: { src: "img/image.png" }
           })
         ]),
         _vm._v(" "),
