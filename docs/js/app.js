@@ -158,19 +158,19 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(263);
-module.exports = __webpack_require__(475);
+module.exports = __webpack_require__(474);
 
 
 /***/ }),
 
-/***/ 467:
+/***/ 466:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 473:
+/***/ 472:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -205,7 +205,7 @@ vue__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].filter('readMore', function 
 
 /***/ }),
 
-/***/ 474:
+/***/ 473:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -478,11 +478,11 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 474;
+webpackContext.id = 473;
 
 /***/ }),
 
-/***/ 475:
+/***/ 474:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -491,30 +491,27 @@ __webpack_require__.r(__webpack_exports__);
 // EXTERNAL MODULE: ./node_modules/bootstrap/dist/css/bootstrap.css
 var bootstrap = __webpack_require__(464);
 
-// EXTERNAL MODULE: ./node_modules/@fortawesome/fontawesome-free/css/all.css
-var css_all = __webpack_require__(465);
-
 // EXTERNAL MODULE: ./node_modules/toastr/build/toastr.css
-var toastr = __webpack_require__(466);
+var toastr = __webpack_require__(465);
 
 // EXTERNAL MODULE: ./src/scss/app.scss
-var app = __webpack_require__(467);
+var app = __webpack_require__(466);
 
 // CONCATENATED MODULE: ./src/styles.js
 /*
   Application styles
 */
 // Default styles
-
+ // import '@/node_modules/@fortawesome/fontawesome-free/css/all.css';
 
  // Custom styles
 
 
 // EXTERNAL MODULE: ./node_modules/bootstrap/dist/js/bootstrap.js
-var js_bootstrap = __webpack_require__(468);
+var js_bootstrap = __webpack_require__(467);
 
 // EXTERNAL MODULE: ./node_modules/@fortawesome/fontawesome-free/js/fontawesome.js
-var fontawesome = __webpack_require__(469);
+var fontawesome = __webpack_require__(468);
 
 // EXTERNAL MODULE: ./node_modules/vue/dist/vue.esm.js
 var vue_esm = __webpack_require__(31);
@@ -1384,7 +1381,7 @@ var routes = [{
   routes: routes
 }));
 // EXTERNAL MODULE: ./src/lib/filters.js
-var filters = __webpack_require__(473);
+var filters = __webpack_require__(472);
 
 // CONCATENATED MODULE: ./src/main.js
 
