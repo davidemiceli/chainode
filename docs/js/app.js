@@ -545,40 +545,7 @@ var navbarvue_type_template_id_8be2602c_render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "nav",
-    {
-      staticClass:
-        "navbar navbar-expand-lg navbar-light bg-light bg-light-white"
-    },
-    [
-      _c("div", { staticClass: "container" }, [
-        _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
-          _c("img", {
-            staticStyle: {
-              "margin-top": "-5px",
-              height: "25px",
-              display: "inline-block"
-            },
-            attrs: { src: _vm.Configs.baseurl + "img/logo.png" }
-          }),
-          _vm._v(" "),
-          _c(
-            "span",
-            {
-              staticClass: "brand-title-name",
-              staticStyle: { display: "inline-block" }
-            },
-            [_vm._v("CHAINODE")]
-          )
-        ]),
-        _vm._v(" "),
-        _vm._m(0),
-        _vm._v(" "),
-        _vm._m(1)
-      ])
-    ]
-  )
+  return _vm._m(0)
 }
 var navbarvue_type_template_id_8be2602c_staticRenderFns = [
   function() {
@@ -586,93 +553,126 @@ var navbarvue_type_template_id_8be2602c_staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "button",
+      "nav",
       {
-        staticClass: "navbar-toggler",
-        attrs: {
-          type: "button",
-          "data-toggle": "collapse",
-          "data-target": "#navbarSupportedContent",
-          "aria-controls": "navbarSupportedContent",
-          "aria-expanded": "false",
-          "aria-label": "Toggle navigation"
-        }
-      },
-      [_c("span", { staticClass: "navbar-toggler-icon" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "collapse navbar-collapse",
-        attrs: { id: "navbarSupportedContent" }
+        staticClass:
+          "navbar navbar-expand-lg navbar-light bg-light bg-light-white"
       },
       [
-        _c("ul", { staticClass: "navbar-nav mr-auto" }),
-        _vm._v(" "),
-        _c("ul", { staticClass: "navbar-nav mr-right" }, [
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link",
-                attrs: {
-                  href: "https://github.com/davidemiceli/chainode/wiki",
-                  target: "_blank"
-                }
+        _c("div", { staticClass: "container" }, [
+          _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
+            _c("img", {
+              staticStyle: {
+                "margin-top": "-5px",
+                height: "25px",
+                display: "inline-block"
               },
-              [
-                _c("i", { staticClass: "fas fa-book" }),
-                _vm._v(" Documentation")
-              ]
+              attrs: { src: "img/logo.png" }
+            }),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                staticClass: "brand-title-name",
+                staticStyle: { display: "inline-block" }
+              },
+              [_vm._v("CHAINODE")]
             )
           ]),
           _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link",
-                attrs: {
-                  href: "https://github.com/davidemiceli/chainode",
-                  target: "_blank"
-                }
-              },
-              [_c("i", { staticClass: "fab fa-github" }), _vm._v(" Github")]
-            )
-          ]),
+          _c(
+            "button",
+            {
+              staticClass: "navbar-toggler",
+              attrs: {
+                type: "button",
+                "data-toggle": "collapse",
+                "data-target": "#navbarSupportedContent",
+                "aria-controls": "navbarSupportedContent",
+                "aria-expanded": "false",
+                "aria-label": "Toggle navigation"
+              }
+            },
+            [_c("span", { staticClass: "navbar-toggler-icon" })]
+          ),
           _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link",
-                attrs: {
-                  href: "https://hub.docker.com/r/davidemiceli/chainode",
-                  target: "_blank"
-                }
-              },
-              [_c("i", { staticClass: "fab fa-docker" }), _vm._v(" Docker")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link",
-                attrs: {
-                  href: "https://www.npmjs.com/package/chainode",
-                  target: "_blank"
-                }
-              },
-              [_c("i", { staticClass: "fab fa-npm" }), _vm._v(" Npm")]
-            )
-          ])
+          _c(
+            "div",
+            {
+              staticClass: "collapse navbar-collapse",
+              attrs: { id: "navbarSupportedContent" }
+            },
+            [
+              _c("ul", { staticClass: "navbar-nav mr-auto" }),
+              _vm._v(" "),
+              _c("ul", { staticClass: "navbar-nav mr-right" }, [
+                _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      attrs: {
+                        href: "https://github.com/davidemiceli/chainode/wiki",
+                        target: "_blank"
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-book" }),
+                      _vm._v(" Documentation")
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      attrs: {
+                        href: "https://github.com/davidemiceli/chainode",
+                        target: "_blank"
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "fab fa-github" }),
+                      _vm._v(" Github")
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      attrs: {
+                        href: "https://hub.docker.com/r/davidemiceli/chainode",
+                        target: "_blank"
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "fab fa-docker" }),
+                      _vm._v(" Docker")
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      attrs: {
+                        href: "https://www.npmjs.com/package/chainode",
+                        target: "_blank"
+                      }
+                    },
+                    [_c("i", { staticClass: "fab fa-npm" }), _vm._v(" Npm")]
+                  )
+                ])
+              ])
+            ]
+          )
         ])
       ]
     )
@@ -886,7 +886,7 @@ var footervue_type_template_id_4e6c37b5_staticRenderFns = [
             height: "20px",
             display: "inline-block"
           },
-          attrs: { src: "/img/logo.png" }
+          attrs: { src: "img/logo.png" }
         }),
         _vm._v(" © 2017-2019 - \n      Documentation licensed under "),
         _c(

@@ -3,7 +3,7 @@
     <div class="container">
 
       <a class="navbar-brand" href="#">
-        <img :src="`${Configs.baseurl}img/logo.png`" style="margin-top: -5px; height: 25px; display: inline-block;" />
+        <img src="img/logo.png" style="margin-top: -5px; height: 25px; display: inline-block;" />
         <span class="brand-title-name" style="display: inline-block;">CHAINODE</span>
       </a>
 
